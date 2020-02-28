@@ -64,8 +64,8 @@ public function authLogin(){
     }
     public function logout(){
         $this->authLogin();
-        Session::put('admin_name',null);
-        Session::put('admin_id',null);
+        Session::put('nd_ma',null);
+        Session::put('nd_ten',null);
         return Redirect::to('/admin');
         //echo "Logout";
     }

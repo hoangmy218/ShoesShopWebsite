@@ -120,7 +120,7 @@
                                     <a class="dropdown-item" href="#"><i class="ik ik-settings dropdown-icon"></i> Settings</a>
                                     <a class="dropdown-item" href="#"><span class="float-right"><span class="badge badge-primary">6</span></span><i class="ik ik-mail dropdown-icon"></i> Inbox</a>
                                     <a class="dropdown-item" href="#"><i class="ik ik-navigation dropdown-icon"></i> Message</a>
-                                    <a class="dropdown-item" href="login.html"><i class="ik ik-power dropdown-icon"></i> Logout</a>
+                                    <a class="dropdown-item" href="{{URL::to('/logout')}}"><i class="ik ik-power dropdown-icon"></i> Logout</a>
                                 </div>
                             </div>
 
@@ -151,6 +151,30 @@
                                 </div>
                                 <div class="nav-item">
                                     <a href="{{URL::to('/manage-order')}}"><i class="ik ik-bar-chart-2"></i><span>Quản lý đơn hàng</span></a>
+                                </div>
+                                <div class="nav-item has-sub">
+                                    <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Quản lý sản phẩm</span> <span class="badge badge-danger"></span></a>
+                                    <div class="submenu-content">
+                                        <a href="{{URL::to('/add-product')}}" class="menu-item">Thêm sản phẩm</a>
+                                        <a href="{{URL::to('/manage-product')}}" class="menu-item">Danh sách sản phẩm</a>
+                                        
+                                    </div>
+                                </div>
+                                <div class="nav-item has-sub">
+                                    <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Quản lý thương hiệu</span> <span class="badge badge-danger"></span></a>
+                                    <div class="submenu-content">
+                                        <a href="{{URL::to('/add-brand')}}" class="menu-item">Thêm thương hiệu</a>
+                                        <a href="{{URL::to('/manage-brand')}}" class="menu-item">Danh sách thương hiệu</a>
+                                        
+                                    </div>
+                                </div>
+                                <div class="nav-item has-sub">
+                                    <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Quản lý danh mục</span> <span class="badge badge-danger"></span></a>
+                                    <div class="submenu-content">
+                                        <a href="{{URL::to('/add-category')}}" class="menu-item">Thêm danh mục</a>
+                                        <a href="{{URL::to('/manage-category')}}" class="menu-item">Danh sách danh mục</a>
+                                        
+                                    </div>
                                 </div>
                                 <div class="nav-item">
                                     <a href="pages/navbar.html"><i class="ik ik-menu"></i><span>Navigation</span> <span class="badge badge-success">New</span></a>
@@ -398,6 +422,7 @@
         <script src="{{asset('public/backend/js/widgets.js')}}"></script>
         <script src="{{asset('public/backend/js/charts.js')}}"></script>
         <script src="{{asset('public/backend/dist/js/theme.min.js')}}"></script>
+        @yield('script_components')
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
             (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=

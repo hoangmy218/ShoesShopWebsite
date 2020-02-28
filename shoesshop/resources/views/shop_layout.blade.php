@@ -69,6 +69,16 @@
 	          <li class="nav-item"><a href="about.html" class="nav-link">Giới thiệu</a></li>
 {{-- 	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li> --}}
 	          <li class="nav-item"><a href="contact.html" class="nav-link">Liên hệ</a></li>
+
+            <?php 
+              $customer_name = Session::get('nd_ten'); 
+            ?>
+            @if ($customer_name)
+              <li class="nav-item"><a href="{{URL::to('/')}}" class="nav-link">{{$customer_name}}</a></li>
+            @else
+              <li class="nav-item"><a href="{{URL::to('userLogin')}}" class="nav-link">Login</a></li>
+              <li class="nav-item"><a href="{{URL::to('register')}}" class="nav-link">Register</a></li>
+            @endif
 	          <li class="nav-item cta cta-colored"><a href="{{URL::to('/show-cart')}}" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
 
 	        </ul>
@@ -176,6 +186,9 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="{{asset('public/frontend/js/google-map.js')}}"></script>
   <script src="{{asset('public/frontend/js/main.js')}}"></script>
-    
+
+  
+    @yield('script_qty')
+
   </body>
 </html>
