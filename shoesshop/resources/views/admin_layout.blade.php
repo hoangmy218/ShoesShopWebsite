@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="{{asset('public/backend/plugins/icon-kit/dist/css/iconkit.min.css')}}">
         <link rel="stylesheet" href="{{asset('public/backend/plugins/ionicons/dist/css/ionicons.min.css')}}">
         <link rel="stylesheet" href="{{asset('public/backend/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}">
+        @yield('head_repeat')
         <link rel="stylesheet" href="{{asset('public/backend/plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}">
         <link rel="stylesheet" href="{{asset('public/backend/plugins/jvectormap/jquery-jvectormap.css')}}">
         <link rel="stylesheet" href="{{asset('public/backend/plugins/tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.min.css')}}">
@@ -116,7 +117,7 @@
                                     {{-- <img class="avatar" src="{{asset('public/backend/img/user.jpg')}}" alt=""> --}}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="profile.html"><i class="ik ik-user dropdown-icon"></i> Profile</a>
+                                    <a class="dropdown-item" href="profile.html')}}"><i class="ik ik-user dropdown-icon"></i> Profile</a>
                                     <a class="dropdown-item" href="#"><i class="ik ik-settings dropdown-icon"></i> Settings</a>
                                     <a class="dropdown-item" href="#"><span class="float-right"><span class="badge badge-primary">6</span></span><i class="ik ik-mail dropdown-icon"></i> Inbox</a>
                                     <a class="dropdown-item" href="#"><i class="ik ik-navigation dropdown-icon"></i> Message</a>
@@ -132,7 +133,7 @@
             <div class="page-wrap">
                 <div class="app-sidebar colored">
                     <div class="sidebar-header">
-                        <a class="header-brand" href="index.html">
+                        <a class="header-brand" href="index.html')}}">
                             <div class="logo-img">
                                <img src="{{asset('public/backend/src/img/brand-white.svg')}}" class="header-brand-img" alt="lavalite"> 
                             </div>
@@ -150,10 +151,10 @@
                                     <a href="{{URL::to('/dashboard')}}"><i class="ik ik-bar-chart-2"></i><span>Dashboard</span></a>
                                 </div>
                                 <div class="nav-item">
-                                    <a href="{{URL::to('/manage-order')}}"><i class="ik ik-bar-chart-2"></i><span>Quản lý đơn hàng</span></a>
+                                    <a href="{{URL::to('/manage-order')}}"><i class="ik ik-file-text"></i><span>Quản lý đơn hàng</span></a>
                                 </div>
                                 <div class="nav-item has-sub">
-                                    <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Quản lý sản phẩm</span> <span class="badge badge-danger"></span></a>
+                                    <a href="javascript:void(0)"><i class="ik ik-package"></i><span>Quản lý sản phẩm</span> <span class="badge badge-danger"></span></a>
                                     <div class="submenu-content">
                                         <a href="{{URL::to('/add-product')}}" class="menu-item">Thêm sản phẩm</a>
                                         <a href="{{URL::to('/manage-product')}}" class="menu-item">Danh sách sản phẩm</a>
@@ -161,7 +162,7 @@
                                     </div>
                                 </div>
                                 <div class="nav-item has-sub">
-                                    <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Quản lý thương hiệu</span> <span class="badge badge-danger"></span></a>
+                                    <a href="javascript:void(0)"><i class="ik ik-award"></i><span>Quản lý thương hiệu</span> <span class="badge badge-danger"></span></a>
                                     <div class="submenu-content">
                                         <a href="{{URL::to('/add-brand')}}" class="menu-item">Thêm thương hiệu</a>
                                         <a href="{{URL::to('/manage-brand')}}" class="menu-item">Danh sách thương hiệu</a>
@@ -169,92 +170,100 @@
                                     </div>
                                 </div>
                                 <div class="nav-item has-sub">
-                                    <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Quản lý danh mục</span> <span class="badge badge-danger"></span></a>
+                                    <a href="javascript:void(0)"><i class="ik ik-list"></i><span>Quản lý danh mục</span> <span class="badge badge-danger"></span></a>
                                     <div class="submenu-content">
                                         <a href="{{URL::to('/add-category')}}" class="menu-item">Thêm danh mục</a>
                                         <a href="{{URL::to('/manage-category')}}" class="menu-item">Danh sách danh mục</a>
                                         
                                     </div>
                                 </div>
+                                <div class="nav-item has-sub">
+                                    <a href="javascript:void(0)"><i class="ik ik-home"></i><span>Quản lý kho</span> <span class="badge badge-danger"></span></a>
+                                    <div class="submenu-content">
+                                        <a href="{{URL::to('/add-goods-receipt')}}" class="menu-item">Nhập hàng</a>
+                                        <a href="{{URL::to('/stock')}}" class="menu-item">Tồn kho</a>
+                                        
+                                    </div>
+                                </div>
                                 <div class="nav-item">
-                                    <a href="pages/navbar.html"><i class="ik ik-menu"></i><span>Navigation</span> <span class="badge badge-success">New</span></a>
+                                    <a href="{{asset('public/backend/pages/navbar.html')}}"><i class="ik ik-menu"></i><span>Navigation</span> <span class="badge badge-success">New</span></a>
                                 </div>
                                 <div class="nav-item has-sub">
                                     <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Widgets</span> <span class="badge badge-danger">150+</span></a>
                                     <div class="submenu-content">
-                                        <a href="pages/widgets.html" class="menu-item">Basic</a>
-                                        <a href="pages/widget-statistic.html" class="menu-item">Statistic</a>
-                                        <a href="pages/widget-data.html" class="menu-item">Data</a>
-                                        <a href="pages/widget-chart.html" class="menu-item">Chart Widget</a>
+                                        <a href="{{asset('public/backend/pages/widgets.html')}}" class="menu-item">Basic</a>
+                                        <a href="{{asset('public/backend/pages/widget-statistic.html')}}" class="menu-item">Statistic</a>
+                                        <a href="{{asset('public/backend/pages/widget-data.html')}}" class="menu-item">Data</a>
+                                        <a href="{{asset('public/backend/pages/widget-chart.html')}}" class="menu-item">Chart Widget</a>
                                     </div>
                                 </div>
                                 <div class="nav-lavel">UI Element</div>
                                 <div class="nav-item has-sub">
                                     <a href="#"><i class="ik ik-box"></i><span>Basic</span></a>
                                     <div class="submenu-content">
-                                        <a href="pages/ui/alerts.html" class="menu-item">Alerts</a>
-                                        <a href="pages/ui/badges.html" class="menu-item">Badges</a>
-                                        <a href="pages/ui/buttons.html" class="menu-item">Buttons</a>
-                                        <a href="pages/ui/navigation.html" class="menu-item">Navigation</a>
+                                        <a href="{{asset('public/backend/pages/ui/alerts.html')}}" class="menu-item">Alerts</a>
+                                        <a href="{{asset('public/backend/pages/ui/badges.html')}}" class="menu-item">Badges</a>
+                                        <a href="{{asset('public/backend/pages/ui/buttons.html')}}" class="menu-item">Buttons</a>
+                                        <a href="{{asset('public/backend/pages/ui/navigation.html')}}" class="menu-item">Navigation</a>
                                     </div>
                                 </div>
                                 <div class="nav-item has-sub">
                                     <a href="#"><i class="ik ik-gitlab"></i><span>Advance</span> <span class="badge badge-success">New</span></a>
                                     <div class="submenu-content">
-                                        <a href="pages/ui/modals.html" class="menu-item">Modals</a>
-                                        <a href="pages/ui/notifications.html" class="menu-item">Notifications</a>
-                                        <a href="pages/ui/carousel.html" class="menu-item">Slider</a>
-                                        <a href="pages/ui/range-slider.html" class="menu-item">Range Slider</a>
-                                        <a href="pages/ui/rating.html" class="menu-item">Rating</a>
+                                        <a href="{{asset('public/backend/pages/ui/modals.html')}}" class="menu-item">Modals</a>
+                                        <a href="{{asset('public/backend/pages/ui/notifications.html')}}" class="menu-item">Notifications</a>
+                                        <a href="{{asset('public/backend/pages/ui/carousel.html')}}" class="menu-item">Slider</a>
+                                        <a href="{{asset('public/backend/pages/ui/range-slider.html')}}" class="menu-item">Range Slider</a>
+                                        <a href="{{asset('public/backend/pages/ui/rating.html')}}" class="menu-item">Rating</a>
                                     </div>
                                 </div>
                                 <div class="nav-item has-sub">
                                     <a href="#"><i class="ik ik-package"></i><span>Extra</span></a>
                                     <div class="submenu-content">
-                                        <a href="pages/ui/session-timeout.html" class="menu-item">Session Timeout</a>
+                                        <a href="{{asset('public/backend/pages/ui/session-timeout.html')}}" class="menu-item">Session Timeout</a>
                                     </div>
                                 </div>
                                 <div class="nav-item">
-                                    <a href="pages/ui/icons.html"><i class="ik ik-command"></i><span>Icons</span></a>
+                                    <a href="{{asset('public/backend/pages/ui/icons.html')}}"><i class="ik ik-command"></i><span>Icons</span></a>
                                 </div>
                                 <div class="nav-lavel">Forms</div>
                                 <div class="nav-item has-sub">
                                     <a href="#"><i class="ik ik-edit"></i><span>Forms</span></a>
                                     <div class="submenu-content">
-                                        <a href="pages/form-components.html" class="menu-item">Components</a>
-                                        <a href="pages/form-addon.html" class="menu-item">Add-On</a>
-                                        <a href="pages/form-advance.html" class="menu-item">Advance</a>
+                                        <a href="{{asset('public/backend/pages/form-components.html')}}" class="menu-item">Components</a>
+                                        <a href="{{asset('public/backend/pages/form-addon.html')}}" class="menu-item">Add-On</a>
+                                        <a href="{{asset('public/backend/pages/form-advance.html')}}" class="menu-item">Advance</a>
                                     </div>
                                 </div>
                                 <div class="nav-item">
-                                    <a href="pages/form-picker.html"><i class="ik ik-terminal"></i><span>Form Picker</span> <span class="badge badge-success">New</span></a>
+                                    <a href="{{asset('public/backend/pages/form-picker.html')}}"><i class="ik ik-terminal"></i><span>Form Picker</span> <span class="badge badge-success">New</span></a>
                                 </div>
 
                                 <div class="nav-lavel">Tables</div>
                                 <div class="nav-item">
-                                    <a href="pages/table-bootstrap.html"><i class="ik ik-credit-card"></i><span>Bootstrap Table</span></a>
+                                    <a href="{{asset('public/backend/pages/table-bootstrap.html')}}"><i class="ik ik-credit-card"></i><span>Bootstrap Table</span></a>
                                 </div>
                                 <div class="nav-item">
-                                    <a href="pages/table-datatable.html"><i class="ik ik-inbox"></i><span>Data Table</span></a>
+                                    <a href="{{asset('public/backend/pages/table-datatable.html')}}"><i class="ik ik-inbox"></i><span>Data Table</span></a>
                                 </div>
 
                                 <div class="nav-lavel">Charts</div>
                                 <div class="nav-item has-sub">
                                     <a href="#"><i class="ik ik-pie-chart"></i><span>Charts</span> <span class="badge badge-success">New</span></a>
                                     <div class="submenu-content">
-                                        <a href="pages/charts-chartist.html" class="menu-item active">Chartist</a>
-                                        <a href="pages/charts-flot.html" class="menu-item">Flot</a>
-                                        <a href="pages/charts-knob.html" class="menu-item">Knob</a>
-                                        <a href="pages/charts-amcharts.html" class="menu-item">Amcharts</a>
+                                        <a href="{{asset('public/backend/pages/charts-chartist.html')}}" class="menu-item active">Chartist</a>
+                                        <a href="{{asset('public/backend/pages/charts-flot.html')}}" class="menu-item">Flot</a>
+                                        <a href="{{asset('public/backend/pages/charts-knob.html')}}" class="menu-item">Knob</a>
+                                        <a href="{{asset('public/backend/pages/charts-amcharts.html')}}" class="menu-item">Amcharts</a>
                                     </div>
                                 </div>
 
                                 <div class="nav-lavel">Apps</div>
                                 <div class="nav-item">
-                                    <a href="pages/calendar.html"><i class="ik ik-calendar"></i><span>Calendar</span></a>
+                                    <a href="{{asset('public/backend/pages/calendar.html')}}"><i class="ik ik-calendar"></i><span>Calendar</span></a>
                                 </div>
                                 <div class="nav-item">
-                                    <a href="pages/taskboard.html"><i class="ik ik-server"></i><span>Taskboard</span></a>
+                                    <a href="{{asset('public/backend/pages/taskboard.html')}}"><i class="ik ik-server"></i><span>Taskboard</span></a>
                                 </div>
 
                                 <div class="nav-lavel">Pages</div>
@@ -262,20 +271,20 @@
                                 <div class="nav-item has-sub">
                                     <a href="#"><i class="ik ik-lock"></i><span>Authentication</span></a>
                                     <div class="submenu-content">
-                                        <a href="pages/login.html" class="menu-item">Login</a>
-                                        <a href="pages/register.html" class="menu-item">Register</a>
-                                        <a href="pages/forgot-password.html" class="menu-item">Forgot Password</a>
+                                        <a href="{{asset('public/backend/pages/login.html')}}" class="menu-item">Login</a>
+                                        <a href="{{asset('public/backend/pages/register.html')}}" class="menu-item">Register</a>
+                                        <a href="{{asset('public/backend/pages/forgot-password.html')}}" class="menu-item">Forgot Password</a>
                                     </div>
                                 </div>
                                 <div class="nav-item has-sub">
                                     <a href="#"><i class="ik ik-file-text"></i><span>Other</span></a>
                                     <div class="submenu-content">
-                                        <a href="pages/profile.html" class="menu-item">Profile</a>
-                                        <a href="pages/invoice.html" class="menu-item">Invoice</a>
+                                        <a href="{{asset('public/backend/pages/profile.html')}}" class="menu-item">Profile</a>
+                                        <a href="{{asset('public/backend/pages/invoice.html')}}" class="menu-item">Invoice</a>
                                     </div>
                                 </div>
                                 <div class="nav-item">
-                                    <a href="pages/layouts.html"><i class="ik ik-layout"></i><span>Layouts</span><span class="badge badge-success">New</span></a>
+                                    <a href="{{asset('public/backend/pages/layouts.html')}}"><i class="ik ik-layout"></i><span>Layouts</span><span class="badge badge-success">New</span></a>
                                 </div>
                                 <div class="nav-lavel">Other</div>
                                 <div class="nav-item has-sub">
@@ -407,6 +416,7 @@
         <script src="{{asset('public/backend/plugins/popper.js/dist/umd/popper.min.js')}}"></script>
         <script src="{{asset('public/backend/plugins/bootstrap/dist/js/bootstrap.min.js')}}"></script>
         <script src="{{asset('public/backend/plugins/perfect-scrollbar/dist/perfect-scrollbar.min.js')}}"></script>
+        @yield('script_repeat')
         <script src="{{asset('public/backend/plugins/screenfull/dist/screenfull.js')}}"></script>
         <script src="{{asset('public/backend/plugins/datatables.net/js/jquery.dataTables.min.js')}}"></script>
         <script src="{{asset('public/backend/plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
@@ -422,6 +432,7 @@
         <script src="{{asset('public/backend/js/widgets.js')}}"></script>
         <script src="{{asset('public/backend/js/charts.js')}}"></script>
         <script src="{{asset('public/backend/dist/js/theme.min.js')}}"></script>
+        
         @yield('script_components')
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

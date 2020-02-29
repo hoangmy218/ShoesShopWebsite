@@ -15,12 +15,12 @@ class CreateChitietdonhang extends Migration
     {
         Schema::create('chitietdonhang', function (Blueprint $table) {
            $table->Integer('dh_ma')->unsigned(); 
-            $table->Integer('sp_ma')->unsigned(); 
-            $table->Integer('soLuongNhap'); 
-            $table->Integer('donGiaNhap');
-            $table->primary(['dh_ma','sp_ma']);
+            $table->Integer('ctsp_ma')->unsigned(); 
+            $table->Integer('soLuongDat'); 
+            $table->Integer('thanhTien');
+            $table->primary(['dh_ma','ctsp_ma']);
             $table->foreign('dh_ma')->references('dh_ma')->on('donhang');
-            $table->foreign('sp_ma')->references('sp_ma')->on('sanpham');
+            $table->foreign('ctsp_ma')->references('sp_ma')->on('sanpham');
              $table->timestamps(); //tự động thêm thời gian tạo
         });
     }

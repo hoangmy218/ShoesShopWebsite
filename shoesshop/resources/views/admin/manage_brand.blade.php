@@ -60,8 +60,8 @@
                                                         <td>{{$brand->th_ma}}</td>
                                                         <td>{{$brand->th_ten}}</td>
                                                         <td><div class="table-actions">                                                  
-                                                            <a href="#"><i class="ik ik-edit-2"></i></a>
-                                                            <a href="#"><i class="ik ik-trash-2"></i></a>
+                                                            <a href="{{URL::to('/edit-brand-product/'.$brand->th_ma)}}"><i class="ik ik-edit-2"></i></a>
+                                                            <a href="{{URL::to('/delete-brand-product/'.$brand->th_ma)}}"><i class="ik ik-trash-2"></i></a>
                                                         </div></td>
                                                     </tr>
                                                     <?php {{$i++;}} ?>

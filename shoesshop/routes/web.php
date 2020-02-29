@@ -62,6 +62,12 @@ Route::get('/manage-brand','BrandController@showBrand');
 Route::get('/add-brand','BrandController@addBrand');
 Route::post('/save-brand','BrandController@saveBrand');
 
+	//Tien
+Route::get('/edit-brand-product/{brand_product_id}','BrandController@edit_brand_product');
+Route::get('/delete-brand-product/{brand_product_id}','BrandController@delete_brand_product');
+Route::post('/update-brand-product/{brand_product_id}','BrandController@update_brand_product');
+
+
 //Category
 Route::get('/manage-category','CategoryController@showCategory');
 Route::get('/add-category','CategoryController@addCategory');
@@ -72,3 +78,7 @@ Route::post('/save-category','CategoryController@saveCategory');
 Route::get('/manage-product','ProductController@showProduct');
 Route::get('/add-product','ProductController@addProduct');
 Route::post('/save-product','ProductController@saveProduct');
+
+//Goods-Receipt
+Route::get('/add-goods-receipt','ProductController@addGoodsReceipt');
+Route::post('/save-goods-receipt','ProductController@saveGoodsReceipt');

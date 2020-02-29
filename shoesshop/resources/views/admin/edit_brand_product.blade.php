@@ -9,7 +9,7 @@
                                     <div class="page-header-title">
                                         <i class="ik ik-file-text bg-blue"></i>
                                         <div class="d-inline">
-                                            <h5>Kho</h5>
+                                            <h5>Thương Hiệu</h5>
                                            {{--  <span>lorem ipsum dolor sit amet, consectetur adipisicing elit</span> --}}
                                         </div>
                                     </div>
@@ -21,28 +21,32 @@
                                                 <a href="{{URL::to('/dashboard')}}"><i class="ik ik-home"></i></a>
                                             </li>
                                             <li class="breadcrumb-item">
-                                                <a href="{{URL::to('/manage-stock')}}">Quản lý kho</a>
+                                                <a href="{{URL::to('/manage-category')}}">Quản lý thương hiệu</a>
                                             </li>
-                                            <li class="breadcrumb-item active" aria-current="page">Nhập kho</li>
+                                            <li class="breadcrumb-item active" aria-current="page">Cập nhật thương hiệu</li>
                                         </ol>
                                     </nav>
                                 </div>
                             </div>
                         </div>
-
-
                                 <div class="card">
-                                    <div class="card-header"><h3>Nhập kho</h3></div>
+                                    <div class="card-header"><h3>Cập nhật thương hiệu sản phẩm</h3></div>
                                     <div class="card-body">
-                                        <form class="forms-sample position-center">
+                                        @foreach($edit_brand_product as $key => $edit_value)
+                                        <div class="position-center">
+                                            <form role="form" action="{{URL::to('/update-brand-product/'.$edit_value->th_ma)}}" method="post">
+                                                {{ csrf_field() }}
                                             <div class="form-group">
-                                                <label for="exampleInputName1">Mã phiếu nhập</label>
-                                                <input type="text" class="form-control" id="exampleInputName1" placeholder="Name">
+                                                <label for="exampleInputName1">Tên thương hiệu</label>
+                                                <input type="text" value="{{$edit_value->th_ten}}" name="brand_product_name" class="form-control" id="exampleInputName1" placeholder="Name" >
                                             </div>
-                                             
-                                            <button type="submit" class="btn btn-primary mr-2">Thêm</button>
+                                            
+                                           
+                                            <button type="submit" name="add_cate" class="btn btn-primary mr-2">Cập nhật</button>
                                             <button class="btn btn-light">Hủy</button>
-                                        </form>
+                                            </form>
+                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>

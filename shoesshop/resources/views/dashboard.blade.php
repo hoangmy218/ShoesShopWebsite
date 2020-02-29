@@ -780,3 +780,23 @@
                 </div>
 
 @endsection
+
+@section('script_dashboard')
+
+<script src="{{asset('public/backend/plugins/screenfull/dist/screenfull.js')}}"></script>
+        <script src="{{asset('public/backend/plugins/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+        <script src="{{asset('public/backend/plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+        <script src="{{asset('public/backend/plugins/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+        <script src="{{asset('public/backend/plugins/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}"></script>
+        <script src="{{asset('public/backend/plugins/jvectormap/jquery-jvectormap.min.js')}}"></script>
+        <script src="{{asset('public/backend/plugins/jvectormap/tests/assets/jquery-jvectormap-world-mill-en.js')}}"></script>
+        <script src="{{asset('public/backend/plugins/moment/moment.js')}}"></script>
+        <script src="{{asset('public/backend/plugins/tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+        <script src="{{asset('public/backend/plugins/d3/dist/d3.min.js')}}"></script>
+        <script src="{{asset('public/backend/plugins/c3/c3.min.js')}}"></script>
+        <script src="{{asset('public/backend/js/tables.js')}}"></script>
+        <script src="{{asset('public/backend/js/widgets.js')}}"></script>
+        <script src="{{asset('public/backend/js/charts.js')}}"></script>
+        <script src="{{asset('public/backend/dist/js/theme.min.js')}}"></script>
+
+@endsection
