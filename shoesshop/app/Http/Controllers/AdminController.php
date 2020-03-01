@@ -12,12 +12,12 @@ session_start();
 class AdminController extends Controller
 {
     
-public function authLogin(){
-        $admin_email= Session::get('nd_email');
-        if ($admin_email) 
+    public function authLogin(){
+        $admin_id = Session::get('nd_ma');
+        if ($admin_id) 
             return Redirect::to('/dashboard'); 
         else 
-            return Redirect::to('/admin');
+            return Redirect::to('/admin')->send();
     }
 
     public function index()

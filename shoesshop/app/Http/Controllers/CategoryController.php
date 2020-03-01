@@ -41,4 +41,27 @@ class CategoryController extends Controller
     	return view('admin_layout')->with('admin.manage_category', $manager_category);
     	/*return view('admin.manage_category');*/
     }
+
+    public function editCategory($category_id){
+         $this->authLogin();
+        $edit_categories = DB::table('danhmuc')->where('dm_ma',$category_id)->get(); //Lấy 1 sản phẩm
+        $manager_category = view('admin.edit_category')->with('edit_cate',$edit_categories);
+        return view('admin_layout')->with('admin.edit_category', $manager_category);
+        /*return view('admin.manage_category');*/
+    }
+
+     public function updateCategory(Request $request,$category_id){
+        $data = array();
+        $data['dm_ma'] = $request->cate_id;
+        $data['dm_ten'] = $request->cate_name;
+        DB::table('danhmuc')->where('dm_ma',$category_id)->update($data);
+        Session::put('message','The category was updated successfully.');
+        return Redirect::to('/manage-category');
+    }
+
+    public function deleteCategory($category_id){
+        DB::table('danhmuc')->where('dm_ma',$category_id)->delete();
+        Session::put('message','The category was deleted successfully.');
+        return Redirect::to('/manage-category');
+    }
 }

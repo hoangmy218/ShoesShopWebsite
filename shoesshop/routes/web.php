@@ -18,23 +18,31 @@
 //FRONTEND hoạt động phía user
 Route::get('/','HomeController@index');
 
+Route::get('/userLogin','HomeController@userLogin');
+Route::post('/user_home','HomeController@AfterLogin');
+Route::get('/log_out', 'HomeController@log_out');
+Route::get('/Home_u', 'HomeController@Home_u');
+Route::get('/register','HomeController@get_register');
+Route::post('/postregister', 'HomeController@post_register');
 
-Route::get('/userLogin','UserController@index');
+/*
+Route::get('/userLogin','UserController@userLogin');
 Route::post('/user_home','UserController@AfterLogin');
-Route::get('/log_out', 'UserController@logout');
-Route::get('/Home_u', 'UserController@Home_u');
+Route::get('/log_out', 'UserController@log_out');
+Route::get('/Home_u', 'UserController@Home_u');*/
 
 
 //User
-Route::get('/register','UserController@get_register');
-Route::get('/checkout','UserController@gcheckout');
-
-Route::post('/postregister', 'UserController@post_register');
+/*Route::get('/register','UserController@get_register');
+Route::get('/checkout','UserController@gcheckout');*/
+/*
+Route::post('/postregister', 'UserController@post_register');*/
 
 //Product
-Route::get('/product-detail','ProductController@detail_product');
+Route::get('/product-detail/{product_id}','ProductController@details_product');//Tiên
 
 
+Route::get('/all-product','ProductController@all_product');//Tiên
 
 /*BACKEND hoat dong phia server*/
 
@@ -47,9 +55,15 @@ Route::post('/admin_dashboard', 'AdminController@dashboard');
 
 //Cart
 Route::get('/show-cart','CartController@showCart');
+Route::get('/delete-to-cart/{rowId}','CartController@delete_to_cart');//Tien
+Route::post('/update-cart-quantity','CartController@update_cart_quantity');//Tien
+Route::post('/save-cart','CartController@save_cart');//Tien
+
 
 //Checkout
 Route::get('/checkout','CheckoutController@checkout');
+Route::post('/save-checkout-customer', 'CheckoutController@save_checkout_customer');
+Route::get('/payment','CheckoutController@payment');
 
 
 //Order
@@ -73,6 +87,13 @@ Route::get('/manage-category','CategoryController@showCategory');
 Route::get('/add-category','CategoryController@addCategory');
 Route::post('/save-category','CategoryController@saveCategory');
 
+	//NGAN
+
+Route::get('/edit-category/{category_id}','CategoryController@editCategory');
+Route::get('/delete-category/{category_id}','CategoryController@deleteCategory');
+
+Route::post('/update-category/{category_id}','CategoryController@updateCategory');
+
 
 //Product
 Route::get('/manage-product','ProductController@showProduct');
@@ -82,3 +103,6 @@ Route::post('/save-product','ProductController@saveProduct');
 //Goods-Receipt
 Route::get('/add-goods-receipt','ProductController@addGoodsReceipt');
 Route::post('/save-goods-receipt','ProductController@saveGoodsReceipt');
+
+
+

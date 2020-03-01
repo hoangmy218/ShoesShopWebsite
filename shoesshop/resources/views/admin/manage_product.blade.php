@@ -61,7 +61,7 @@
                                                     <tr>
                                                         <th scope="row">{{$i}}</th>
                                                         <td>{{$pro->sp_ma}}</td>
-                                                         <td><img src="public/upload/product/{{$pro->ha_ten}}" height="100" width="100"></td> 
+                                                         <td><img src="{{URL::to('public/upload/product/'.$pro->ha_ten)}}" height="100" width="100"></td> 
                                                         <td>{{$pro->sp_ten}}</td>
                                                         <td>{{$pro->th_ten}}</td>
                                                         <td>{{$pro->dm_ten}}</td>

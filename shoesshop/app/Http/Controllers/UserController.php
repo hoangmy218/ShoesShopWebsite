@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+/*use Illuminate\Http\Request;
 use DB;
 use Session;
 use App\Http\Requests;
@@ -11,19 +11,28 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use Hash;
+session_start();*/
+
+use Illuminate\Http\Request;
+use DB;
+use Session;
+use App\Http\Requests;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 session_start();
+
 
 class UserController extends Controller
 {
     public function authLogin(){
-        $admin_id = Session::get('user_id');
-        if ($admin_id) 
-            return Redirect::to('/dashboard'); 
+        $user_id = Session::get('nd_ma');
+        if ($user_id) 
+            return Redirect::to('/'); 
         else 
-            return Redirect::to('/admin')->send();
+            return Redirect::to('/userLogin')->send();
     }
 
-    public function index(){
+    public function userLogin(){
         return view('pages.customer.user_login');
     }
 
@@ -62,6 +71,7 @@ class UserController extends Controller
     public function checkout(){
 
     }
+    
     public function AfterLogin(Request $request){
         $this->validate($request, [
             'user_email'=>'required',
@@ -94,11 +104,12 @@ class UserController extends Controller
     }
 
 
-    public function logout(){
+    public function log_out(){
         $this->authLogin();
         Session::put('nd_ma',null);
         Session::put('nd_ten',null);
-        return Redirect::to('/userLogin');
+        return Redirect::to('/');
+       /* return Redirect::to('/userLogin');*/
                 //echo "Logout";
     }
 }

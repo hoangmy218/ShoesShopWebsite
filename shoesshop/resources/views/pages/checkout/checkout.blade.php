@@ -1,153 +1,106 @@
 @extends('shop_layout')
 @section('content')
-    <div class="hero-wrap hero-bread" style="background-image: url({{asset('public/frontend/images/bg_6.jpg')}});">
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="{{URL::to('/')}}">Trang chủ</a></span> <span>Thanh toán</span></p>
-            <h1 class="mb-0 bread">Thanh toán</h1>
-          </div>
-        </div>
-      </div>
+	<div class="hero-wrap hero-bread" style="background-image: url({{asset('public/frontend/images/bg_6.jpg')}});">
+     	<div class="container">
+        	<div class="row no-gutters slider-text align-items-center justify-content-center">
+          		<div class="col-md-9 ftco-animate text-center">
+          			<p class="breadcrumbs"><span class="mr-2"><a href="{{URL::to('/')}}">Trang chủ</a></span> <span>Đặt hàng</span></p>
+            		<h1 class="mb-0 bread">Đặt hàng</h1>
+          		</div>
+        	</div>
+      	</div>
     </div>
 
     <section class="ftco-section">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-xl-10 ftco-animate">
-						{{-- <form action="#" class="billing-form">
-							<h3 class="mb-4 billing-heading">Billing Details</h3>
-	          	<div class="row align-items-end">
-	          		<div class="col-md-6">
-	                <div class="form-group">
-	                	<label for="firstname">Firt Name</label>
-	                  <input type="text" class="form-control" placeholder="">
-	                </div>
-	              </div>
-	              <div class="col-md-6">
-	                <div class="form-group">
-	                	<label for="lastname">Last Name</label>
-	                  <input type="text" class="form-control" placeholder="">
-	                </div>
-                </div>
-                <div class="w-100"></div>
-		            <div class="col-md-12">
-		            	<div class="form-group">
-		            		<label for="country">State / Country</label>
-		            		<div class="select-wrap">
-		                  <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-		                  <select name="" id="" class="form-control">
-		                  	<option value="">France</option>
-		                    <option value="">Italy</option>
-		                    <option value="">Philippines</option>
-		                    <option value="">South Korea</option>
-		                    <option value="">Hongkong</option>
-		                    <option value="">Japan</option>
-		                  </select>
-		                </div>
-		            	</div>
-		            </div>
-		            <div class="w-100"></div>
-		            <div class="col-md-6">
-		            	<div class="form-group">
-	                	<label for="streetaddress">Street Address</label>
-	                  <input type="text" class="form-control" placeholder="House number and street name">
-	                </div>
-		            </div>
-		            <div class="col-md-6">
-		            	<div class="form-group">
-	                  <input type="text" class="form-control" placeholder="Appartment, suite, unit etc: (optional)">
-	                </div>
-		            </div>
-		            <div class="w-100"></div>
-		            <div class="col-md-6">
-		            	<div class="form-group">
-	                	<label for="towncity">Town / City</label>
-	                  <input type="text" class="form-control" placeholder="">
-	                </div>
-		            </div>
-		            <div class="col-md-6">
-		            	<div class="form-group">
-		            		<label for="postcodezip">Postcode / ZIP *</label>
-	                  <input type="text" class="form-control" placeholder="">
-	                </div>
-		            </div>
-		            <div class="w-100"></div>
-		            <div class="col-md-6">
-	                <div class="form-group">
-	                	<label for="phone">Phone</label>
-	                  <input type="text" class="form-control" placeholder="">
-	                </div>
-	              </div>
-	              <div class="col-md-6">
-	                <div class="form-group">
-	                	<label for="emailaddress">Email Address</label>
-	                  <input type="text" class="form-control" placeholder="">
-	                </div>
-                </div>
-                <div class="w-100"></div>
-                <div class="col-md-12">
-                	<div class="form-group mt-4">
-										<div class="radio">
-										  <label class="mr-3"><input type="radio" name="optradio"> Create an Account? </label>
-										  <label><input type="radio" name="optradio"> Ship to different address</label>
-										</div>
-									</div>
-                </div>
-	            </div>
-	          </form><!-- END -->
- --}}
+    	<div class="container">
+        	
+				
+          		<div class="row">
+    			<div class="col-md-12 ftco-animate">
+    				<div class="cart-list">
+	    				<table class="table">
+						    <thead class="thead-primary">
+						      <tr class="text-center">
+						        <th>STT</th>
+						        <th>Hình ảnh</th>
+						        <th>Sản phẩm</th>
+						        <th>Đơn giá</th>
+						        <th>Số lượng</th>
+						        <th>Thành tiền</th>
+						        <th>&nbsp;</th>
+						      </tr>
+						    </thead>
+						    <tbody>
+						      <tr class="text-center">
+						      	<td class="product-price">
+						        	<h4>1</h4>
+						        </td>
+						        <td class="image-prod"><div class="img" style="background-image:url({{URL::to('public/frontend/images/product-3.jpg')}});"></div></td>
+						        
+						        <td class="product-name">
+						        	<h3>Nike Free RN 2019 iD</h3>
+						        	<p>Far far away, behind the word mountains, far from the countries</p>
+						        </td>
+						        
+						        <td class="price">$4.90</td>
+						        
+						         <td class="product-name">
+						        	<p>1</p>
+						        
+					          </td>
+						        <td class="total">$4.90</td>
+						      </tr><!-- END TR-->
+						    </tbody>
+						  </table>
+					  </div>
+    			</div>
+    		</div>
 
 
-	          <div class="row mt-5 pt-3 d-flex">
+
+	         <div class="row mt-5 pt-3 d-flex">
 	          	<div class="col-md-6 d-flex">
 	          		<div class="cart-detail cart-total bg-light p-3 p-md-4">
-	          			<h3 class="billing-heading mb-4">Tổng tiền giỏ hàng</h3>
-	          			<p class="d-flex">
-    						<span>Thành tiền</span>
-    						<span>$20.60</span>
-    					</p>
-    					<p class="d-flex">
-    						<span>Phí giao hàng</span>
-    						<span>$0.00</span>
-    					</p>
-    					<p class="d-flex">
-    						<span>Giảm giá</span>
-    						<span>$3.00</span>
-    					</p>
-    					<hr>
-    					<p class="d-flex total-price">
-    						<span>Tổng tiền</span>
-    						<span>$17.60</span>
-    					</p>
+	          			<h3 class="billing-heading mb-4">Thông tin giao hàng</h3>
+	          			<form action="{{URL::to('save-checkout-customer')}}" method="post">
+                                {{csrf_field()}}
+                                <div class="form-group">
+                                    <input type="Email" name="dh_email" class="form-control" placeholder="Email" required="" >
+                                    <i class="ik ik-user"></i>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="dh_tenNhan" class="form-control" placeholder="Họ và tên người nhận" required="">
+                                    <i class="ik ik-lock"></i>
+                                </div>
+                                <div class="form-group">
+                                    <textarea name="dh_diaChiNhan"  class="form-control" rows="3" cols="20" placeholder="Địa chỉ nhận hàng" required></textarea>                
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="dh_dienThoai" class="form-control" placeholder="Điện thoại" required="">
+                                    <i class="ik ik-lock"></i>
+                                </div>
+                                <div class="form-group">
+                            <label for="exampleInputPassword1">Phương thức vận chuyển</label>
+                            <select name="vc_ma" class="form-control m-bot15">
+                                @foreach($ma_vanchuyen as $key => $mavc)
+                                <option value="{{$mavc->vc_ma}}">{{$mavc->vc_ten}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                                <div class="form-group">
+                                    <textarea name="dh_ghiChu"  class="form-control" rows="3" cols="20" placeholder="Ghi chú giao hàng" required></textarea>                
+                                </div>
+                                <div class="sign-btn text-center">
+                        		<button type="submit" class="btn btn-theme btn-primary py-3 px-4">Tiếp tục đến phương thức thanh toán</button>
+                   				</div>
+
+                            </form> 
 					</div>
 	          	</div>
-	          	<div class="col-md-6">
-	          		<div class="cart-detail bg-light p-3 p-md-4">
-	          			<h3 class="billing-heading mb-4">Hình thức thanh toán</h3>
-									<div class="form-group">
-										<div class="col-md-12">
-											<div class="radio">
-											   <label><input type="radio" name="optradio" class="mr-2"> Thanh toán khi nhận hàng</label>
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-md-12">
-											<div class="radio">
-											   <label><input type="radio" name="optradio" class="mr-2"> Thanh toán bằng thẻ tín dụng</label>
-											</div>
-										</div>
-									</div>
-									<p><a href="#"class="btn btn-primary py-3 px-4">Hoàn tất</a></p>
-								</div>
-	          	</div>
+	          
 	          </div>
-          </div> <!-- .col-md-8 -->
-        </div>
+          
       </div>
     </section> <!-- .section -->
-		
-
 
 @endsection

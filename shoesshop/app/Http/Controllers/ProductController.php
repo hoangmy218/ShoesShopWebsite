@@ -82,9 +82,13 @@ class ProductController extends Controller
     	$manager_product = view('admin.manage_product')->with('list_pro', $list_products);
     	return view('admin_layout')->with('admin.manage_product', $manager_product);
     }
+ 
+    public function details_product($product_id){
 
-    public function detail_product(){
-        return view('pages.product.show_detail');
+         $details_product = DB::table('sanpham')->join('hinhanh','hinhanh.sp_ma','=','sanpham.sp_ma')->where('sanpham.sp_ma',$product_id)->get(); 
+         $sz_product = DB::table('chitietsanpham')->where('chitietsanpham.sp_ma',$product_id)->get(); 
+
+         return view('pages.product.show_detail')->with('details_product',$details_product)->with('sz_product',$sz_product);
     }
 
 
@@ -101,11 +105,11 @@ class ProductController extends Controller
         $data = array();
         $data = $request->all();
         $datapn = array();
-/*
+        /*
         $datapn['pn_ngayNhap']=$request->ngayNhap;*/
         $dateTime = Carbon::parse($request->ngayNhap);
 
-   $datapn['pn_ngayNhap'] = $dateTime->format('Y-m-d');
+        $datapn['pn_ngayNhap'] = $dateTime->format('Y-m-d');
         $pn_id = DB::table('phieunhap')->insertGetId($datapn);
 
         foreach($data['group-a'] as $pro){
@@ -113,29 +117,29 @@ class ProductController extends Controller
              $insert_data[] = $datasp;
         }
   
-             $count = count($insert_data);
-             echo $count.'count <br>';
-            for ($i=0; $i<$count; $i++){
-                $insert_datapro = $insert_data[$i];
-                 $count_i = count($insert_datapro);
-                for ($y=0; $y<$count_i; $y++){
-                    $insert_datadetail = $insert_datapro[$y];
-                    /*dd($insert_datadetail);*/
-                    $data_ctsp = array();
-                    $data_ctsp['sp_ma']= $insert_datadetail['masp'];
-                    $data_ctsp['ctsp_kichCo']= $insert_datadetail['kichCo'];
-                    $data_ctsp['ctsp_donGiaNhap'] = $insert_datadetail['donGiaNhap'];
-                    $data_ctsp['ctsp_soLuongNhap'] = $insert_datadetail['soLuongNhap'];
-                    $data_ctsp['ctsp_soLuongTon'] = $insert_datadetail['donGiaNhap'];
-                    $data_ctsp['pn_ma'] = $pn_id;
-                    DB::table('chitietsanpham')->insertGetId($data_ctsp);
-                    echo $insert_datadetail['masp'].'<br>';
-                    echo $insert_datadetail['kichCo'].'<br>';
-                    echo $insert_datadetail['soLuongNhap'].'<br>';
-                    echo $insert_datadetail['donGiaNhap'].'<br>';
+         $count = count($insert_data);
+         echo $count.'count <br>';
+        for ($i=0; $i<$count; $i++){
+            $insert_datapro = $insert_data[$i];
+             $count_i = count($insert_datapro);
+            for ($y=0; $y<$count_i; $y++){
+                $insert_datadetail = $insert_datapro[$y];
+                /*dd($insert_datadetail);*/
+                $data_ctsp = array();
+                $data_ctsp['sp_ma']= $insert_datadetail['masp'];
+                $data_ctsp['ctsp_kichCo']= $insert_datadetail['kichCo'];
+                $data_ctsp['ctsp_donGiaNhap'] = $insert_datadetail['donGiaNhap'];
+                $data_ctsp['ctsp_soLuongNhap'] = $insert_datadetail['soLuongNhap'];
+                $data_ctsp['ctsp_soLuongTon'] = $insert_datadetail['donGiaNhap'];
+                $data_ctsp['pn_ma'] = $pn_id;
+                DB::table('chitietsanpham')->insertGetId($data_ctsp);
+                echo $insert_datadetail['masp'].'<br>';
+                echo $insert_datadetail['kichCo'].'<br>';
+                echo $insert_datadetail['soLuongNhap'].'<br>';
+                echo $insert_datadetail['donGiaNhap'].'<br>';
 
-                }   
-            }
+            }   
+        }
             
     }
 }
