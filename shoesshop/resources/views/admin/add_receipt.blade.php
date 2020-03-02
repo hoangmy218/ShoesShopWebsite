@@ -127,12 +127,12 @@
                                                     </div>
                                                     <label for="exampleInputName1">Số lượng nhập </label>
                                                     <div class="form-group mb-2 mr-sm-2 mb-sm-0">
-                                                        <input type="number" class="form-control" name="soLuongNhap" min="1" step="0.5" max="40" value="35">
+                                                        <input type="number" class="form-control" name="soLuongNhap" min="1" step="1" max="40" value="10">
                                                     </div>
-                                                    <label for="exampleInputName1">Đơn giá nhập </label>
+                                                   {{--  <label for="exampleInputName1">Đơn giá nhập </label>
                                                     <div class="form-group  mb-2 mr-sm-2 mb-sm-0">
                                                         <input type="text" class="form-control" name="donGiaNhap" placeholder="100000">
-                                                    </div>
+                                                    </div> --}}
                                                     <button data-repeater-delete type="button" class="btn btn-danger btn-icon ml-2" ><i class="ik ik-trash-2"></i></button>
                                                 </div>
                                             </div>

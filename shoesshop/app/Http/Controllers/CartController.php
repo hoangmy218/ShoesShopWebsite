@@ -22,7 +22,7 @@ class CartController extends Controller
     	$id= $request->size;
     	$soluong = $request->qty;
 
-    	$ctsp = DB::table('chitietsanpham')->where('ctsp_id',$id)->first();
+    	$ctsp = DB::table('chitietsanpham')->where('ctsp_ma',$id)->first();
 
     	$ma_sanpham = $ctsp->sp_ma;
 

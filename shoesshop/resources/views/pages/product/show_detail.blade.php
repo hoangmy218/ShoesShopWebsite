@@ -58,7 +58,7 @@
 					                  <div class="icon"><span class="ion-ios-arrow-down"></span></div>
 					                  <select name="size" id="" class="form-control">
 					                  	@foreach($sz_product as $key => $size)
-					                  	<option value="{{$size->ctsp_id}}" name="opsize">{{$size->ctsp_kichCo}}</option>
+					                  	<option value="{{$size->ctsp_ma}}" name="opsize">{{$size->ctsp_kichCo}}</option>
 					                  	@endforeach
 					                    
 					                  </select>

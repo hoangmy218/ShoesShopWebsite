@@ -128,15 +128,15 @@ class ProductController extends Controller
                 $data_ctsp = array();
                 $data_ctsp['sp_ma']= $insert_datadetail['masp'];
                 $data_ctsp['ctsp_kichCo']= $insert_datadetail['kichCo'];
-                $data_ctsp['ctsp_donGiaNhap'] = $insert_datadetail['donGiaNhap'];
+                // $data_ctsp['ctsp_donGiaNhap'] = $insert_datadetail['donGiaNhap'];
                 $data_ctsp['ctsp_soLuongNhap'] = $insert_datadetail['soLuongNhap'];
-                $data_ctsp['ctsp_soLuongTon'] = $insert_datadetail['donGiaNhap'];
+                $data_ctsp['ctsp_soLuongTon'] =  $insert_datadetail['soLuongNhap'];
                 $data_ctsp['pn_ma'] = $pn_id;
                 DB::table('chitietsanpham')->insertGetId($data_ctsp);
                 echo $insert_datadetail['masp'].'<br>';
                 echo $insert_datadetail['kichCo'].'<br>';
                 echo $insert_datadetail['soLuongNhap'].'<br>';
-                echo $insert_datadetail['donGiaNhap'].'<br>';
+                /*echo $insert_datadetail['donGiaNhap'].'<br>';*/
 
             }   
         }

@@ -46,7 +46,7 @@ class HomeController extends Controller
         $data['nd_diaChi'] = $req->user_address;
         $data['cv_ma'] = "2"; //Chuc vu Khach hang
         if($req->rdGioitinh=="Male"){
-            $data['nd_gioiTinh'] = 0;
+            $data['nd_gioiTinh'] = 0; //nam
         }
         else{
             $data['nd_gioiTinh'] = 1;
