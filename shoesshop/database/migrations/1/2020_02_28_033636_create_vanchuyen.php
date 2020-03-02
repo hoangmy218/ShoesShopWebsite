@@ -16,7 +16,7 @@ class CreateVanchuyen extends Migration
         Schema::create('vanchuyen', function (Blueprint $table) {
             $table->Increments('vc_ma');
             $table->String('vc_ten');
-            $table->String('vc_phi');
+            $table->String('vc_phi')->unsigned();
             $table->timestamps();
         });
     }

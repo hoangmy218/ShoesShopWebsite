@@ -16,7 +16,8 @@ class CreateSanpham extends Migration
         Schema::create('sanpham', function (Blueprint $table) {
             $table->Increments('sp_ma'); //Increments là khóa chính
             $table->String('sp_ten');
-            $table->Integer('sp_donGiaBan')->nullable();
+            $table->Integer('sp_donGiaBan')->unsigned()->nullable();
+            $table->Integer('sp_donGiaNhap')->unsigned()->nullable();
             $table->Text('sp_ghiChu');
             $table->Integer('th_ma')->unsigned();
             $table->foreign('th_ma')->references('th_ma')->on('thuonghieu');

@@ -64,6 +64,7 @@ Route::post('/save-cart','CartController@save_cart');//Tien
 Route::get('/checkout','CheckoutController@checkout');
 Route::post('/save-checkout-customer', 'CheckoutController@save_checkout_customer');
 Route::get('/payment','CheckoutController@payment');
+Route::post('/order-place','CheckoutController@orderPlace');
 
 
 //Order

@@ -17,7 +17,6 @@
 			<?php
 				$content = Cart::content();
 			?>
-			@if (!$content->isempty())
 
 			<div class="row">
     			<div class="col-md-12 ftco-animate">
@@ -74,10 +73,11 @@
 											?><!-- Tien -->
 										</p>
 								        </td>
-								         <td class="product-remove">
+								        <td class="product-remove">
 								         	<a class="ion-ios-close" href="{{URL::to('/delete-to-cart/'.$v_content->rowId)}}"><i class="fa fa-times"></i></a>
 								         	
 								         </td>
+								         
 							         
 							      		</tr><!-- END TR-->
 							    	</tbody>
@@ -89,14 +89,12 @@
 	    	<div class="row justify-content-start">
 	    		<div class="col-md-12 ftco-animate">
 	    			<div class="cart-total mb-3">
-	    				<h3 class="billing-heading mb-4" align="right">Thành tiền giỏ hàng: &emsp;{{Cart::total().' '.'vnđ'}}</h3>		
+	    				<h3 class="billing-heading mb-4" align="right">Thành tiền giỏ hàng: &emsp;{{Cart::subtotal().' '.'vnđ'}}</h3>		
 	    			</div>
 	    			<p class="text-center"><a href="{{URL::to('/checkout')}}" class="btn btn-primary py-3 px-4">Đặt hàng</a></p>
 	    		</div>
 	    	</div>
-	    @else
-	    <p align="center"><h3>Giỏ hàng trống</h3> <a href="{{URL::to('/')}}" class="btn btn-primary py-3 px-4">Mua hàng ngay</a></p>
-	    @endif
+	    
 
 	</div>
 </section>

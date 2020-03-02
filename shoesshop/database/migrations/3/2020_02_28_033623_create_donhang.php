@@ -22,7 +22,7 @@ class CreateDonhang extends Migration
             $table->Text('dh_ghiChu');
             $table->Date('dh_ngayDat');
             $table->String('dh_trangThai');
-            $table->Integer('dh_tongTien');
+            $table->Integer('dh_tongTien')->unsigned();
             $table->Integer('vc_ma')->unsigned();
             $table->foreign('vc_ma')->references('vc_ma')->on('vanchuyen');
             $table->Integer('tt_ma')->unsigned();

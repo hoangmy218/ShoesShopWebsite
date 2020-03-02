@@ -13,135 +13,133 @@
 
     <section class="ftco-section">
       <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-xl-10 ftco-animate">
-						{{-- <form action="#" class="billing-form">
-							<h3 class="mb-4 billing-heading">Billing Details</h3>
-	          	<div class="row align-items-end">
-	          		<div class="col-md-6">
-	                <div class="form-group">
-	                	<label for="firstname">Firt Name</label>
-	                  <input type="text" class="form-control" placeholder="">
-	                </div>
-	              </div>
-	              <div class="col-md-6">
-	                <div class="form-group">
-	                	<label for="lastname">Last Name</label>
-	                  <input type="text" class="form-control" placeholder="">
-	                </div>
+
+			<?php
+                $content = Cart::content();
+            ?>
+          	<div class="row">
+                <div class="col-md-12 ftco-animate">
+                    <div class="cart-list">
+
+                        <table class="table">
+                            <thead class="thead-primary">
+                                 <tr class="text-center">
+                                    <th>STT</th>
+                                    <th>Hình ảnh</th>
+                                    <th>Sản phẩm</th>
+                                    <th>Kích cỡ</th>
+                                    <th>Đơn giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Thành tiền</th>
+                                    
+                                </tr>
+                            </thead>
+
+                            @foreach($content as $v_content)<!-- tien -->
+                                <tbody>
+                                    <tr class="text-center">
+                                        <td class="product-price">
+                                            <h4>1</h4>
+                                        </td>
+                                        <td class="image-prod"><div class="img" style="background-image:url({{URL::to('public/upload/product/'.$v_content->options->image)}});" ></div></td>
+                                        
+                                        <td class="product-name">
+                                            <h3>{{$v_content->name}}</h3>
+                                            
+                                        </td>
+                                        <td class="quantity">
+                                            <h3>{{$v_content->options->size}}</h3>                                          
+                                        </td>
+                                        
+                                        <td class="price">{{number_format($v_content->price).' '.'vnđ'}}</td>
+                                        
+                                        <td class="quantity">
+                                            <h4>{{$v_content->qty}}</h4>
+                                                        {{-- <inget type="number" name="cart_quantity" class="quantity form-control inget-number" value="{{$v_content->qty}}" min="1" max="100"> --}}       
+                                                
+                                        </td>
+                                        <td class="total">
+                                            <p class="cart_total_price">
+                                            
+                                            <?php
+                                            $subtotal = $v_content->price * $v_content->qty;
+                                            echo number_format($subtotal).' '.'vnđ';
+                                            ?><!-- Tien -->
+                                        </p>
+                                        </td>
+                                        </tr><!-- END TR-->
+                                    </tbody>
+                            @endforeach 
+                        </table>
+                    </div>
                 </div>
-                <div class="w-100"></div>
-		            <div class="col-md-12">
-		            	<div class="form-group">
-		            		<label for="country">State / Country</label>
-		            		<div class="select-wrap">
-		                  <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-		                  <select name="" id="" class="form-control">
-		                  	<option value="">France</option>
-		                    <option value="">Italy</option>
-		                    <option value="">Philippines</option>
-		                    <option value="">South Korea</option>
-		                    <option value="">Hongkong</option>
-		                    <option value="">Japan</option>
-		                  </select>
-		                </div>
-		            	</div>
-		            </div>
-		            <div class="w-100"></div>
-		            <div class="col-md-6">
-		            	<div class="form-group">
-	                	<label for="streetaddress">Street Address</label>
-	                  <input type="text" class="form-control" placeholder="House number and street name">
-	                </div>
-		            </div>
-		            <div class="col-md-6">
-		            	<div class="form-group">
-	                  <input type="text" class="form-control" placeholder="Appartment, suite, unit etc: (optional)">
-	                </div>
-		            </div>
-		            <div class="w-100"></div>
-		            <div class="col-md-6">
-		            	<div class="form-group">
-	                	<label for="towncity">Town / City</label>
-	                  <input type="text" class="form-control" placeholder="">
-	                </div>
-		            </div>
-		            <div class="col-md-6">
-		            	<div class="form-group">
-		            		<label for="postcodezip">Postcode / ZIP *</label>
-	                  <input type="text" class="form-control" placeholder="">
-	                </div>
-		            </div>
-		            <div class="w-100"></div>
-		            <div class="col-md-6">
-	                <div class="form-group">
-	                	<label for="phone">Phone</label>
-	                  <input type="text" class="form-control" placeholder="">
-	                </div>
-	              </div>
-	              <div class="col-md-6">
-	                <div class="form-group">
-	                	<label for="emailaddress">Email Address</label>
-	                  <input type="text" class="form-control" placeholder="">
-	                </div>
-                </div>
-                <div class="w-100"></div>
-                <div class="col-md-12">
-                	<div class="form-group mt-4">
-										<div class="radio">
-										  <label class="mr-3"><input type="radio" name="optradio"> Create an Account? </label>
-										  <label><input type="radio" name="optradio"> Ship to different address</label>
+            </div>
+	         <div class="row mt-5 pt-3 d-flex">
+	          	<div class="col-md-12 d-flex">
+	          		<div class="cart-detail cart-total bg-light p-3 p-md-4">
+	          			<h3 class="billing-heading mb-4">Thông tin giao hàng</h3>
+	          				<?php 
+                                echo '<p class="d-flex"><span>Tên người nhận </span>';
+                                echo '<span>'.Session::get('dh_tenNhan').'</span></p>';
+                               echo '<p class="d-flex"><span>Địa chỉ</span>';
+						        echo '<span>'.Session::get('dh_diaChiNhan').'</span></p>';
+						       echo '<p class="d-flex"><span>Điện thoại</span>';
+						        echo '<span>'.Session::get('dh_dienThoai').'</span></p>';
+						       echo '<p class="d-flex"><span>Email</span>';
+						        echo '<span>'.Session::get('dh_email').'</span></p>';
+						       
+						        echo '<p class="d-flex"><span>Ngày đặt</span>';
+						        $date =date_create(Session::get('dh_ngayDat'));
+						        echo '<span>'.date_format($date,"d/m/Y ").'</span></p>';
+						        					       
+						       echo '<p class="d-flex"><span>Hình thức vận chuyển</span>';
+						        echo '<span>'.Session::get('vc_ten').'</span></p>';
+						        echo '<p class="d-flex"><span>Ghi chú</span>';
+						        echo '<span>'.Session::get('dh_ghiChu').'</span></p>';
+						    ?>
+	          		</div>
+                    <div class="cart-detail cart-total bg-light p-3 p-md-4">
+                        <h3 class="billing-heading mb-4">Tổng tiền giỏ hàng</h3>
+                        <p class="d-flex">
+                            <span>Thành tiền</span>
+                            <span>{{number_format((double)Cart::subtotal(2,'.','')).' VND'}}</span>
+                        </p>
+                        <p class="d-flex">
+                            <span>Phí giao hàng</span>
+                            <?php (int)$phi=Session::get('vc_phi'); ?>
+                            <span>{{number_format($phi).' VND'}}</span>
+                        </p>
+                        
+                        <hr>
+                        <p class="d-flex total-price">
+                            <span>Tổng tiền</span>
+                            <?php $subtt =(double)Cart::subtotal(2,'.',''); ?> {{-- bo dau hang nghin, chuyen sau thap phan thanh , --}}
+                            <span>{{number_format($subtt-$phi).' VND'}}</span>
+                            <?php Session::put('dh_tongTien',number_format((double)Cart::subtotal(2,'.','')));?>
+                        </p>
+                    </div>
+	          		<div class="cart-detail bg-light p-3 p-md-4">
+	          			<form action="{{URL::to('/order-place')}}" method="POST">
+							{{csrf_field()}}
+		          			<h3 class="billing-heading mb-4">Hình thức thanh toán</h3>
+		          			<div class="payment-options">
+		          			@foreach($ma_thanhtoan as $key => $matt)
+			          			<div class="form-group">
+									<div class="col-md-12">
+										<div class="paymentradio">
+											<label><input type="radio" name="optradio" value="{{$matt->tt_ma}}" class="mr-2">{{$matt->tt_ten}}</label>
 										</div>
 									</div>
-                </div>
-	            </div>
-	          </form>
- --}}
+								</div> 
+	                        @endforeach									
+							<button type="submit" class="btn btn-theme btn-primary py-3 px-4">Hoàn tất</button>
+							</div>
+						</div>
+					</form>
 
-
-	          <div class="row mt-5 pt-3 d-flex">
-	          	<div class="col-md-6 d-flex">
-	          		<div class="cart-detail cart-total bg-light p-3 p-md-4">
-	          			<h3 class="billing-heading mb-4">Tổng tiền giỏ hàng</h3>
-	          			<p class="d-flex">
-    						<span>Thành tiền</span>
-    						<span>$20.60</span>
-    					</p>
-    					<p class="d-flex">
-    						<span>Phí giao hàng</span>
-    						<span>$0.00</span>
-    					</p>
-    					<p class="d-flex">
-    						<span>Giảm giá</span>
-    						<span>$3.00</span>
-    					</p>
-    					<hr>
-    					<p class="d-flex total-price">
-    						<span>Tổng tiền</span>
-    						<span>$17.60</span>
-    					</p>
-					</div>
-	          	</div>
-	          	<div class="col-md-6">
-	          		<div class="cart-detail bg-light p-3 p-md-4">
-	          			<h3 class="billing-heading mb-4">Hình thức thanh toán</h3>
-
-	          			@foreach($ma_thanhtoan as $key => $matt)
-	          			<div class="form-group">
-										<div class="col-md-12">
-											<div class="radio">
-											   <label><input type="radio" name="optradio" value="{{$matt->tt_ma}}" class="mr-2">{{$matt->tt_ten}}</label>
-											</div>
-										</div>
-									</div> 
-                        @endforeach									
-						<p><a href="#"class="btn btn-primary py-3 px-4">Hoàn tất</a></p>
-					</div>
-	          	</div>
 	          </div>
           </div> <!-- .col-md-8 -->
-        </div>
-      </div>
+
     </section> <!-- .section -->
 		
 

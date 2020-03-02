@@ -14,16 +14,15 @@ class CreateChitietsanpham extends Migration
     public function up()
     {
         Schema::create('chitietsanpham', function (Blueprint $table) {
-            $table->Increments('ctsp_id');
-            $table->Integer('sp_ma'); 
-            $table->Integer('pn_ma'); 
+            $table->Increments('ctsp_ma');
             $table->Integer('ctsp_kichCo'); 
-            $table->Integer('soLuongNhap'); 
-            $table->Integer('donGiaNhap');
-            $table->Integer('soLuongTon');
-            $table->timestamps(); //tự động thêm thời gian tạo
+            $table->Integer('ctsp_soLuongNhap')->unsigned(); 
+            $table->Integer('ctsp_soLuongTon')->unsigned();
+            $table->Integer('sp_ma')->unsigned(); 
+            $table->Integer('pn_ma')->unsigned();
             $table->foreign('sp_ma')->references('sp_ma')->on('sanpham');
             $table->foreign('pn_ma')->references('pn_ma')->on('phieunhap');
+            $table->timestamps(); //tự động thêm thời gian tạo
         });
     }
 
