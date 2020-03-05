@@ -8,6 +8,25 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+{{-- 
+    <link rel="stylesheet" href="{{asset('public/frontend/css/open-iconic-bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('public/frontend/css/animate.css')}}">
+    
+    <link rel="stylesheet" href="{{asset('public/frontend/css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('public/frontend/css/owl.theme.default.min.css')}}">
+    <link rel="stylesheet" href="{{asset('public/frontend/css/magnific-popup.css')}}">
+
+    <link rel="stylesheet" href="{{asset('public/frontend/css/aos.css')}}">
+
+    <link rel="stylesheet" href="{{asset('public/frontend/css/ionicons.min.css')}}">
+
+    <link rel="stylesheet" href="{{asset('public/frontend/css/bootstrap-datepicker.css')}}">
+    <link rel="stylesheet" href="{{asset('public/frontend/css/jquery.timepicker.css')}}">
+
+    
+    <link rel="stylesheet" href="{{asset('public/frontend/css/flaticon.css')}}">
+    <link rel="stylesheet" href="{{asset('public/frontend/css/icomoon.css')}}">
+    <link rel="stylesheet" href="{{asset('public/frontend/css/style.css')}}"> --}}
 
         <!-- Styles -->
         <style>
@@ -64,36 +83,59 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+        <div class="container">
+            <h2>Dropdown </h2>
+            <div class="form-group">
+                <label for="size">Select size</label>
+                <select name="size" id="size" class="form-control">
+                    <option value="">Size</option>
+                    @foreach($sizes as $key => $value)
+                        <option value="{{$value->ctsp_kichCo}}">{{$value->ctsp_kichCo}}</option>
+                    @endforeach
+                </select>
+                
+            </div>
+             <div class="form-group">
+                <label for="size">Select stock number</label>
+                <select name="stock" id="stock" class="form-control">
+                    <option value="">Stock</option>
+                   {{--  @foreach($stocks as $key => $value)
+                        <option value="{{$key}}">{{$value}}</option>
+                    @endforeach --}}
+                </select>
+                
             </div>
         </div>
+       
+        
+
+    <script src="http://www.codermen.com/js/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('select[name="size"]').on('change',function(){
+                var size_id = $(this).val();
+                console.log(size_id);
+
+                if(size_id){
+
+                    $.ajax({
+
+                        url: "{{url('getStock')}}?size_id="+size_id,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data){
+                            console.log(data);
+                             $('select[name="stock"]').empty();
+                             $.each(data, function(name,stock){
+                                $('select[name="stock"]').append('<option value="'+stock+'">'+stock+'</option>');
+                             });
+                        }
+                    });
+                }else{
+                     $('select[name="stock"]').empty();
+                }
+            });
+        });
+    </script>
     </body>
 </html>

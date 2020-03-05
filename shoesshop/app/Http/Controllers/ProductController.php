@@ -142,4 +142,53 @@ class ProductController extends Controller
         }
             
     }
+
+    //Lan
+    public function chinhsua_sanpham($chinhsua_sp_ma){
+        $this->authLogin();    
+        $list_cate = DB::table("danhmuc")->orderby('dm_ma','desc')->get();
+        $list_brand = DB::table("thuonghieu")->orderby('th_ma','desc')->get();
+        $hinh_anh=DB::table('hinhanh')->where('sp_ma', $chinhsua_sp_ma)->get();
+        $edit_pro=DB::table('sanpham')->where('sp_ma',$chinhsua_sp_ma)->get();
+       
+        // echo $hinh_anh;
+        return view('admin.edit_product')->with('edit_pro', $edit_pro)->with('list_brand', $list_brand)->with('list_cate', $list_cate)->with('hinh_anh', $hinh_anh);
+    }
+    public function capnhat_sanpham(Request $request, $chinhsua_sp_ma){
+        $data= array();
+        $data['sp_ten']=$request->pro_name;
+        $data['sp_donGiaNhap']=$request->pro_pricegor;
+        $data['sp_donGiaBan']=$request->pro_price;
+        $data['sp_ghiChu']=$request->pro_note;
+        $data['th_ma']=$request->pro_brand;
+        $data['dm_ma']=$request->pro_cate;
+
+        if ($request->hasFile('pro_image')){
+            $this->validate($request,
+                                ['product_image'=>'mimes:jpg,jpeg,png,gif|max:2048',
+                                ],
+                                ['product_image.mimes'=>'Only accept jpg, jpeg, png, gif.',
+                                 'product_image.max'=>'Max file size: 2MB.',
+                                ]
+                            );
+
+            $product_image = $request->file('pro_image');
+            if ($product_image){
+                $get_image = $product_image->getClientOriginalName();
+                $destinationPath = public_path('upload/product');
+                $product_image->move($destinationPath, $get_image);
+                $data_img = array();
+               
+                $data_img['sp_ma'] = DB::table('sanpham')->insertGetId($data);              
+                $data_img['ha_ten']=$get_image;
+                DB::table('hinhanh')->where('sp_ma', $chinhsua_sp_ma)->update($data_img);
+            }
+           
+           
+        }
+        DB::table('sanpham')->where('sp_ma', $chinhsua_sp_ma)->update($data);
+        Session::put('message','The product was added successfully.');
+        return Redirect::to('/manage-product');
+    }
+
 }

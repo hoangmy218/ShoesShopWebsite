@@ -50,60 +50,7 @@
                             <button type="button" id="navbar-fullscreen" class="nav-link"><i class="ik ik-maximize"></i></button>
                         </div>
                         <div class="top-menu d-flex align-items-center">
-                           {{--  <div class="dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="notiDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ik ik-bell"></i><span class="badge bg-danger">3</span></a>
-                                <div class="dropdown-menu dropdown-menu-right notification-dropdown" aria-labelledby="notiDropdown">
-                                    <h4 class="header">Notifications</h4>
-                                    <div class="notifications-wrap">
-                                        <a href="#" class="media">
-                                            <span class="d-flex">
-                                                <i class="ik ik-check"></i> 
-                                            </span>
-                                            <span class="media-body">
-                                                <span class="heading-font-family media-heading">Invitation accepted</span> 
-                                                <span class="media-content">Your have been Invited ...</span>
-                                            </span>
-                                        </a>
-                                        <a href="#" class="media">
-                                            <span class="d-flex">
-                                                <img src="{{asset('public/backend/img/users/1.jpg')}}" class="rounded-circle" alt="">
-                                            </span>
-                                            <span class="media-body">
-                                                <span class="heading-font-family media-heading">Steve Smith</span> 
-                                                <span class="media-content">I slowly updated projects</span>
-                                            </span>
-                                        </a>
-                                        <a href="#" class="media">
-                                            <span class="d-flex">
-                                                <i class="ik ik-calendar"></i> 
-                                            </span>
-                                            <span class="media-body">
-                                                <span class="heading-font-family media-heading">To Do</span> 
-                                                <span class="media-content">Meeting with Nathan on Friday 8 AM ...</span>
-                                            </span>
-                                        </a>
-                                    </div>
-                                    <div class="footer"><a href="javascript:void(0);">See all activity</a></div>
-                                </div>
-                            </div> --}}
-                           {{--  <button type="button" class="nav-link ml-10 right-sidebar-toggle"><i class="ik ik-message-square"></i><span class="badge bg-success">3</span></button>
-                            <div class="dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="menuDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ik ik-plus"></i></a>
-                                <div class="dropdown-menu dropdown-menu-right menu-grid" aria-labelledby="menuDropdown">
-                                    <a class="dropdown-item" href="#" data-toggle="tooltip" data-placement="top" title="Dashboard"><i class="ik ik-bar-chart-2"></i></a>
-                                    <a class="dropdown-item" href="#" data-toggle="tooltip" data-placement="top" title="Message"><i class="ik ik-mail"></i></a>
-                                    <a class="dropdown-item" href="#" data-toggle="tooltip" data-placement="top" title="Accounts"><i class="ik ik-users"></i></a>
-                                    <a class="dropdown-item" href="#" data-toggle="tooltip" data-placement="top" title="Sales"><i class="ik ik-shopping-cart"></i></a>
-                                    <a class="dropdown-item" href="#" data-toggle="tooltip" data-placement="top" title="Purchase"><i class="ik ik-briefcase"></i></a>
-                                    <a class="dropdown-item" href="#" data-toggle="tooltip" data-placement="top" title="Pages"><i class="ik ik-clipboard"></i></a>
-                                    <a class="dropdown-item" href="#" data-toggle="tooltip" data-placement="top" title="Chats"><i class="ik ik-message-square"></i></a>
-                                    <a class="dropdown-item" href="#" data-toggle="tooltip" data-placement="top" title="Contacts"><i class="ik ik-map-pin"></i></a>
-                                    <a class="dropdown-item" href="#" data-toggle="tooltip" data-placement="top" title="Blocks"><i class="ik ik-inbox"></i></a>
-                                    <a class="dropdown-item" href="#" data-toggle="tooltip" data-placement="top" title="Events"><i class="ik ik-calendar"></i></a>
-                                    <a class="dropdown-item" href="#" data-toggle="tooltip" data-placement="top" title="Notifications"><i class="ik ik-bell"></i></a>
-                                    <a class="dropdown-item" href="#" data-toggle="tooltip" data-placement="top" title="More"><i class="ik ik-more-horizontal"></i></a>
-                                </div>
-                            </div> --}}
+
                             <button type="button" class="nav-link ml-10" id="apps_modal_btn" data-toggle="modal" data-target="#appsModal"><i class="ik ik-grid"></i></button>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -183,6 +130,22 @@
                                         <a href="{{URL::to('/add-goods-receipt')}}" class="menu-item">Nhập hàng</a>
                                         <a href="{{URL::to('/stock')}}" class="menu-item">Tồn kho</a>
                                         
+                                    </div>
+                                </div>
+                                <div class="nav-item has-sub">
+                                    <a href="javascript:void(0)"><i class="ik ik-home"></i><span>Hình thức vận chuyển</span> <span class="badge badge-danger"></span></a>
+                                    <div class="submenu-content">
+                                        <a href="{{URL::to('/add-transport')}}" class="menu-item">Thêm hình thức vận chuyển</a>
+                                        <a href="{{URL::to('/manage-transport')}}" class="menu-item">Danh sách hình thức vận chuyển</a>
+                                       
+                                    </div>
+                                </div>
+                                <div class="nav-item has-sub">
+                                    <a href="javascript:void(0)"><i class="ik ik-home"></i><span>Phương thức thanh toán</span> <span class="badge badge-danger"></span></a>
+                                    <div class="submenu-content">
+                                        <a href="{{URL::to('/add-pay')}}" class="menu-item">Thêm phương thức thanh toán</a>
+                                        <a href="{{URL::to('/manage-pay')}}" class="menu-item">Danh sách phương thức thanh toán</a>
+                                       
                                     </div>
                                 </div>
                                 <div class="nav-item">

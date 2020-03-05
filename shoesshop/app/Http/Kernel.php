@@ -60,6 +60,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'AdminRole_Name' => \App\Http\Middleware\AdminRole::class, // AdminRole_Name là tên đường dẫn; AdminRole là tên middelware
+        'UserRole_Name' => \App\Http\Middleware\UserRole::class,
     ];
 
     /**

@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="{{asset('public/frontend/css/open-iconic-bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('public/frontend/css/animate.css')}}">
+    {{--     <link rel="stylesheet" href="{{asset('public/frontend/css/core-style.css')}}"> --}}
     
     <link rel="stylesheet" href="{{asset('public/frontend/css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('public/frontend/css/owl.theme.default.min.css')}}">
@@ -24,7 +25,12 @@
     
     <link rel="stylesheet" href="{{asset('public/frontend/css/flaticon.css')}}">
     <link rel="stylesheet" href="{{asset('public/frontend/css/icomoon.css')}}">
+
     <link rel="stylesheet" href="{{asset('public/frontend/css/style.css')}}">
+{{--       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> --}}
   </head>
  <body class="goto-here">
     <div class="py-1 bg-black">
@@ -86,7 +92,19 @@
               <li class="nav-item"><a href="{{URL::to('userLogin')}}" class="nav-link">Login</a></li>
               <li class="nav-item"><a href="{{URL::to('register')}}" class="nav-link">Register</a></li>
             @endif
-            <li class="nav-item cta cta-colored"><a href="{{URL::to('/show-cart')}}" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+            <li class="nav-item cta cta-colored"><a href="{{URL::to('/show-cart')}}" class="nav-link"><span class="icon-shopping_cart"></span> 
+              <?php
+                $content = Cart::content();
+                $sl = 0;
+                if ($content){
+                  foreach ($content as $v_content){
+                      $sl = $sl + $v_content->qty; 
+                  }
+                  
+                }
+                
+              ?>
+              [{{$sl}}]</a></li>
 
           </ul>
         </div>

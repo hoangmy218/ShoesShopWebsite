@@ -1,42 +1,19 @@
-@extends('shop_layout')
-@section('content')
-
-
-    <div class="hero-wrap hero-bread" style="background-image: url({{URL::to('public/frontend/images/bg_6.jpg')}});">
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="{{URL::to('/')}}">Trang chủ</a></span> <span>Giỏ hàng</span></p>
-            <h1 class="mb-0 bread">Giỏ hàng của tôi</h1>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <section class="ftco-section ftco-cart">
-
-		<div class="container">
-			<?php
+<div class="cart-list">
+	<?php
 		            	$message = Session::get('message');
 		            	if ($message){
 		            		echo '<span class="alert alert-danger">'.$message."</span>";
 		            		
 		            		Session::put('message',null);
 		            	}
+		            	$success_message = Session::get('success_message');
+		            	if ($success_message){
+		            		echo '<span class="alert alert-success">'.$success_message."</span>";
+		            		
+		            		Session::put('success_message',null);
+		            	}
 		            ?>
-			<?php
-				$content = Cart::content();
-			?>
-
-			@if ($content->isempty())
-				<p class="text-center"><a href="{{URL::to('/')}}" class="btn btn-primary py-3 px-4">MUA HÀNG NGAY!</a></p>
-			@else
-
-			<div class="row">
-    			<div class="col-md-12 ftco-animate">
-    				<div id='updateDiv'>
-					
-		            <div class="cart-list">
+			
 	    				<table class="table">
 						    <thead class="thead-primary">
 							     <tr class="text-center">
@@ -69,9 +46,9 @@
 								        	
 								        </td>
 								        <td class="quantity">
-								        	
+								        	<h3>{{$v_content->options->size}}</h3>
 								        	<select name="size" id="size"  class="form-control size<?php echo $count; ?>">
-							                    
+							                    <option value="">Size</option>
 							                    <?php 
 								                    $product = DB::Table('chitietsanpham')->select('sp_ma','ctsp_soLuongTon')->where('ctsp_ma',$v_content->id)->first();
 								                    $sizes = DB::Table('chitietsanpham')->select('ctsp_kichCo','ctsp_ma')->where('sp_ma',$product->sp_ma)->get();  
@@ -124,25 +101,6 @@
 
 						</table>
 					</div>
-</div>
-
-    			</div>
-
-    		</div>
-	    	<div class="row justify-content-start">
-	    		<div class="col-md-12 ftco-animate">
-	    			<div class="cart-total mb-3">
-	    				<h3 class="billing-heading mb-4" align="right">Thành tiền giỏ hàng: &emsp;{{Cart::subtotal().' '.'vnđ'}}</h3>		
-	    			</div>
-	    			<p class="text-center"><a href="{{URL::to('/checkout')}}" class="btn btn-primary py-3 px-4">Đặt hàng</a></p>
-	    		</div>
-	    	</div>
-	    	@endif
-	    
-
-	</div>
-
-
 	<script src="http://www.codermen.com/js/jquery.js"></script>
     <script type="text/javascript">
     	    function rating(a){
@@ -177,8 +135,6 @@
                              $.each(data, function(name,stock){
                                 /*$('select[name="stock"]').append('<option value="'+stock+'">'+stock+'</option>');
 */
-								 /*$('input[name="quantity"]').replaceWith('<input type="number" onchange="this.form.submit()" name="quantity" class="quantity form-control input-number" value="1" min="1" max="'+stock+'">');*/
-								 /* $('input[name="quantity"]').replaceWith('<input type="number"  name="quantity" id="upCart" class="quantity form-control input-number" value="1" min="1" max="'+stock+'">');*/
 								  $('input[name="quantity"]').attr({
 								       "max" : stock,        // substitute your own
 								       "min" : 1          // values (or variables) here
@@ -229,6 +185,3 @@
 
         });
     </script>
-</section>
-@endsection
-		

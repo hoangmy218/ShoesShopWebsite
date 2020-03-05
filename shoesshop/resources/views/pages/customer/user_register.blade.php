@@ -1,19 +1,15 @@
 @extends('shop_layout')
 @section('content')
+
     <section class="ftco-section">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-xl-10 ftco-animate">
              <div class="col-md-12">
             <div class="container"><h3 class="mb-4 billing-heading" style="text-align: center; font-size: 35px;">Register</h3>
-            <?php
-                $message=Session::get('message');
-                 if($message){
-                  echo $message;
-                  Session::put('message',null);
-               }
-            ?> 
-                 <form action="{{URL::to('postregister')}}" method="post">
+           
+
+                 <form action="{{URL::to('postregister')}}" method="post" name="formRegister" onsubmit="return check_email();">
                                 {{csrf_field()}}
                                 <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
 
@@ -46,7 +42,7 @@
                      <!-- <div style="background-color: red;">Cột thứ 2 tỉ lệ 2</div> -->
 
                                 <div class="form-group">
-                                    <input type="email" name="user_email" class="form-control" placeholder="Email" required="">
+                                    <input type="text" name="user_email" class="form-control" placeholder="Email" required="">
                                     <i class="ik ik-user"></i>
                                 </div>
                                 <div class="form-group">

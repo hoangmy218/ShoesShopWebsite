@@ -5,37 +5,48 @@
         <div class="row justify-content-center">
           <div class="col-xl-10 ftco-animate">
              <div class="col-md-6">
-            <h3 class="mb-4 billing-heading">Login</h3>
-            <?php
+            
+            <h2 style="color: black; text-align: center;"><b>Đăng nhập</b></h1>
+            <h5 style="color: black; text-align: center;"><b>Người dùng</b></h3>
+            <p style="color: red;"><b><?php
                 $message=Session::get('message');
                  if($message){
-                  echo $message;
+                   echo $message; 
                   Session::put('message',null);
                }
-            ?> 
+            ?></b></p> 
+
+
+            <p style="color: red;"><b><?php
+                $message1=Session::get('message1');
+                 if($message1){
+                  echo $message1;
+                  Session::put('message1',null);
+               }
+            ?></b></p>
+
+           
                   <form action="{{URL::to('user_home')}}" method="post">
                     {{csrf_field()}}
                      
                 <!--/<div class="row align-items-end">  --> 
             
                     <div class="form-group">
-                        <label for="firstname">Email</label>
-                      <input type="text" class="form-control" name="user_email" placeholder="" required> 
+                      <input type="text" class="form-control" name="user_email" placeholder="Email" required> 
                     </div>
                     <div class="form-group">
-                        <label for="lastname">Password</label>
-                      <input type="password" name="user_password" class="form-control" placeholder="" required><br>
+                      <input type="password" name="user_password" class="form-control" placeholder="Mật khẩu" required><br>
                     </div>
 
                     <div class="sign-btn text-center">
-                        <button type="submit" class="btn btn-theme btn-primary py-3 px-4">Login</button>
+                        <button type="submit" class="btn btn-theme btn-primary py-3 px-4">Đăng nhập</button>
                    </div>
                 
                   
                 </form>
-
+<br>
                  <div class="register">
-                     <p>Don't have an account? <a href="{{URL::to('/register')}}">Create an account</a></p>
+                     <p style="text-align: center;">Bạn chưa có tài khoản? <a href="{{URL::to('/register')}}" style="color: red;">Tạo tài khoản</a></p>
                   </div>
            </div>     
 

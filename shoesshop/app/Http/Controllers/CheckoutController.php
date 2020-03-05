@@ -12,10 +12,27 @@ session_start();
 
 class CheckoutController extends Controller
 {
+     public function authLogin(){
+        $user_id = Session::get('nd_ma');
+        $cv=Session::get('cv_ma');
+        
+        if (($user_id)&&($cv==2)) 
+            return Redirect::to('/Home_u'); 
+        else 
+            return Redirect::to('/')->send();
+    }
+
     public function checkout()
     {
-    	$ma_vanchuyen=DB::table('vanchuyen')->orderby('vc_ma', 'desc')->get();
-    	return view("pages.checkout.checkout")->with('ma_vanchuyen', $ma_vanchuyen);
+        $this->authLogin();
+        $this->authLogin();
+        $content = Cart::content();
+        if ($content->isempty()){
+            return Redirect::to('/');
+        }else {
+        	$ma_vanchuyen=DB::table('vanchuyen')->orderby('vc_ma', 'desc')->get();
+        	return view("pages.checkout.checkout")->with('ma_vanchuyen', $ma_vanchuyen);
+        }
     }
 
     public function save_checkout_customer(Request $request){
@@ -40,9 +57,15 @@ class CheckoutController extends Controller
 
     public function payment()
     {
-        $ma_vanchuyen=DB::table('vanchuyen')->orderby('vc_ma', 'desc')->get();
-    	$ma_thanhtoan=DB::table('thanhtoan')->orderby('tt_ma', 'desc')->get();
-    	return view("pages.checkout.payment")->with('ma_thanhtoan', $ma_thanhtoan)->with('ma_vanchuyen', $ma_vanchuyen);
+        $this->authLogin();
+        $content = Cart::content();
+        if ($content->isempty()){
+            return Redirect::to('/');
+        }else {
+            $ma_vanchuyen=DB::table('vanchuyen')->orderby('vc_ma', 'desc')->get();
+        	$ma_thanhtoan=DB::table('thanhtoan')->orderby('tt_ma', 'desc')->get();
+        	return view("pages.checkout.payment")->with('ma_thanhtoan', $ma_thanhtoan)->with('ma_vanchuyen', $ma_vanchuyen);
+        }
     }
 
      public function orderPlace(Request $request)
@@ -70,19 +93,49 @@ class CheckoutController extends Controller
         //insert chi tiet don hang
 
         $content = Cart::content(); 
+        $hethang = 0; //false
+        $outstock = array();
         foreach ($content as $v_content) {
-            $order_detail_data = array();
-            $order_detail_data['dh_ma'] = $insert_donhang_id; 
-            $order_detail_data['ctsp_ma'] = $v_content->id;
-            $order_detail_data['soLuongDat'] = $v_content->qty;
-            $order_detail_data['thanhTien'] = $v_content->qty*$v_content->price;            
-            $insert_orderdetail_id = DB::table('chitietdonhang')->insertGetId($order_detail_data);
+             $ctsp_ton =  DB::table('chitietsanpham')->where('ctsp_ma', $v_content->id)->first();
+            if ( $v_content->qty > $ctsp_ton->ctsp_soLuongTon){
+                $hethang = $hethang+1; //true
+                $outstock[$hethang] = $ctsp_ton->sp_ma;
+            }
+        }
+        echo '<pre>';
+        print_r($outstock);
+        echo "</pre>";
+        if ($hethang == 0){
+            foreach ($content as $v_content) {
+                $order_detail_data = array();
+                $order_detail_data['dh_ma'] = $insert_donhang_id; 
+                $order_detail_data['ctsp_ma'] = $v_content->id;
+                $order_detail_data['soLuongDat'] = $v_content->qty;
+                $order_detail_data['thanhTien'] = $v_content->qty*$v_content->price;            
+                $insert_orderdetail_id = DB::table('chitietdonhang')->insertGetId($order_detail_data);
+                $ctsp_ton = DB::table('chitietsanpham')->where('ctsp_ma', $v_content->id)->first();
+                DB::table('chitietsanpham')->where('ctsp_ma', $v_content->id)->update(['ctsp_soLuongTon' => $ctsp_ton->ctsp_soLuongTon - $v_content->qty]);
+            }
+            if (Session::get('vc_ma') == 1){
+                Cart::destroy();
+                return view('pages.checkout.handcash');
+            }
+        }
+        else {
+            $tenhang = '';
+            foreach ($outstock as $key => $value) {
+                $hang = DB::table('sanpham')->where('sp_ma',$value)->select('sp_ten')->first();
+                $tenhang .= ' ';
+                $tenhang .= $hang->sp_ten;
+                if ($key != count($outstock))
+                $tenhang .= ',';
+            }
+            $sizes = DB::Table('chitietsanpham')->select('ctsp_kichCo','ctsp_ma')->where('sp_ma',4)->get(); 
+       
+            Session::put('message','Đặt hàng không thành công! <b>'.$tenhang.'</b> không đủ hàng');
+            return view('pages.cart.show_cart',compact('sizes'));
         }
 
-        if (Session::get('vc_ma') == 1){
-            Cart::destroy();
-            return view('pages.checkout.handcash');
-        }
             
     }
 }

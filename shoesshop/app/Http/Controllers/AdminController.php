@@ -13,8 +13,11 @@ class AdminController extends Controller
 {
     
     public function authLogin(){
-        $admin_id = Session::get('nd_ma');
-        if ($admin_id) 
+        
+        $user_id = Session::get('nd_ma');
+        $cv=Session::get('cv_ma');
+        
+        if (($user_id)&&($cv==1)) 
             return Redirect::to('/dashboard'); 
         else 
             return Redirect::to('/admin')->send();
@@ -51,11 +54,20 @@ class AdminController extends Controller
             echo '</pre>';*/
             /*return view('admin.dashboard');*/
             if ($result) {
-                Session::put('nd_ma', $result->nd_ma); // result trỏ tới trường csdl
-                Session::put('nd_ten',$result->nd_ten);
-                return Redirect::to('/dashboard');
-            }else {
-                Session::put('message','Email or Password is wrong. Please try again.');
+                Session::put('cv_ma',$result->cv_ma);
+                $cv=Session::get('cv_ma');
+                if($cv==1){
+                    Session::put('nd_ma', $result->nd_ma); // result trỏ tới trường csdl
+                    Session::put('nd_ten',$result->nd_ten);
+                    Session::put('nd_email',$result->nd_email);
+                        return Redirect::to('/dashboard');
+                }else{
+                    Session::put('message1','Bạn không có quyền truy cập.');
+                        return Redirect::to('/admin');
+                }
+            }    
+            else {
+                Session::put('message','Email hoặc mật khẩu không đúng. Vui lòng thử lại.');
                 return Redirect::to('/admin');
             }
         //}
@@ -66,6 +78,8 @@ class AdminController extends Controller
         $this->authLogin();
         Session::put('nd_ma',null);
         Session::put('nd_ten',null);
+        Session::put('cv_ma',null);
+        Session::put('nd_email',null);
         return Redirect::to('/admin');
         //echo "Logout";
     }

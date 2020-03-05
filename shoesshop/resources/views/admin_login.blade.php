@@ -8,7 +8,7 @@
         <meta name="keywords')}}" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
-        <link rel="icon" href="{{asset('public/backend/favicon.ico')}}" type="image/x-icon" />
+        <!-- <link rel="icon" href="{{asset('public/backend/favicon.ico')}}" type="image/x-icon" /> -->
 
         <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800" rel="stylesheet">
         
@@ -36,17 +36,26 @@
                     </div>
                      <div class="col-xl-4 col-lg-6 col-md-7 my-auto p-0">
                         <div class="authentication-form mx-auto">
-                            <div class="logo-centered">
+                            <!-- <div class="logo-centered">
                                 <a href="{{asset('public/backend/index.html')}}"><img src="{{asset('public/backend/src/img/brand.svg')}}" alt=""></a>
-                            </div>
-                            <h3>Sign In to ThemeKit</h3>
-                            <?php
+                            </div> -->
+                                <h1 style="color: black; text-align: center;"><b>Đăng nhập</b></h1>
+                                <h3 style="color: black; text-align: center;"><b>Quản trị viên</b></h3>
+                             <p style="color: red;"><b><?php
                                 $message=Session::get('message');
-                                if($message){
-                                    echo $message;
-                                    Session::put('message',null);
-                                }
-                            ?> 
+                                 if($message){
+                                   echo $message; 
+                                  Session::put('message',null);
+                               }
+                            ?></b></p> 
+
+                            <p style="color: red;"><b><?php
+                                $message1=Session::get('message1');
+                                 if($message1){
+                                  echo $message1;
+                                  Session::put('message1',null);
+                               }
+                            ?></b></p> 
                             <form action="{{URL::to('admin_dashboard')}}" method="post">
                                 {{csrf_field()}}
                                 <div class="form-group">
@@ -54,10 +63,10 @@
                                     <i class="ik ik-user"></i>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="admin_password" class="form-control" placeholder="Password" required="">
+                                    <input type="password" name="admin_password" class="form-control" placeholder="Mật khẩu" required="">
                                     <i class="ik ik-lock"></i>
                                 </div>
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col text-left">
                                         <label class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" id="item_checkbox" name="item_checkbox" value="option1">
@@ -67,14 +76,14 @@
                                     <div class="col text-right">
                                         <a href="forgot_pass.html">Forgot Password ?</a>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="sign-btn text-center">
-                                    <button type="submit" class="btn btn-theme">Sign In</button>
+                                    <button type="submit" class="btn btn-theme">Đăng nhập</button>
                                 </div>
                             </form>
 
                             <div class="register">
-                                <p>Don't have an account? <a href="register.html">Create an account</a></p>
+                                <p>Chưa có tài khoản? <a href="register.html" style="color: red">Tạo tài khoản</a></p>
                             </div>
                         </div>
                     </div>
