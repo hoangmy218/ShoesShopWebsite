@@ -207,4 +207,10 @@ class CartController extends Controller
         }
     }
 
+    public function removeCart()
+    {
+        Cart::destroy();
+        return Redirect::to('/');
+    }
+
 }

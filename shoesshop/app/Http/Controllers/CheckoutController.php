@@ -70,9 +70,10 @@ class CheckoutController extends Controller
 
      public function orderPlace(Request $request)
     {
+        $content = Cart::content(); 
         //them don hang
 
-
+        if (!$content->isempty()) {
 
         $data = array();
         $data['dh_tenNhan'] = Session::get('dh_tenNhan');
@@ -82,17 +83,18 @@ class CheckoutController extends Controller
         $data['dh_ghiChu'] = Session::get('dh_ghiChu');
         $data['dh_ngayDat'] = Session::get('dh_ngayDat');
         $data['dh_trangThai'] = 'Chờ xử lý';
-        $data['dh_tongTien'] =  (int)Session::get('dh_tongTien');
+        $subtt =(int)Cart::subtotal(2,'.','');
+        $data['dh_tongTien'] =  $subtt;
         $data['vc_ma'] = Session::get('vc_ma');
         $data['tt_ma'] = $request->optradio;
         $data['nd_ma'] = Session::get('nd_ma');
 
 
-        $insert_donhang_id = DB::table('donhang')->insertGetId($data);
+       
 
         //insert chi tiet don hang
 
-        $content = Cart::content(); 
+
         $hethang = 0; //false
         $outstock = array();
         foreach ($content as $v_content) {
@@ -102,10 +104,9 @@ class CheckoutController extends Controller
                 $outstock[$hethang] = $ctsp_ton->sp_ma;
             }
         }
-        echo '<pre>';
-        print_r($outstock);
-        echo "</pre>";
+        
         if ($hethang == 0){
+            $insert_donhang_id = DB::table('donhang')->insertGetId($data);
             foreach ($content as $v_content) {
                 $order_detail_data = array();
                 $order_detail_data['dh_ma'] = $insert_donhang_id; 
@@ -116,9 +117,13 @@ class CheckoutController extends Controller
                 $ctsp_ton = DB::table('chitietsanpham')->where('ctsp_ma', $v_content->id)->first();
                 DB::table('chitietsanpham')->where('ctsp_ma', $v_content->id)->update(['ctsp_soLuongTon' => $ctsp_ton->ctsp_soLuongTon - $v_content->qty]);
             }
-            if (Session::get('vc_ma') == 1){
+            if ($request->optradio == 1){ //thanh toan tien mat
+
                 Cart::destroy();
-                return view('pages.checkout.handcash');
+                return Redirect::to('/handcash');
+            }else{
+                Cart::destroy();
+                return Redirect::to('/paypal');
             }
         }
         else {
@@ -130,12 +135,25 @@ class CheckoutController extends Controller
                 if ($key != count($outstock))
                 $tenhang .= ',';
             }
-            $sizes = DB::Table('chitietsanpham')->select('ctsp_kichCo','ctsp_ma')->where('sp_ma',4)->get(); 
+            /*$sizes = DB::Table('chitietsanpham')->select('ctsp_kichCo','ctsp_ma')->where('sp_ma',4)->get(); */
        
             Session::put('message','Đặt hàng không thành công! <b>'.$tenhang.'</b> không đủ hàng');
-            return view('pages.cart.show_cart',compact('sizes'));
+            return view('pages.cart.show_cart');
         }
+    }
 
             
+    }
+
+    public function handcash()
+    {
+        $this->authLogin();
+        return view('pages.checkout.handcash');
+    }
+
+    public function paypal()
+    {
+        $this->authLogin();
+        return view('pages.checkout.paypal');
     }
 }

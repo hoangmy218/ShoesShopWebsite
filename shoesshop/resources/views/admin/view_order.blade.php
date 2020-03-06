@@ -31,34 +31,32 @@
                         </div>
 
                         <div class="card">
-                            <div class="card-header"><h3 class="d-block w-100">Mã đơn hàng: 110 <small class="float-right">Ngày: 12/11/2018</small></h3></div>
+                            <div class="card-header"><h3 class="d-block w-100">Mã đơn hàng: {{$order->dh_ma}} <small class="float-right">Ngày đặt: {{$order->dh_ngayDat}}</small></h3></div>
                             <div class="card-body">
                                 <div class="row invoice-info">
                                     <div class="col-sm-4 invoice-col">
                                         Người đặt
                                         <address>
-                                            <strong>ThemeKit,</strong><br>795 Folsom Ave, Suite 546 <br>San Francisco, CA 54656 <br>Phone: (123) 123-4567<br>Email: info@themekit.com
+                                            <strong>{{$order->nd_ten}}</strong><br>{{$order->nd_diaChi}} <br>Phone: {{$order->nd_dienThoai}}<br>Email: {{$order->nd_email}}
                                         </address>
                                     </div>
                                     <div class="col-sm-4 invoice-col">
                                         Người nhận
                                         <address>
-                                            <strong>John Doe</strong><br>795 Folsom Ave, Suite 600<br>San Francisco, CA 94107<br>Phone: (555) 123-7654<br>Email: john.doe@example.com
+                                            <strong>{{$order->dh_tenNhan}}</strong><br>{{$order->dh_diaChiNhan}}<br>Phone: {{$order->dh_dienThoai}}<br>Email: {{$order->dh_email}}
                                         </address>
                                     </div>
                                     <div class="col-sm-4 invoice-col">
-                                        <b>Mã đơn hàng #007612</b><br>
-                                        <br>          
-                                        <b>Hình thức vận chuyển:</b> VNPOST<br>
-
-                                        <b>Tài khoản:</b> hoangmy123
+                                        <b>Mã đơn hàng #{{$order->dh_ma}}</b><br>          
+                                        <b>Hình thức vận chuyển:</b> {{$order->vc_ten}}<br>
+                                        <b>Hình thức thanh toán:</b> {{$order->tt_ten}}
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-12 table-responsive">
                                         <table class="table table-striped">
-                                            <thead>
+                                            <thead>                                                
                                                 <tr>
                                                     <th>STT</th>
                                                     <th>Tên sản phẩm</th>
@@ -69,14 +67,21 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <?php 
+                                                    $i=1;
+                                                    $congTien=0;
+
+                                                ?>
+                                                @foreach($items as $item)
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>Call of Duty</td>
-                                                    <td>2</td>
-                                                    <td>{{number_format('599000').' VND'}}</td>
-                                                    <td>{{number_format('599000').' VND'}}</td>
+                                                    <td>{{$i++}}</td>
+                                                    <td>{{$item->sp_ten}}</td>
+                                                    <td>{{$item->soLuongDat}}</td>
+                                                    <td>{{number_format($item->sp_donGiaBan).' VND'}}</td>
+                                                    <td>{{number_format($item->thanhTien).' VND'}}</td>
+                                                    <?php $congTien = $congTien + $item->thanhTien; ?>
                                                 </tr>
-                                                
+                                                 @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -85,34 +90,39 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <p class="lead">Phương thức thanh toán:</p>
-                                        <img src="{{URL::to('public/backend/img/credit/visa.png')}}" alt="Visa">
+                                        <b>{{$order->tt_ten}}</b>
+                                        <p class="lead">Trạng thái thanh toán:</p>
+                                        @if ($order->tt_ten=='Tiền mặt')
+                                            <b>Chưa thanh toán</b>
+                                        @endif
+                                        {{-- <img src="{{URL::to('public/backend/img/credit/visa.png')}}" alt="Visa">
                                         <img src="{{URL::to('public/backend/img/credit/mastercard.png')}}" alt="Mastercard">
                                         <img src="{{URL::to('public/backend/img/credit/american-express.png')}}" alt="American Express">
-                                        <img src="{{URL::to('public/backend/img/credit/paypal2.png')}}" alt="Paypal">
+                                        <img src="{{URL::to('public/backend/img/credit/paypal2.png')}}" alt="Paypal"> --}}
                                         
                                         <div class="alert alert-secondary mt-20">
                                           Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
                                         </div>
                                     </div>
                                     <div class="col-6">
-                                        <p class="lead">Amount Due 10/11/2018</p>
+                                       {{--  <p class="lead">Amount Due 10/11/2018</p> --}}
                                         <div class="table-responsive">
                                             <table class="table">
                                                 <tr>
                                                     <th style="width:50%">Cộng tiền:</th>
-                                                    <td>$250.30</td>
+                                                    <td>{{number_format($congTien).' VND'}}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Khuyến mãi:</th>
-                                                    <td>$10.34</td>
+                                                    <td>0</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Phí vận chuyển:</th>
-                                                    <td>$5.80</td>
+                                                    <td>{{number_format($order->vc_phi).' VND'}}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Tổng tiền thanh toán:</th>
-                                                    <td>$265.24</td>
+                                                    <td>{{number_format($congTien+$order->vc_phi).' VND'}}</td>
                                                 </tr>
                                             </table>
                                         </div>

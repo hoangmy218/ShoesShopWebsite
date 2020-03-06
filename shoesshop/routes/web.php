@@ -75,17 +75,25 @@ Route::post('/update-cart-quantity','CartController@update_cart_quantity');//Tie
 Route::get('/update-qty/{id}','CartController@update_qty');//My
 Route::post('/save-cart','CartController@save_cart');//Tien
 
+Route::get('/removeCart','CartController@removeCart'); //my
+
 
 //Checkout
 Route::get('/checkout','CheckoutController@checkout');
 Route::post('/save-checkout-customer', 'CheckoutController@save_checkout_customer');
 Route::get('/payment','CheckoutController@payment');
 Route::post('/order-place','CheckoutController@orderPlace');
+Route::get('/handcash','CheckoutController@handcash'); //M
 
 
-//Order
+
+//Order M
 Route::get('/manage-order','OrderController@showOrder');
-Route::get('/view-order','OrderController@viewOrder');
+Route::get('/view-order/{dh_ma}','OrderController@viewOrder');
+Route::get('/approve-order/{dh_ma}','OrderController@approveOrder');
+Route::get('/ship-order/{dh_ma}','OrderController@shipOrder');
+Route::get('/complete-order/{dh_ma}','OrderController@completeOrder');
+Route::get('/cancel-order/{dh_ma}','OrderController@cancelOrder');
 
 
 //Brand

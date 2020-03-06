@@ -18,8 +18,7 @@
 	          			<h3 class="billing-heading mb-4">Hoàn tất đặt hàng</h3>
                     	<p class="d-flex">
                         	<span>
-								<p>Thank you for your order! Once the products have been packed, we will be shipped to you immediately. Anh you can view the status at any time.
-								If you have any question on your payment, please feel free to Contact us.
+								<p>PAYPAL
 								</p>
 								<p>Hope you enjoy shopping with us!</p>
 							</span>

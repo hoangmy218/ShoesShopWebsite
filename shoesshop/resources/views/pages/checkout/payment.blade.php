@@ -114,7 +114,7 @@
                         <p class="d-flex total-price">
                             <span>Tổng tiền</span>
                             <?php $subtt =(double)Cart::subtotal(2,'.',''); ?> {{-- bo dau hang nghin, chuyen sau thap phan thanh , --}}
-                            <span>{{number_format($subtt-$phi).' VND'}}</span>
+                            <span>{{number_format($subtt+$phi).' VND'}}</span>
                             <?php Session::put('dh_tongTien',number_format((double)Cart::subtotal(2,'.','')));?>
                         </p>
                     </div>

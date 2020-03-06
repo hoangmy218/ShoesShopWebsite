@@ -81,13 +81,14 @@
 	          			<form action="{{URL::to('save-checkout-customer')}}" method="post">
                                 {{csrf_field()}}
                                 <div class="form-group">
-                                    <input type="Email" name="dh_email" class="form-control" placeholder="Email" required="" >
-                                    <i class="ik ik-user"></i>
-                                </div>
-                                <div class="form-group">
                                     <input type="text" name="dh_tenNhan" class="form-control" placeholder="Họ và tên người nhận" required="">
                                     <i class="ik ik-lock"></i>
                                 </div>
+                                <div class="form-group">
+                                    <input type="Email" name="dh_email" class="form-control" placeholder="Email" required="" >
+                                    <i class="ik ik-user"></i>
+                                </div>
+                                
                                 <div class="form-group">
                                     <textarea name="dh_diaChiNhan"  class="form-control" rows="3" cols="20" placeholder="Địa chỉ nhận hàng" required></textarea>                
                                 </div>
@@ -130,7 +131,7 @@
                         <p class="d-flex total-price">
                             <span>Tổng tiền</span>
                             <?php $subtt =(double)Cart::subtotal(2,'.',''); ?> {{-- bo dau hang nghin, chuyen sau thap phan thanh , --}}
-                            <span>{{number_format($subtt-$phi).' VND'}}</span>
+                            <span>{{number_format($subtt+$phi).' VND'}}</span>
                         </p>
                     </div>
                 </div>

@@ -134,7 +134,8 @@
 	    			<div class="cart-total mb-3">
 	    				<h3 class="billing-heading mb-4" align="right">Thành tiền giỏ hàng: &emsp;{{Cart::subtotal().' '.'vnđ'}}</h3>		
 	    			</div>
-	    			<p class="text-center"><a href="{{URL::to('/checkout')}}" class="btn btn-primary py-3 px-4">Đặt hàng</a></p>
+	    			<p class="text-center"><a href="{{URL::to('/')}}" class="btn btn-primary py-3 px-4">MUA HÀNG</a>
+	    			<a href="{{URL::to('/checkout')}}" class="btn btn-primary py-3 px-4">ĐẶT HÀNG</a></p>
 	    		</div>
 	    	</div>
 	    	@endif

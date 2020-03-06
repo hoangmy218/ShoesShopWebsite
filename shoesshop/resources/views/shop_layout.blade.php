@@ -92,7 +92,9 @@
               <li class="nav-item"><a href="{{URL::to('userLogin')}}" class="nav-link">Login</a></li>
               <li class="nav-item"><a href="{{URL::to('register')}}" class="nav-link">Register</a></li>
             @endif
-            <li class="nav-item cta cta-colored"><a href="{{URL::to('/show-cart')}}" class="nav-link"><span class="icon-shopping_cart"></span> 
+
+             <li class="nav-item dropdown nav-item cta cta-colored">
+              <a class="nav-link dropdown-toggle" href="{{URL::to('/show-cart')}}" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-shopping_cart"></span> 
               <?php
                 $content = Cart::content();
                 $sl = 0;
@@ -104,7 +106,14 @@
                 }
                 
               ?>
-              [{{$sl}}]</a></li>
+              [{{$sl}}]</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown04">
+               
+                <a class="dropdown-item" href="{{URL::to('/removeCart')}}">Xóa giỏ hàng</a>
+                
+              </div>
+            </li>
+            {{-- <li class="nav-item cta cta-colored"><a  class="nav-link"> --}}
 
           </ul>
         </div>

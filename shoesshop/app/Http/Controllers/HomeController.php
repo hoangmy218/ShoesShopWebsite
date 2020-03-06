@@ -61,6 +61,7 @@ class HomeController extends Controller
 
         Session::put('nd_ma',$customer_id);
         Session::put('nd_ten',$req->user_name);
+        Session::put('cv_ma',2);
         return Redirect::to('/Home_u');
     }
 
