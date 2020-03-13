@@ -90,18 +90,20 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <p class="lead">Phương thức thanh toán:</p>
-                                        <b>{{$order->tt_ten}}</b>
+                                        <h5><b>{{$order->tt_ten}}</b></h5>
                                         <p class="lead">Trạng thái thanh toán:</p>
                                         @if ($order->tt_ten=='Tiền mặt')
-                                            <b>Chưa thanh toán</b>
+                                            <h5><b>Chưa thanh toán</b></h5>
+                                        @else
+                                             <h5><b>Đã thanh toán</b></h5>
                                         @endif
                                         {{-- <img src="{{URL::to('public/backend/img/credit/visa.png')}}" alt="Visa">
                                         <img src="{{URL::to('public/backend/img/credit/mastercard.png')}}" alt="Mastercard">
                                         <img src="{{URL::to('public/backend/img/credit/american-express.png')}}" alt="American Express">
                                         <img src="{{URL::to('public/backend/img/credit/paypal2.png')}}" alt="Paypal"> --}}
-                                        
+                                        <p class="lead">Ghi chú:</p>
                                         <div class="alert alert-secondary mt-20">
-                                          Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
+                                          {{$order->dh_ghiChu}}
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -130,7 +132,7 @@
                                 </div>
                                 <div class="row no-print">
                                     <div class="col-12">
-                                        <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment</button>
+                                        {{-- <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment</button> --}}
                                         <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Generate PDF</button>
                                     </div>
                                 </div>

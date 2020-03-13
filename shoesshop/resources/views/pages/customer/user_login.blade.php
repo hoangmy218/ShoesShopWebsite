@@ -24,7 +24,24 @@
                   Session::put('message1',null);
                }
             ?></b></p>
-
+            <!-- Ngân(6/3/2020) thêm dòng thông báo sau đây -->
+            <p style="color: red;"><b><?php 
+                $message2=Session::get('message2');
+                 if($message2){
+                  echo $message2;
+                  Session::put('message2',null);
+               }
+            ?></b></p>
+            @if(count($errors)>0)
+                    <div class="alert alert-danger">
+                        <strong>Lỗi</strong><br>
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{$error}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
            
                   <form action="{{URL::to('user_home')}}" method="post">
                     {{csrf_field()}}
@@ -32,10 +49,10 @@
                 <!--/<div class="row align-items-end">  --> 
             
                     <div class="form-group">
-                      <input type="text" class="form-control" name="user_email" placeholder="Email" required> 
+                      <input type="text" class="form-control" name="user_email" placeholder="Email" required=""> 
                     </div>
                     <div class="form-group">
-                      <input type="password" name="user_password" class="form-control" placeholder="Mật khẩu" required><br>
+                      <input type="password" name="user_password" class="form-control" placeholder="Mật khẩu" required=""><br>
                     </div>
 
                     <div class="sign-btn text-center">
@@ -44,7 +61,7 @@
                 
                   
                 </form>
-<br>
+                <br>
                  <div class="register">
                      <p style="text-align: center;">Bạn chưa có tài khoản? <a href="{{URL::to('/register')}}" style="color: red;">Tạo tài khoản</a></p>
                   </div>

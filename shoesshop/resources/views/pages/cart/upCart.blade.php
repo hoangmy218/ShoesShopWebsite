@@ -33,7 +33,7 @@
 							    <tbody>
 								    <tr class="text-center">
 								      	<td class="product-price">
-								        	<h4>1</h4>
+								        	<h4>{{$count}}</h4>
 								        </td>
 								        <td class="product-id">
 								        	<h3>{{$v_content->id}}</h3>
@@ -46,7 +46,7 @@
 								        	
 								        </td>
 								        <td class="quantity">
-								        	<h3>{{$v_content->options->size}}</h3>
+								        	{{-- <h3>{{$v_content->options->size}}</h3> --}}
 								        	<select name="size" id="size"  class="form-control size<?php echo $count; ?>">
 							                    <option value="">Size</option>
 							                    <?php 

@@ -1,9 +1,6 @@
 @extends('admin_layout')
 @section('content')
 
-                       
-
-
 <div class="main-content">
                     <div class="container-fluid">
                         <div class="page-header">
@@ -12,7 +9,7 @@
                                     <div class="page-header-title">
                                         <i class="ik ik-credit-card bg-blue"></i>
                                         <div class="d-inline">
-                                            <h5>Quản lý sản phẩm</h5>
+                                            <h5>Quản lý lịch sử</h5>
                                             {{-- <span>lorem ipsum dolor sit amet, consectetur adipisicing elit</span> --}}
                                         </div>
                                     </div>
@@ -24,7 +21,7 @@
                                                 <a href="{{URL::to('/dashboard')}}"><i class="ik ik-home"></i></a>
                                             </li>
                                             <li class="breadcrumb-item active">
-                                                <a href="#">Quản lý sản phẩm</a>
+                                                <a href="#">Quản lý lịch sử</a>
                                             </li>
                                             {{-- <li class="breadcrumb-item active" aria-current="page">Bootstrap Tables</li> --}}
                                         </ol>
@@ -35,16 +32,10 @@
 
                         <div class="row">
                             <div class="col-md-12">
-								<div class="card">
+                                <div class="card">
                                     <div class="card-header d-block">
-                                        <h3>Danh sách sản phẩm</h3>
-                                        <?php
-                                            $message =Session::get('message');
-                                            if($message){
-                                              echo '<span class="text-alert">'.$message.'</span>';
-                                              Session::put('message', null);
-                                            }
-                                          ?>
+                                        <h3>Danh sách người dùng</h3>
+                                        
                                     </div>
                                     <div class="card-body p-0 table-border-style">
                                         <div class="table-responsive">
@@ -52,36 +43,25 @@
                                                 <thead>
                                                     <tr>
                                                         <th>STT</th>
-                                                        <th>Mã sản phẩm</th>
-                                                        <th>Hình ảnh</th>
-                                                        <th>Tên sản phẩm</th>
-                                                        <th>Thương hiệu</th>
-                                                        <th>Danh mục</th>
-                                                        <th>Đơn giá bán</th>
-                                                        <th>Đơn giá nhập</th>
-                                                        <th>Thao tác</th>
+                                                        <th>Mã người dùng</th>
+                                                        <th>Tên người dùng</th>
+                                                        <th>Xem chi tiết</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php $i=1; ?>
-                                                	@foreach( $list_pro as $key => $pro)
+                                                    <?php {{$i=1;}} ?>
+                                                    @foreach( $list_customer as $key => $customer)
+
                                                     <tr>
                                                         <th scope="row">{{$i}}</th>
-                                                        <td>{{$pro->sp_ma}}</td>
-                                                         <td><img src="{{URL::to('public/upload/product/'.$pro->ha_ten)}}" height="100" width="100"></td> 
-                                                        <td>{{$pro->sp_ten}}</td>
-                                                        <td>{{$pro->th_ten}}</td>
-                                                        <td>{{$pro->dm_ten}}</td>
-                                                        <td>{{$pro->sp_donGiaBan}}</td>
-                                                        <td>{{$pro->sp_donGiaNhap}}</td>
-                                                        <td><div class="table-actions">
-                                                            <a href="{{URL::to('/chitiet-sanpham/'.$pro->sp_ma)}}"><i class="ik ik-eye"></i></a>
-                                                            <a href="{{URL::to('/chinhsua-sanpham/'.$pro->sp_ma)}}"><i class="ik ik-edit-2"></i></a>
-                                                            <a href="#"><i class="ik ik-trash-2"></i></a>
-                                                        </div></td>
+                                                        <td>{{$customer->nd_ma}}</td>
+                                                        <td>{{$customer->nd_ten}}</td>
+                                                        <td>                                                  
+                                                           <a href="{{URL::to('/view-history/'.$customer->nd_ma)}}"><i class="ik ik-eye"></i></a>
+                                                        </td>
                                                     </tr>
-                                                    <?php $i++; ?>
-                                                   	@endforeach
+                                                    <?php {{$i++;}} ?>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>

@@ -56,7 +56,7 @@
 							    <tbody>
 								    <tr class="text-center">
 								      	<td class="product-price">
-								        	<h4>1</h4>
+								        	<h4>{{$count}}</h4>
 								        </td>
 								        <td class="product-id">
 								        	<h3>{{$v_content->id}}</h3>
@@ -74,7 +74,7 @@
 							                    
 							                    <?php 
 								                    $product = DB::Table('chitietsanpham')->select('sp_ma','ctsp_soLuongTon')->where('ctsp_ma',$v_content->id)->first();
-								                    $sizes = DB::Table('chitietsanpham')->select('ctsp_kichCo','ctsp_ma')->where('sp_ma',$product->sp_ma)->get();  
+								                    $sizes = DB::Table('chitietsanpham')->select('ctsp_kichCo','ctsp_ma')->where([['sp_ma',$product->sp_ma],['ctsp_soLuongTon','!=',0]])->orderBy('ctsp_kichCo','asc')->get();  
 							                    ?>
 							                    @foreach($sizes as $key => $value)
 							                    	@if ($v_content->options->size == $value->ctsp_kichCo )

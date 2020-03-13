@@ -24,24 +24,15 @@ Route::get('/userLogin','HomeController@userLogin');
 Route::post('/user_home','HomeController@AfterLogin');
 Route::get('/Home_u', 'HomeController@Home_u');
 Route::get('/log_out', 'HomeController@log_out');
+Route::get('/status-order','HomeController@status_order');
+ Route::get('/view-customerdetails/{dh_ma}','HomeController@view_customerdetails');
 
 Route::group(['prefix'=>'User', 'middleware'=>'UserRole_Name'],function(){
 
 
 });
 
-/*
-Route::get('/userLogin','UserController@userLogin');
-Route::post('/user_home','UserController@AfterLogin');
-Route::get('/log_out', 'UserController@log_out');
-Route::get('/Home_u', 'UserController@Home_u');*/
 
-
-//User
-/*Route::get('/register','UserController@get_register');
-Route::get('/checkout','UserController@gcheckout');*/
-/*
-Route::post('/postregister', 'UserController@post_register');*/
 
 //Product
 Route::get('/product-detail/{product_id}','ProductController@details_product');//Tiên
@@ -57,16 +48,36 @@ Route::get('/index','StockController@index');
 Route::get('/getStock','StockController@getStock');
 Route::post('/getAmount','StockController@getAmount');
 
+
+//MY PAYPAL
+// Route::post('paypal','PaymentController@payWithPayPal');
+// Route::get('status','PaymentController@getPaymentStatus');
+Route::get('/thankyou','PaymentController@thankyou');
+//13/3/2020
+Route::post('/create-payment','PaymentController@create')->name('create-payment');
+Route::get('/execute-payment','PaymentController@execute');
+Route::get('/orderplace','PaymentController@orderPlace');
+
 /*BACKEND hoat dong phia server*/
 
 Route::get('/admin','AdminController@index');
 Route::get('/dashboard', 'AdminController@show_dashboard');
 Route::get('/logout', 'AdminController@logout');
 Route::post('/admin_dashboard', 'AdminController@dashboard');
+Route::get('/chitiet-sanpham/{ct_id}','AdminController@chitiet_sanpham');
 
 Route::group(['prefix'=>'Admin', 'middleware'=>'AdminRole_Name'],function()   {
 	
 });
+
+
+//Lan QL nguoi dung
+Route::get('/manage-customer','AdminController@manage_customer');
+Route::get('/unactive-customer/{controll_nd_ma}', 'AdminController@unactive_customer');
+Route::get('/active-customer/{controll_nd_ma}', 'AdminController@active_customer');
+Route::get('/history-customer', 'AdminController@history_customer');
+Route::get('/view-history/{controll_nd_ma}', 'AdminController@view_history');
+
 
 //Cart
 Route::get('/show-cart','CartController@showCart');
@@ -84,6 +95,7 @@ Route::post('/save-checkout-customer', 'CheckoutController@save_checkout_custome
 Route::get('/payment','CheckoutController@payment');
 Route::post('/order-place','CheckoutController@orderPlace');
 Route::get('/handcash','CheckoutController@handcash'); //M
+// Route::get('/paypal','CheckoutController@paypal'); //M
 
 
 
@@ -95,6 +107,8 @@ Route::get('/ship-order/{dh_ma}','OrderController@shipOrder');
 Route::get('/complete-order/{dh_ma}','OrderController@completeOrder');
 Route::get('/cancel-order/{dh_ma}','OrderController@cancelOrder');
 
+//Cus cancel Order M
+Route::get('/cus-cancel-order/{dh_ma}','OrderController@cusCancelOrder');
 
 //Brand
 Route::get('/manage-brand','BrandController@showBrand');
@@ -129,10 +143,20 @@ Route::post('/save-product','ProductController@saveProduct');
 Route::get('/chinhsua-sanpham/{chinhsua_sp_ma}','ProductController@chinhsua_sanpham');
 Route::post('/capnhat-sanpham/{chinhsua_sp_ma}','ProductController@capnhat_sanpham');
 
-//Goods-Receipt
+//Goods-Receipt My
 Route::get('/add-goods-receipt','ProductController@addGoodsReceipt');
 Route::post('/save-goods-receipt','ProductController@saveGoodsReceipt');
+Route::post('/save-price-receipt','ProductController@savePriceReceipt');
+/*Route::get('/addPriceReceipt/{$masp[]}/{$pn_id}','ProductControlle@addPriceReceipt');*/
+Route::get('/manage-goods-receipt','ProductController@showGoodsReceipt');
+Route::get('/view-receipt/{pn_ma}','ProductController@viewReceiptDetails');
+Route::get('/delete-receipt/{pn_ma}','ProductController@deleteReceipt');
+Route::get('/getDateReceipt','ProductController@getDateReceipt');
+Route::post('/save-edit-receipt/{pn_ma}','ProductController@saveEditReceipt');
 
+Route::get('/delete-goods/{ctsp_ma}','ProductController@deleteGoods');
+Route::get('/getDetailGoods','ProductController@getDetailGoods');
+Route::post('/save-edit-goods/{ctsp_ma}','ProductController@saveEditGoods');
 
 //Phuong thuc thanh toan
 Route::get('/manage-pay','PayController@manage_pay');

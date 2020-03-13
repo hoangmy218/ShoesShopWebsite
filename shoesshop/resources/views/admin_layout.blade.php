@@ -100,6 +100,13 @@
                                 <div class="nav-item">
                                     <a href="{{URL::to('/manage-order')}}"><i class="ik ik-file-text"></i><span>Quản lý đơn hàng</span></a>
                                 </div>
+                                 <div class="nav-item has-sub">
+                                       <a href="javascript:void(0)"><i class="ik ik-home"></i><span>Quản lý người dùng</span> <span class="badge badge-danger"></span></a>
+                                       <div class="submenu-content">
+                                            <a href="{{URL::to('/manage-customer')}}" class="menu-item">Vô hiệu hóa người dùng</a>
+                                            <a href="{{URL::to('/history-customer')}}" class="menu-item">Lịch sử mua hàng của người dùng</a>
+                                        </div>
+                                </div>
                                 <div class="nav-item has-sub">
                                     <a href="javascript:void(0)"><i class="ik ik-package"></i><span>Quản lý sản phẩm</span> <span class="badge badge-danger"></span></a>
                                     <div class="submenu-content">
@@ -128,6 +135,7 @@
                                     <a href="javascript:void(0)"><i class="ik ik-home"></i><span>Quản lý kho</span> <span class="badge badge-danger"></span></a>
                                     <div class="submenu-content">
                                         <a href="{{URL::to('/add-goods-receipt')}}" class="menu-item">Nhập hàng</a>
+                                        <a href="{{URL::to('/manage-goods-receipt')}}" class="menu-item">Quản lý phiếu nhập</a>
                                         <a href="{{URL::to('/stock')}}" class="menu-item">Tồn kho</a>
                                         
                                     </div>
@@ -136,7 +144,7 @@
                                     <a href="javascript:void(0)"><i class="ik ik-home"></i><span>Hình thức vận chuyển</span> <span class="badge badge-danger"></span></a>
                                     <div class="submenu-content">
                                         <a href="{{URL::to('/add-transport')}}" class="menu-item">Thêm hình thức vận chuyển</a>
-                                        <a href="{{URL::to('/manage-transport')}}" class="menu-item">Danh sách hình thức vận chuyển</a>
+                                        <a href="{{URL::to('/manage-transport')}}" class="menu-item">Danh sách hình thức <br> vận chuyển</a>
                                        
                                     </div>
                                 </div>
@@ -144,7 +152,7 @@
                                     <a href="javascript:void(0)"><i class="ik ik-home"></i><span>Phương thức thanh toán</span> <span class="badge badge-danger"></span></a>
                                     <div class="submenu-content">
                                         <a href="{{URL::to('/add-pay')}}" class="menu-item">Thêm phương thức thanh toán</a>
-                                        <a href="{{URL::to('/manage-pay')}}" class="menu-item">Danh sách phương thức thanh toán</a>
+                                        <a href="{{URL::to('/manage-pay')}}" class="menu-item">Danh sách phương thức <br> thanh toán</a>
                                        
                                     </div>
                                 </div>

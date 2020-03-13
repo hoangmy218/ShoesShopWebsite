@@ -83,6 +83,62 @@ class AdminController extends Controller
         return Redirect::to('/admin');
         //echo "Logout";
     }
+
+    public function manage_customer(){
+        //$this->authLogin();
+        $list_customer =DB::table('nguoidung')->get();
+        return view('admin.manage_customer')->with('list_customer', $list_customer);
+    }
+
+    //Lan
+    
+    public function active_customer($Controll_nd_ma){
+            //$this->AuthLogin();
+            DB::table('nguoidung')->where('nd_ma', $Controll_nd_ma)->update(['nd_trangThai'=>0]);
+            Session::put('message', 'Bỏ vô hiệu hóa người dùng thành công');
+            return Redirect::to('manage-customer');
+        }
+    public function unactive_customer($Controll_nd_ma){
+            //$this->AuthLogin();
+           DB::table('nguoidung')->where('nd_ma', $Controll_nd_ma)->update(['nd_trangThai'=>1]);
+            Session::put('message', 'Vô hiệu hóa người dùng thành công!');
+            return Redirect::to('manage-customer');
+        }
+    public function history_customer(){
+            //$this->AuthLogin();
+            $list_customer =DB::table('nguoidung')->get();
+            return view('admin.history_customer')->with('list_customer', $list_customer);
+        }
+    public function view_history($Controll_nd_ma){
+            //$this->AuthLogin();
+           
+            $ten=DB::table('nguoidung')->where('nd_ma',$Controll_nd_ma)->get();
+
+            $don_hang= DB::table('donhang')->where('nd_ma', $Controll_nd_ma)->get();
+           
+            return view('admin.view_history')->with('ten', $ten)->with('don_hang',$don_hang);
+        }
+    public function view_details($id_details){// dh_ma
+            //$this->AuthLogin();
+            $ten=DB::table('donhang')->where('dh_ma',$id_details)->get();
+
+            $chitiet_ctsp=DB::table('chitietdonhang')->where('chitietdonhang.dh_ma', $id_details)->join('chitietsanpham', 'chitietdonhang.ctsp_ma', '=','chitietsanpham.ctsp_ma')->get();
+           $sanpham=DB::table('sanpham')->get();
+           $vanchuyen=DB::table('vanchuyen')->get();
+            return view('admin.view_details')->with('chitiet_ctsp', $chitiet_ctsp)->with('sanpham', $sanpham)->with('ten', $ten)->with('vanchuyen', $vanchuyen);
+        }
+
+    //Lan
+    public function chitiet_sanpham($ct_id){
+        $tongslton= DB::table('chitietsanpham')->select(DB::raw("sum(ctsp_soLuongTon) as slton"))->where('sp_ma',$ct_id)->get();
+        $tongslnhap= DB::table('chitietsanpham')->select(DB::raw("sum(ctsp_soLuongNhap) as slnhap"))->where('sp_ma',$ct_id)->get();
+        $kichco= DB::table('chitietsanpham')->select("ctsp_kichCo")->where('sp_ma',$ct_id)->get();
+
+        $list=DB::table('sanpham')->where('sanpham.sp_ma', $ct_id)->join('hinhanh','hinhanh.sp_ma','=','sanpham.sp_ma')->get();
+        $ton=DB::table('chitietsanpham')->where('sp_ma', $ct_id)->get();
+       
+        return view('admin.chitiet_sanpham')->with('list', $list)->with('tongslton', $tongslton)->with('tongslnhap', $tongslnhap)->with('kichco', $kichco)->with('ton', $ton);
+    }
    
    
 }

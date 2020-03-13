@@ -1,5 +1,14 @@
 @extends('shop_layout')
 @section('content')
+        <style type="text/css">
+/*#cashbtn, #paypal-button {
+display: none;
+}*/
+#cashbtn, #paypalbtn {
+display: none;
+}
+
+</style>
     <div class="hero-wrap hero-bread" style="background-image: url({{asset('public/frontend/images/bg_6.jpg')}});">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -25,6 +34,7 @@
                             <thead class="thead-primary">
                                  <tr class="text-center">
                                     <th>STT</th>
+                                    <th>Mã sản phẩm</th>
                                     <th>Hình ảnh</th>
                                     <th>Sản phẩm</th>
                                     <th>Kích cỡ</th>
@@ -34,12 +44,16 @@
                                     
                                 </tr>
                             </thead>
-
-                            @foreach($content as $v_content)<!-- tien -->
+                             <?php $count=1; ?>
+                            @foreach($content as $v_content)
                                 <tbody>
                                     <tr class="text-center">
                                         <td class="product-price">
-                                            <h4>1</h4>
+                                            <h4>{{$count}}</h4>
+                                        </td>
+                                        <td class="product-id">
+                                            <h3>{{$v_content->id}}</h3>
+                                            
                                         </td>
                                         <td class="image-prod"><div class="img" style="background-image:url({{URL::to('public/upload/product/'.$v_content->options->image)}});" ></div></td>
                                         
@@ -69,6 +83,7 @@
                                         </td>
                                         </tr><!-- END TR-->
                                     </tbody>
+                                    {{$count++}}
                             @endforeach 
                         </table>
                     </div>
@@ -119,29 +134,57 @@
                         </p>
                     </div>
 	          		<div class="cart-detail bg-light p-3 p-md-4">
-	          			<form action="{{URL::to('/order-place')}}" method="POST">
-							{{csrf_field()}}
+	          			{{-- <form action="{{URL::to('/order-place')}}" method="POST">
+							{{csrf_field()}} --}}
 		          			<h3 class="billing-heading mb-4">Hình thức thanh toán</h3>
 		          			<div class="payment-options">
-		          			@foreach($ma_thanhtoan as $key => $matt)
-			          			<div class="form-group">
-									<div class="col-md-12">
-										<div class="paymentradio">
-											<label><input type="radio" name="optradio" value="{{$matt->tt_ma}}" class="mr-2">{{$matt->tt_ten}}</label>
-										</div>
-									</div>
-								</div> 
-	                        @endforeach									
-							<button type="submit" class="btn btn-theme btn-primary py-3 px-4">Hoàn tất</button>
+    		          			@foreach($ma_thanhtoan as $key => $matt)
+    			          			<div class="form-group">
+    									<div class="col-md-12">
+    										<div class="paymentradio">
+    											<label><input type="radio" name="optradio" id="btn{{$matt->tt_ma}}" value="{{$matt->tt_ma}}" class="mr-2">{{$matt->tt_ten}}</label>
+    										</div>
+    									</div>
+    								</div> 
+
+    	                        @endforeach		
+                               {{--  btn1: cash; btn2: paypal	 --}}						
+    							<button type="submit" id="cashbtn" class="btn btn-theme btn-primary py-3 px-4">Hoàn tất</button>
+                                {{-- @include('pages.checkout.paypal2') --}}
+                                @include('pages.checkout.paypal')
 							</div>
-						</div>
-					</form>
+						
+					  {{--   </form> --}}
 
-	          </div>
-          </div> <!-- .col-md-8 -->
+                    </div>
+                 
+	            </div>
+            </div> <!-- .col-md-8 -->
+        </div>
 
+        {{-- paypal : paypalbtn / paypal2: paypal-button --}}
+
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+        <script>
+            $('input[id="btn1"]').change(function(){
+                $('#cashbtn').show();
+                // $('#paypal-button').hide();
+                $('#paypalbtn').hide();
+            });
+
+            $('input[id="btn2"]').change(function(){
+                // $('#paypal-button').show();
+                $('#paypalbtn').show();
+                $('#cashbtn').hide();
+            });
+
+            // $('#paypalbtn').attr('hidden': hidden);
+            
+        </script>
     </section> <!-- .section -->
 		
 
+<br>
+<br>
 
 @endsection

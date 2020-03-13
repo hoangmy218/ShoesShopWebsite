@@ -78,14 +78,16 @@
             <li class="nav-item"><a href="contact.html" class="nav-link">Liên hệ</a></li>
 
             <?php 
-              $customer_name = Session::get('nd_ten'); 
+              $customer_name = Session::get('nd_ten');
+              $customer_cv = Session::get('cv_ma'); 
             ?>
-            @if ($customer_name)
+            @if ($customer_cv == 2)
              <li class="nav-item dropdown">
               <a href="{{URL::to('/')}}" class="nav-link">{{$customer_name}}</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-                <a class="dropdown-item" href="#">Account</a>
-                <a class="dropdown-item" href="{{URL::to('/log_out')}}">Logout</a>
+                <a class="dropdown-item" href="{{URL::to('/info-customer')}}">Thông tin</a>
+                <a class="dropdown-item" href="{{URL::to('/status-order')}}">Đơn hàng của tôi</a>
+                <a class="dropdown-item" onclick="return confirm('Bạn chắc chắn muốn đăng xuất tài khoản này?')" href="{{URL::to('/log_out')}}">Đăng xuất</a>
               </div>
             </li>
             @else
@@ -108,7 +110,7 @@
               ?>
               [{{$sl}}]</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-               
+                <a class="dropdown-item" href="{{URL::to('/show-cart')}}">Giỏ hàng</a>
                 <a class="dropdown-item" href="{{URL::to('/removeCart')}}">Xóa giỏ hàng</a>
                 
               </div>

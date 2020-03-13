@@ -121,6 +121,14 @@
                                                             @endforeach
                                                         </select>
                                                     </div>
+                                                    {{-- <label for="exampleInputName1">Giá nhập</label>
+                                                    <div class="form-group mb-2 mr-sm-2 mb-sm-0">
+                                                        <input type="number" class="form-control" name="giaNhap" min="100000" step="5000" max="5000000" value="100000">
+                                                    </div>
+                                                    <label for="exampleInputName1">Giá bán</label>
+                                                    <div class="form-group mb-2 mr-sm-2 mb-sm-0">
+                                                        <input type="number" class="form-control" name="giaBan" min="100000" step="5000" max="5000000" value="100000">
+                                                    </div> --}}
                                                     <label for="exampleInputName1">Kích cỡ </label>
                                                     <div class="form-group mb-2 mr-sm-2 mb-sm-0">
                                                         <input type="number" class="form-control" name="kichCo" min="1" step="0.5" max="40" value="35">
@@ -153,7 +161,7 @@
                         </div>
                     </div>
                 </div>
-
+<script src="http://www.codermen.com/js/jquery.js"></script>
                 
 @endsection
 

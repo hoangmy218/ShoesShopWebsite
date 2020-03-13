@@ -25,6 +25,7 @@
                             <thead class="thead-primary">
                                  <tr class="text-center">
                                     <th>STT</th>
+                                    <th>Mã sản phẩm</th>
                                     <th>Hình ảnh</th>
                                     <th>Sản phẩm</th>
                                     <th>Kích cỡ</th>
@@ -34,12 +35,15 @@
                                     
                                 </tr>
                             </thead>
-
+                            <?php $i=1; ?>
                             @foreach($content as $v_content)<!-- tien -->
                                 <tbody>
                                     <tr class="text-center">
                                         <td class="product-price">
-                                            <h4>1</h4>
+                                            <h4>{{$i++}}</h4>
+                                        </td>
+                                        <td class="product-price">
+                                            <h4>{{$v_content->id}}</h4>
                                         </td>
                                         <td class="image-prod"><div class="img" style="background-image:url({{URL::to('public/upload/product/'.$v_content->options->image)}});" ></div></td>
                                         

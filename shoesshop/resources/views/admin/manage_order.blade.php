@@ -33,19 +33,19 @@
                             </div>
                         </div>
                         <?php
-                        $message = Session::get('fail_message');
-                        if ($message){
-                            echo '<span class="alert alert-danger">'.$message."</span>";
-                            
-                            Session::put('fail_message',null);
-                        }
-                        $message = Session::get('success_message');
-                        if ($message){
-                            echo '<span class="alert alert-success">'.$message."</span>";
-                            
-                            Session::put('success_message',null);
-                        }
-                    ?>
+                            $message = Session::get('fail_message');
+                            if ($message){
+                                echo '<span class="alert alert-danger">'.$message."</span>";
+                                
+                                Session::put('fail_message',null);
+                            }
+                            $message = Session::get('success_message');
+                            if ($message){
+                                echo '<span class="alert alert-success">'.$message."</span>";
+                                
+                                Session::put('success_message',null);
+                            }
+                        ?>
 
                         <div class="row">
                             <div class="col-md-12">

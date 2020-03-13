@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Session;
+use Cart;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 session_start();
 class HomeController extends Controller
 {
@@ -41,6 +43,25 @@ class HomeController extends Controller
     }
 
     public function post_register(Request $req){
+        // 12/3/2020 MY ẨN VALIDATE VÌ LỖI KHÔNG ĐĂNG ký ĐC
+        // Ngân(6/3/2020) thay nguyên khúc bắt lỗi tới return View ('valida....')
+        $validate = Validator::make($req->all(), [
+            'user_birth'=>'date',
+            'user_phone'=>'numeric',
+            'user_email'=>'email',
+            'user_password'=>'min:3|max:28',
+            'user_confirm_pass'=>'same:user_password',
+            ],[
+            'user_birth.date'=>'Ngày sinh phải theo định dạng năm/tháng/ngày', 
+            'user_phone.numeric'=>'Số điện thoại phải là số.',
+            'user_email.email'=>'Emails chưa nhập đúng định dạng abc@gmai.com',
+            'user_password.min'=>'Mật khẩu không nhỏ hơn 3 ký tự',
+            'user_password.max'=>'Mật khẩu không lớn hơn 28 ký tự',]);
+        if ($validate->fails()) {
+            return View('ValidationView')->withErrors($validate);
+        }
+
+
         $data=array();
 
         $data['nd_ten'] = $req->user_name;
@@ -49,6 +70,7 @@ class HomeController extends Controller
         $data['nd_dienThoai'] = $req->user_phone;
         $data['nd_diaChi'] = $req->user_address;
         $data['cv_ma'] = "2"; //Chuc vu Khach hang
+        $data['nd_trangThai'] = "0"; //Trạng thái tài khoản (không vô hiệu) Ngân(6/3/2020)
         if($req->rdGioitinh=="Male"){
             $data['nd_gioiTinh'] = 0;
         }
@@ -61,20 +83,23 @@ class HomeController extends Controller
 
         Session::put('nd_ma',$customer_id);
         Session::put('nd_ten',$req->user_name);
-        Session::put('cv_ma',2);
         return Redirect::to('/Home_u');
     }
 
 
      public function AfterLogin(Request $request){
-        $this->validate($request, [
-            'user_email'=>'required',
-            'user_password'=>'required|min:3|max:28'
+         //Ngân (6/3/2020) thay thế từ đây đến return View('ValidationView')->withErrors($validate)
+        
+        $validate = Validator::make($request->all(), [    
+            'user_email'=>'email',
+            'user_password'=>'min:3|max:28',
             ],[
-            'user_email.required'=>'Bạn chưa nhập Email',
-            'user_password.required'=>'Bạn chưa nhập Password',
-            'user_password.min'=>'Password không nhỏ hơn 3 ký tự',
-            'user_password.max'=>'Password không lớn hơn 28 ký tự']);
+            'user_email.email'=>'Email chưa nhập đúng định dạng abc@gmai.com',
+            'user_password.min'=>'Mật khẩu không nhỏ hơn 3 ký tự',
+            'user_password.max'=>'Mật khẩu không lớn hơn 28 ký tự',]);
+        if ($validate->fails()) {
+            return View('pages.customer.user_login')->withErrors($validate);   
+        }
         // if (Auth::attempt(['email'=>$request->admin_email, 'password'=>$request->admin_password]))
         // {
             $user_email = $request->user_email; // request trỏ tới tên thẻ
@@ -85,27 +110,38 @@ class HomeController extends Controller
             print_r($result);
             echo '</pre>';*/
             /*return view('admin.dashboard');*/
-            if ($result) {
-                Session::put('cv_ma',$result->cv_ma);
-                $cv=Session::get('cv_ma');
-                if($cv==2){
-                    Session::put('nd_ma', $result->nd_ma); // result trỏ tới trường csdl
-                    Session::put('nd_ten',$result->nd_ten);
-                    Session::put('nd_email',$result->nd_email);
-                        return Redirect::to('/Home_u');
-                }else{
-                    Session::put('message1','Bạn không có quyền truy cập.');
-                        return Redirect::to('/userLogin');
-                }
-            }    
-            else {
-                
-                Session::put('message','Email hoặc mật khẩu không đúng. Vui lòng thử lại');
-                return Redirect::to('/userLogin');
-            }
             
-        //}
+            // Ngân (6/3/2020) thay thế if cũ bằng khúc từ khúc start->end
+            //start
+            Session::put('nd_trangThai',$result->nd_trangThai);
+                $status=Session::get('nd_trangThai');
+            if($status==0){
+                if ($result) {
+                    Session::put('cv_ma',$result->cv_ma);
+                    $cv=Session::get('cv_ma');
+                    
+                        
+                        if($cv==2){
+                            Session::put('nd_ma', $result->nd_ma); // result trỏ tới trường csdl
+                            Session::put('nd_ten',$result->nd_ten);
+                            Session::put('nd_email',$result->nd_email);
+                                return Redirect::to('/Home_u');
+                        }else{
+                            Session::put('message1','Bạn không có quyền truy cập.');
+                                return Redirect::to('/userLogin');
+                        }
+                }    
+                else {
+                    
+                    Session::put('message','Email hoặc mật khẩu không đúng. Vui lòng thử lại');
+                    return Redirect::to('/userLogin');
+                }
+            }else{
+                Session::put('message2','Tài khoản không thể đăng nhập.');
+                    return Redirect::to('/userLogin');
+            } //end
     }
+
 
 
     public function log_out(){
@@ -114,8 +150,28 @@ class HomeController extends Controller
         Session::put('nd_ten',null);
         Session::put('cv_ma',null);
         Session::put('nd_email',null);
+        Cart::destroy();
         return Redirect::to('/');
        /* return Redirect::to('/userLogin');*/
                 //echo "Logout";
+    }
+
+
+    
+    //LAN
+
+    public function status_order(){
+        $nd_ma= Session::get('nd_ma');
+        $status=DB::table('donhang')->where('nd_ma',$nd_ma )->get();
+        if($status!=NULL){
+            return view('pages.customer.status_order')->with('status', $status);
+        }
+    }
+
+    public function view_customerdetails($dh_ma){
+        $this->authLogin();
+        $order = DB::table('donhang')->join('nguoidung','nguoidung.nd_ma','donhang.nd_ma')->join('thanhtoan','thanhtoan.tt_ma','donhang.tt_ma')->join('vanchuyen','vanchuyen.vc_ma','donhang.vc_ma')->where('donhang.dh_ma','=',$dh_ma)->first();
+        $items = DB::table('chitietdonhang')->join('chitietsanpham','chitietsanpham.ctsp_ma','chitietdonhang.ctsp_ma')->join('sanpham','sanpham.sp_ma','chitietsanpham.sp_ma')->where('dh_ma',$dh_ma)->get();
+        return view('pages.customer.view_customerdetails')->with('order',$order)->with('items',$items);
     }
 }

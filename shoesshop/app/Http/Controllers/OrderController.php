@@ -105,4 +105,50 @@ class OrderController extends Controller
         
        
     }
+
+    public function cusCancelOrder($dh_ma)
+    {
+        $this->authLogin();
+       
+        try {
+    
+            $count = DB::table('donhang')->where('dh_ma', $dh_ma)->update(['dh_trangThai' => 'Đã hủy']);
+            Session::put('success_message','Cập nhật trạng thái đơn hàng thành công!');
+            $items_cancel = DB::table('chitietdonhang')->join('chitietsanpham','chitietdonhang.ctsp_ma','chitietsanpham.ctsp_ma')->where('dh_ma', $dh_ma)->select('chitietdonhang.ctsp_ma','chitietdonhang.soLuongDat','chitietsanpham.ctsp_soLuongTon')->get();
+            foreach ($items_cancel as $key => $item) {
+                try{
+                    /*echo $item->soLuongDat;
+                    echo $item->ctsp_soLuongTon;*/
+                   /*echo*/  $new_stock = $item->soLuongDat+$item->ctsp_soLuongTon;
+
+                    DB::table('chitietsanpham')->where('ctsp_ma', $item->ctsp_ma)->update(['ctsp_soLuongTon' => $new_stock]);
+
+                }catch (\Illuminate\Database\QueryException $e) {
+                    Session::put('fail_message','Cập nhật trạng thái đơn hàng không thành công!');
+                    $nd_ma= Session::get('nd_ma');
+                    $status=DB::table('donhang')->where('nd_ma',$nd_ma )->get();
+                    if($status!=NULL){
+                        return view('pages.customer.status_order')->with('status', $status);
+                    }
+                }
+            }
+
+            
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::put('fail_message','Cập nhật trạng thái đơn hàng không thành công!');
+            $nd_ma= Session::get('nd_ma');
+            $status=DB::table('donhang')->where('nd_ma',$nd_ma )->get();
+            if($status!=NULL){
+                return view('pages.customer.status_order')->with('status', $status);
+            }
+        }
+        Session::put('success_message','Cập nhật trạng thái đơn hàng thành công!');
+        $nd_ma= Session::get('nd_ma');
+        $status=DB::table('donhang')->where('nd_ma',$nd_ma )->get();
+        if($status!=NULL){
+            return view('pages.customer.status_order')->with('status', $status);
+        }
+        
+       
+    }
 }
