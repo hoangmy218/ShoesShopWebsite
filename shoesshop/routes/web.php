@@ -102,13 +102,18 @@ Route::get('/handcash','CheckoutController@handcash'); //M
 //Order M
 Route::get('/manage-order','OrderController@showOrder');
 Route::get('/view-order/{dh_ma}','OrderController@viewOrder');
+Route::get('/order-pdf/{dh_ma}','OrderController@orderPdf');
 Route::get('/approve-order/{dh_ma}','OrderController@approveOrder');
 Route::get('/ship-order/{dh_ma}','OrderController@shipOrder');
 Route::get('/complete-order/{dh_ma}','OrderController@completeOrder');
 Route::get('/cancel-order/{dh_ma}','OrderController@cancelOrder');
 
+
 //Cus cancel Order M
 Route::get('/cus-cancel-order/{dh_ma}','OrderController@cusCancelOrder');
+
+//PDF
+Route::get('/createOrderPdf/{dh_ma}','PdfController@createOrderPdf');
 
 //Brand
 Route::get('/manage-brand','BrandController@showBrand');

@@ -26,7 +26,7 @@
                                 <a href="{{URL::to('/dashboard')}}"><i class="ik ik-home"></i></a>
                             </li>
                             <li class="breadcrumb-item active">
-                                <a href="#">Quản lý sản phẩm</a>
+                                <a href="{{URL::to('/manage-product')}}">Quản lý sản phẩm</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Chi tiết sản phẩm</li>
                         </ol>
@@ -58,13 +58,29 @@
                                     <tr>
                                         <th scope="row">{{$i}}</th>
                                         <th scope="row">{{$size->ctsp_kichCo}}</th>
-                                        @foreach($ton as $key =>$tn)
-                                        @if($tn->ctsp_kichCo==$size->ctsp_kichCo)
-                                        <th scope="row">{{$tn->ctsp_soLuongNhap}}</th>
-                                        <th scope="row">{{$tn->ctsp_soLuongTon}}</th>
-                                        @endif
-
+                                        
+                                        @foreach($list as $key => $sp)
+                                        <?php 
+                                            $tslnhapsize= DB::table('chitietsanpham')->select(DB::raw("sum(ctsp_soLuongNhap) as tslnhap"))->where('ctsp_kichCo',$size->ctsp_kichCo)->where('sp_ma',$sp->sp_ma)->get();
+                                        ?>
                                         @endforeach
+                                        
+                                       @foreach($tslnhapsize as $key =>$tn)
+                                        <th scope="row">{{$tn->tslnhap}}</th>
+                                        @endforeach
+
+                                        
+
+                                        @foreach($list as $key => $sp)
+                                        <?php 
+                                            $tsltonsize= DB::table('chitietsanpham')->select(DB::raw("sum(ctsp_soLuongTon) as tslton"))->where('ctsp_kichCo',$size->ctsp_kichCo)->where('sp_ma',$sp->sp_ma)->get();
+                                        ?>
+                                        @endforeach
+                                        
+                                        @foreach($tsltonsize as $key =>$tnn)
+                                        <th scope="row">{{$tnn->tslton}}</th>
+                                        @endforeach
+
                                     </tr>
                                     <?php $i++; ?>
                                     @endforeach 

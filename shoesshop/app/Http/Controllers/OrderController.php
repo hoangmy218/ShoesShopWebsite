@@ -35,6 +35,14 @@ class OrderController extends Controller
         return view('admin.view_order')->with('order',$order)->with('items',$items); 	
     }
 
+    public function orderPdf($dh_ma)
+    {
+        $this->authLogin();
+        $order = DB::table('donhang')->join('nguoidung','nguoidung.nd_ma','donhang.nd_ma')->join('thanhtoan','thanhtoan.tt_ma','donhang.tt_ma')->join('vanchuyen','vanchuyen.vc_ma','donhang.vc_ma')->where('donhang.dh_ma','=',$dh_ma)->first();
+        $items = DB::table('chitietdonhang')->join('chitietsanpham','chitietsanpham.ctsp_ma','chitietdonhang.ctsp_ma')->join('sanpham','sanpham.sp_ma','chitietsanpham.sp_ma')->where('dh_ma',$dh_ma)->get();
+        return view('admin.order_pdf')->with('order',$order)->with('items',$items);    
+    }
+
     public function approveOrder($dh_ma)
     {
         $this->authLogin();

@@ -24,7 +24,7 @@
                                             </li>
                                             <li class="breadcrumb-item active">
                                                
-                                                <a href="#">Quản lý lịch sử</a>
+                                                <a href="{{URL::to('/history-customer')}}">Quản lý lịch sử</a>
                                                 
                                             </li>
                                             <li class="breadcrumb-item active" aria-current="page">Lịch sử mua hàng</li>
@@ -69,7 +69,7 @@
                                                         <th scope="row">{{$i}}</th>
                                                         <td>{{$don_hang->dh_ma}}</td>
                                                         <td>{{$don_hang->dh_tenNhan}}</td>
-                                                        <td>{{$don_hang->dh_ngayDat}}</td>
+                                                        <td>{{date('d-m-Y',strtotime($don_hang->dh_ngayDat))}}</td>
                                                         <td>{{$don_hang->dh_tongTien}}</td>
                                                         <td>{{$don_hang->dh_trangThai}}</td>
                                                         {{-- @foreach($tam as $key => $tam)

@@ -139,6 +139,7 @@ class CheckoutController extends Controller
         }
             
     }
+    
 
     public function handcash()
     {
@@ -151,4 +152,5 @@ class CheckoutController extends Controller
         $this->authLogin();
         return view('pages.checkout.thankyou');
     }
+
 }

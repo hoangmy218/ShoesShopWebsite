@@ -22,7 +22,7 @@ define('LARAVEL_START', microtime(true));
 */
 
 require __DIR__.'/vendor/autoload.php';
-
+require_once __DIR__.'/dompdf/autoload.inc.php';
 /*
 |--------------------------------------------------------------------------
 | Turn On The Lights

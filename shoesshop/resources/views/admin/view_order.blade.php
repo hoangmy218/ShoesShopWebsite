@@ -31,7 +31,7 @@
                         </div>
 
                         <div class="card">
-                            <div class="card-header"><h3 class="d-block w-100">Mã đơn hàng: {{$order->dh_ma}} <small class="float-right">Ngày đặt: {{$order->dh_ngayDat}}</small></h3></div>
+                            <div class="card-header"><h3 class="d-block w-100">Mã đơn hàng: {{$order->dh_ma}} <small class="float-right">Ngày đặt: {{date('d-m-Y',strtotime($order->dh_ngayDat))}}</small></h3></div>
                             <div class="card-body">
                                 <div class="row invoice-info">
                                     <div class="col-sm-4 invoice-col">
@@ -133,7 +133,7 @@
                                 <div class="row no-print">
                                     <div class="col-12">
                                         {{-- <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment</button> --}}
-                                        <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Generate PDF</button>
+                                        <a href="{{URL::to('/createOrderPdf/'.$order->dh_ma)}}"><button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Generate PDF</button></a>
                                     </div>
                                 </div>
                             </div>

@@ -79,7 +79,7 @@
                                                         <td>{{$order->dh_ma}}</td>
                                                         <td>{{$order->nd_ten}}</td>
                                                         <td>{{$order->dh_tenNhan}} / {{$order->dh_diaChiNhan}} / {{$order->dh_dienThoai}} / {{$order->vc_ten}} </td>
-                                                        <td>{{$order->dh_ngayDat}}</td>
+                                                        <td>{{date('d-m-Y',strtotime($order->dh_ngayDat))}}</td>
                                                         
                                                         <td>{{$order->tt_ten}}</td>
                                                         <td>{{number_format($order->dh_tongTien).' VND'}}</td>

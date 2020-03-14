@@ -132,7 +132,9 @@ class AdminController extends Controller
     public function chitiet_sanpham($ct_id){
         $tongslton= DB::table('chitietsanpham')->select(DB::raw("sum(ctsp_soLuongTon) as slton"))->where('sp_ma',$ct_id)->get();
         $tongslnhap= DB::table('chitietsanpham')->select(DB::raw("sum(ctsp_soLuongNhap) as slnhap"))->where('sp_ma',$ct_id)->get();
-        $kichco= DB::table('chitietsanpham')->select("ctsp_kichCo")->where('sp_ma',$ct_id)->get();
+        $kichco= DB::table('chitietsanpham')->select("ctsp_kichCo")->where('sp_ma',$ct_id)->distinct()->get();
+
+
 
         $list=DB::table('sanpham')->where('sanpham.sp_ma', $ct_id)->join('hinhanh','hinhanh.sp_ma','=','sanpham.sp_ma')->get();
         $ton=DB::table('chitietsanpham')->where('sp_ma', $ct_id)->get();

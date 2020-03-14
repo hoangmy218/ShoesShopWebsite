@@ -66,7 +66,7 @@
                                                         <th scope="row">{{$i}}</th>
                                                         <td>{{$transport->vc_ma}}</td>
                                                         <td>{{$transport->vc_ten}}</td>
-                                                        <td>{{$transport->vc_phi}}</td>
+                                                        <td>{{number_format($transport->vc_phi).' VND'}}</td>
                                                         <td><div class="table-actions">                                                  
                                                             <a href="{{URL::to('/edit-transport/'.$transport->vc_ma)}}"><i class="ik ik-edit-2"></i></a>
                                                             <a onclick="return confirm('Bạn chắc chắn muốn xóa hình thức vận chuyển này?')"  href="{{URL::to('/delete-transport/'.$transport->vc_ma)}}"><i class="ik ik-trash-2"></i></a>

@@ -57,8 +57,8 @@
                                                         <th>Tên sản phẩm</th>
                                                         <th>Thương hiệu</th>
                                                         <th>Danh mục</th>
-                                                        <th>Đơn giá bán</th>
                                                         <th>Đơn giá nhập</th>
+                                                        <th>Đơn giá bán</th>
                                                         <th>Thao tác</th>
                                                     </tr>
                                                 </thead>
@@ -72,12 +72,13 @@
                                                         <td>{{$pro->sp_ten}}</td>
                                                         <td>{{$pro->th_ten}}</td>
                                                         <td>{{$pro->dm_ten}}</td>
-                                                        <td>{{$pro->sp_donGiaBan}}</td>
-                                                        <td>{{$pro->sp_donGiaNhap}}</td>
+                                                        <td>{{number_format($pro->sp_donGiaNhap).' VND'}}</td>
+                                                        <td>{{number_format($pro->sp_donGiaBan).' VND'}}</td>
+                                                        
                                                         <td><div class="table-actions">
                                                             <a href="{{URL::to('/chitiet-sanpham/'.$pro->sp_ma)}}"><i class="ik ik-eye"></i></a>
                                                             <a href="{{URL::to('/chinhsua-sanpham/'.$pro->sp_ma)}}"><i class="ik ik-edit-2"></i></a>
-                                                            <a href="#"><i class="ik ik-trash-2"></i></a>
+                                                           {{--  <a href="#"><i class="ik ik-trash-2"></i></a> --}}
                                                         </div></td>
                                                     </tr>
                                                     <?php $i++; ?>
