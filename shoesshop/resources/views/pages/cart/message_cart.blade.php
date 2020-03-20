@@ -6,8 +6,8 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="{{URL::to('/')}}">Trang chủ</a></span> <span>Giỏ hàng</span></p>
-            <h1 class="mb-0 bread">Giỏ hàng của tôi</h1>
+          	<p class="breadcrumbs"><span class="mr-2"><a href="{{URL::to('/')}}">{{ __('Trang chủ') }}</a></span> <span>{{ __('Giỏ hàng của tôi') }}</span></p>
+            <h1 class="mb-0 bread">{{ __('Giỏ hàng của tôi') }}</h1>
           </div>
         </div>
       </div>

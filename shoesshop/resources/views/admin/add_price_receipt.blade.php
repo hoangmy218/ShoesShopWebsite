@@ -71,7 +71,7 @@
                                                         <td>{{$pro->sp_ten}}</td>
                                                        
                                                         <td> <input type="number" class="form-control" name="giaNhap[]"  id="giaNhap<?php echo $i; ?>" min="100000" step="1000" max="5000000" value="{{$pro->sp_donGiaNhap}}"></td>
-                                                        <td> <input type="number" class="form-control" name="giaBan[]" id="giaBan<?php echo $i; ?>" min="100000" step="1000" max="5000000" value="{{$pro->donGiaBan}}"></td>
+                                                        <td> <input type="number" class="form-control" name="giaBan[]" id="giaBan<?php echo $i; ?>" min="100000" step="1000" max="5000000" value="{{$pro->sp_donGiaBan}}"></td>
                                                        
                                                     </tr>
                                                     <?php $i++; ?>

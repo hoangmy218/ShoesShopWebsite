@@ -12,16 +12,17 @@ session_start();
 class AdminController extends Controller
 {
     
+     // Ngân (11/3/2020) paste lại nguyên cái public authLogin
     public function authLogin(){
         
-        $user_id = Session::get('nd_ma');
         $cv=Session::get('cv_ma');
         
-        if (($user_id)&&($cv==1)) 
+        if ($cv==1) 
             return Redirect::to('/dashboard'); 
         else 
             return Redirect::to('/admin')->send();
     }
+
 
     public function index()
     {
@@ -140,6 +141,35 @@ class AdminController extends Controller
         $ton=DB::table('chitietsanpham')->where('sp_ma', $ct_id)->get();
        
         return view('admin.chitiet_sanpham')->with('list', $list)->with('tongslton', $tongslton)->with('tongslnhap', $tongslnhap)->with('kichco', $kichco)->with('ton', $ton);
+    }
+
+    public function delete_image_product($ha_id){
+        $this->AuthLogin();
+        DB::table('hinhanh')->where('ha_ma',$ha_id)->delete();
+        Session::put('message', 'Xóa hình ảnh thành công');
+       return redirect()->back();
+    }
+
+    public function xoa_sanpham($id_xoa){
+        $this->AuthLogin();
+        $data= DB::table('chitietsanpham')->select(DB::raw("count(sp_ma) as slsp"))->where('sp_ma',$id_xoa)->get();
+        foreach ($data as $key => $value) {
+            $v=$value->slsp;
+        }
+        if($v>0){
+            Session::put('message', 'Sản phẩm đang bán, không thể xóa!');
+            return redirect()->back();
+           
+            }else{
+               
+                 DB::table('hinhanh')->join('sanpham', 'sanpham.sp_ma', '=', 'hinhanh.sp_ma')->where('hinhanh.sp_ma',$id_xoa)->delete();
+
+            DB::table('sanpham')->where('sp_ma',$id_xoa)->delete();
+       
+            Session::put('message', 'Xóa sản phẩm ảnh thành công');
+            return redirect()->back();
+            }
+       
     }
    
    

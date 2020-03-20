@@ -6,8 +6,8 @@
           <div class="col-xl-10 ftco-animate">
              <div class="col-md-6">
             
-            <h2 style="color: black; text-align: center;"><b>Đăng nhập</b></h1>
-            <h5 style="color: black; text-align: center;"><b>Người dùng</b></h3>
+            <h2 style="color: black; text-align: center;"><b>{{ __('Đăng nhập') }}</b></h1>
+            <h5 style="color: black; text-align: center;"><b>{{ __('Khách hàng') }}</b></h3>
             <p style="color: red;"><b><?php
                 $message=Session::get('message');
                  if($message){
@@ -34,7 +34,7 @@
             ?></b></p>
             @if(count($errors)>0)
                     <div class="alert alert-danger">
-                        <strong>Lỗi</strong><br>
+                        <strong>{{ __('Lỗi') }}</strong><br>
                         <ul>
                             @foreach($errors->all() as $error)
                                 <li>{{$error}}</li>
@@ -52,18 +52,18 @@
                       <input type="text" class="form-control" name="user_email" placeholder="Email" required=""> 
                     </div>
                     <div class="form-group">
-                      <input type="password" name="user_password" class="form-control" placeholder="Mật khẩu" required=""><br>
+                      <input type="password" name="user_password" class="form-control" placeholder="{{ __('Mật khẩu') }}" required=""><br>
                     </div>
 
                     <div class="sign-btn text-center">
-                        <button type="submit" class="btn btn-theme btn-primary py-3 px-4">Đăng nhập</button>
+                        <button type="submit" class="btn btn-theme btn-primary py-3 px-4">{{ __('Đăng nhập') }}</button>
                    </div>
                 
                   
                 </form>
                 <br>
                  <div class="register">
-                     <p style="text-align: center;">Bạn chưa có tài khoản? <a href="{{URL::to('/register')}}" style="color: red;">Tạo tài khoản</a></p>
+                     <p style="text-align: center;">{{ __('Bạn chưa có tài khoản?') }} <a href="{{URL::to('/register')}}" style="color: red;">{{ __('Tạo tài khoản') }}</a></p>
                   </div>
            </div>     
 

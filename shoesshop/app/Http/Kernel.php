@@ -19,6 +19,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        \App\Http\Middleware\Locale::class, //Thêm vào dòng này để chọn đa ngôn ngữ
         
     ];
 
@@ -36,6 +37,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+             \App\Http\Middleware\Locale::class, //Thêm vào dòng này để chọn đa ngôn ngữ
         ],
 
         'api' => [
@@ -63,6 +65,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'AdminRole_Name' => \App\Http\Middleware\AdminRole::class, // AdminRole_Name là tên đường dẫn; AdminRole là tên middelware
         'UserRole_Name' => \App\Http\Middleware\UserRole::class,
+        'locale' => \App\Http\Middleware\Locale::class, //Thêm vào dòng này để chọn đa ngôn ngữ
     ];
 
     /**

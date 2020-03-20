@@ -29,6 +29,7 @@ class CreateDonhang extends Migration
             $table->foreign('tt_ma')->references('tt_ma')->on('thanhtoan');
             $table->Integer('nd_ma')->unsigned();
             $table->foreign('nd_ma')->references('nd_ma')->on('nguoidung');
+            
             $table->timestamps();
 
         });

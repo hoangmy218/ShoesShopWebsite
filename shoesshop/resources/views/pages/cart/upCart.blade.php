@@ -17,14 +17,14 @@
 	    				<table class="table">
 						    <thead class="thead-primary">
 							     <tr class="text-center">
-							        <th>STT</th>
-							        <th>Mã sản phẩm</th>
-							        <th>Hình ảnh</th>
-							        <th>Sản phẩm</th>
-							        <th>Kích cỡ</th>
-							        <th>Đơn giá</th>
-							        <th>Số lượng</th>
-							        <th>Thành tiền</th>
+							        <th>{{ __('STT') }}</th>
+							        <th>{{ __('Mã sản phẩm') }}</th>
+							        <th>{{ __('Hình ảnh') }}</th>
+							        <th>{{ __('Tên sản phẩm') }}</th>
+							        <th>{{ __('Kích cỡ') }}</th>
+							        <th>{{ __('Đơn giá') }}</th>
+							        <th>{{ __('Số lượng') }}</th>
+							        <th>{{ __('Thành tiền') }}</th>
 							        <th>&nbsp;</th>
 							    </tr>
 						    </thead>
@@ -51,7 +51,7 @@
 							                    <option value="">Size</option>
 							                    <?php 
 								                    $product = DB::Table('chitietsanpham')->select('sp_ma','ctsp_soLuongTon')->where('ctsp_ma',$v_content->id)->first();
-								                    $sizes = DB::Table('chitietsanpham')->select('ctsp_kichCo','ctsp_ma')->where('sp_ma',$product->sp_ma)->get();  
+								                    $sizes = DB::Table('chitietsanpham')->select('ctsp_kichCo','ctsp_ma')->where([['sp_ma',$product->sp_ma],['ctsp_soLuongTon','!=',0]])->orderBy('ctsp_kichCo','asc')->get();    
 							                    ?>
 							                    @foreach($sizes as $key => $value)
 							                    	@if ($v_content->options->size == $value->ctsp_kichCo )
@@ -84,7 +84,7 @@
 											
 											<?php
 											$subtotal = $v_content->price * $v_content->qty;
-											echo number_format($subtotal).' '.'vnđ';
+											echo number_format($subtotal).' '.'VNĐ';
 											?><!-- Tien -->
 										</p>
 								        </td>

@@ -77,7 +77,7 @@
                                                     <td>{{$i++}}</td>
                                                     <td>{{$item->sp_ten}}</td>
                                                     <td>{{$item->soLuongDat}}</td>
-                                                    <td>{{number_format($item->sp_donGiaBan).' VND'}}</td>
+                                                    <td>{{number_format($item->donGiaBan).' VND'}}</td>
                                                     <td>{{number_format($item->thanhTien).' VND'}}</td>
                                                     <?php $congTien = $congTien + $item->thanhTien; ?>
                                                 </tr>

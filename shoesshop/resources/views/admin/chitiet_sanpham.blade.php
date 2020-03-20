@@ -26,7 +26,7 @@
                                 <a href="{{URL::to('/dashboard')}}"><i class="ik ik-home"></i></a>
                             </li>
                             <li class="breadcrumb-item active">
-                                <a href="{{URL::to('/manage-product')}}">Quản lý sản phẩm</a>
+                                <a href="#">Quản lý sản phẩm</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Chi tiết sản phẩm</li>
                         </ol>
@@ -34,6 +34,46 @@
                  </div>
             </div>
         </div>
+        {{-- THÊM+CHỈNH SƯA --}}
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header d-block">
+                        <h3>Hình ảnh của sản phẩm</h3>
+                    </div>
+                    <div class="card-body p-0 table-border-style">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Mã ảnh</th>
+                                        <th>Tên ảnh</th>
+                                        <th>Nội dung ảnh</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                     <?php 
+                                        $hinhanh= DB::table('hinhanh')->where('sp_ma',$sp->sp_ma)->get();
+                                        ?>
+                                    <?php $i=1; ?>
+                                    @foreach( $hinhanh as $key => $ha)
+                                    <tr>
+                                        <th scope="row">{{$i}}</th>
+                                        <th scope="row">{{$ha->ha_ma}}</th>
+                                        <th scope="row">{{$ha->ha_ten}}</th>
+                                        <td><img src="{{URL::to('public/upload/product/'.$ha->ha_ten)}}" height="100" width="100"></td> 
+                                    </tr>
+                                    <?php $i++; ?>
+                                    @endforeach 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <br>
+                </div>                 
+        </div>
+    </div>
 
         <div class="row">
             <div class="col-8">
@@ -114,6 +154,7 @@
                 </div>               
             </div>
         </div>
+        
     </div>
 </div>
 @endsection

@@ -114,3 +114,11 @@
     overflow: auto !important;
   }
 }
+span.fa-thumb-styling.fa.fa-thumbs-up {
+    font-size: 20px;
+    color: green;
+}
+span.fa-thumb-styling.fa.fa-thumbs-down {
+    font-size: 20px;
+    color: red;
+}

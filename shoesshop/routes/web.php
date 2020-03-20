@@ -32,15 +32,31 @@ Route::group(['prefix'=>'User', 'middleware'=>'UserRole_Name'],function(){
 
 });
 
+//MY DA NGON NGU
 
+Route::get('switchlang/{locale}', function ($locale) {
+
+    // App::setLocale($locale);
+ 	Session::put('website_language', $locale);
+    return redirect()->back();
+
+
+});
+
+
+//LAN
+Route::get('/info-customer', 'HomeController@info_customer');
+Route::get('/chinhsua-thongtin', 'HomeController@chinhsua_thongtin');
+Route::post('/capnhat-thongtin', 'HomeController@capnhat_thongtin');
+Route::post('capnhat-thongtin/{capnhat_nd_ma}','HomeController@capnhat_thongtin');
 
 //Product
 Route::get('/product-detail/{product_id}','ProductController@details_product');//Tiên
-
+Route::post('comment/{id}','CommentController@postComment');//Tiên 13/03
 
 Route::get('/all-product','ProductController@all_product');//Tiên
 
-
+Route::post('/tim-kiem','HomeController@search');// Tiên 15/03
 
 //MY - select Size Stock
 Route::get('/index','StockController@index');
@@ -77,6 +93,8 @@ Route::get('/unactive-customer/{controll_nd_ma}', 'AdminController@unactive_cust
 Route::get('/active-customer/{controll_nd_ma}', 'AdminController@active_customer');
 Route::get('/history-customer', 'AdminController@history_customer');
 Route::get('/view-history/{controll_nd_ma}', 'AdminController@view_history');
+Route::get('/xoa-sanpham/{ct_id}','AdminController@xoa_sanpham');
+Route::get('/delete-image-product/{ha_id}', 'AdminController@delete_image_product');
 
 
 //Cart
@@ -89,6 +107,7 @@ Route::post('/save-cart','CartController@save_cart');//Tien
 Route::get('/removeCart','CartController@removeCart'); //my
 
 
+
 //Checkout
 Route::get('/checkout','CheckoutController@checkout');
 Route::post('/save-checkout-customer', 'CheckoutController@save_checkout_customer');
@@ -97,6 +116,10 @@ Route::post('/order-place','CheckoutController@orderPlace');
 Route::get('/handcash','CheckoutController@handcash'); //M
 // Route::get('/paypal','CheckoutController@paypal'); //M
 
+
+//Lan Showcheckout
+Route::get('get-list-transport','CheckoutController@get_list_transport');
+Route::get('get-price','CheckoutController@get_price');
 
 
 //Order M
@@ -179,4 +202,20 @@ Route::get('/edit-transport/{edit_id}','TransportController@edit_transport');
 Route::post('/update-transport/{update_id}','TransportController@update_transport');
 Route::get('/delete-transport/{delete_id}','TransportController@delete_transport');
 
+// Khuyến mãi (Ngân 14/3/2020)
+Route::get('/checkCoupon','CheckoutController@checkCoupon'); 
+Route::get('/manage-coupon','CouponController@showCoupon');
+Route::get('/add-coupon','CouponController@addCoupon');
+Route::post('/save-coupon','CouponController@saveCoupon');
+Route::get('/edit-coupon/{Coupon_id}','CouponController@editCoupon');
+Route::get('/delete-coupon/{Coupon_id}','CouponController@deleteCoupon');
+Route::post('/update-coupon/{Coupon_id}','CouponController@updateCoupon');
 
+
+// Quảng cáo (Ngân 14/3/2020)
+Route::get('/manage-advertisement','AdvertisementController@showadvertisement');
+Route::get('/add-advertisement','AdvertisementController@addadvertisement');
+Route::post('/save-advertisement','AdvertisementController@saveadvertisement');
+Route::get('/edit-advertisement/{advertisement_id}','AdvertisementController@editadvertisement');
+Route::get('/delete-advertisement/{advertisement_id}','AdvertisementController@deleteadvertisement');
+Route::post('/update-advertisement/{advertisement_id}','AdvertisementController@updateadvertisement');

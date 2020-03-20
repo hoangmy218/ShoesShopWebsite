@@ -9,6 +9,8 @@ use Carbon\Carbon;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 session_start();
+use Cart;
+use App\Comment;
 
 class ProductController extends Controller
 {
@@ -28,8 +30,7 @@ class ProductController extends Controller
     	
     }
 
-    public function saveProduct(Request $request){
-
+     public function saveProduct(Request $request){
         $data = array();
         $data['sp_ten'] = $request->pro_name;
         $data['sp_donGiaBan'] = $request->pro_price;
@@ -37,38 +38,22 @@ class ProductController extends Controller
         $data['th_ma'] = $request->pro_brand;
         $data['dm_ma'] = $request->pro_cate;
        
-
-        //up 1 image
-        $get_image = '';
-        if ($request->hasFile('product_image')){
-            $this->validate($request,
-                                ['product_image'=>'mimes:jpg,jpeg,png,gif|max:2048',
-                                ],
-                                ['product_image.mimes'=>'Only accept jpg, jpeg, png, gif.',
-                                 'product_image.max'=>'Max file size: 2MB.',
-                                ]
-                            );
-
-            $product_image = $request->file('product_image');
-            if ($product_image){
-                $get_image = $product_image->getClientOriginalName();
-                $destinationPath = public_path('upload/product');
-                $product_image->move($destinationPath, $get_image);
-                $data_img = array();
-                
-                $data_img['sp_ma'] = DB::table('sanpham')->insertGetId($data);               
-                $data_img['ha_ten']=$get_image;
-                DB::table('hinhanh')->insert($data_img);
-                Session::put('message','The product was added successfully.');
+        if($request->hasFile('product_image')) {
+            $sp_ma = DB::table('sanpham')->insertGetId($data);
+                // duyệt từng ảnh và thực hiện lưu
+                foreach ($request->product_image as $photo) {
+                    $get_image = $photo->getClientOriginalName();
+                    $destinationPath = public_path('upload/product');
+                    $photo->move($destinationPath, $get_image);
+                    $data_img = array();
+                    $data_img['sp_ma']=$sp_ma;
+                    $data_img['ha_ten']=$get_image;
+                    DB::table('hinhanh')->insert($data_img);
+                }
+                Session::put('message','Thêm sản phẩm thành công!');
                 return Redirect::to('/manage-product');
-            }
-            
-            
         }
-        $data['pro_image']=$get_image;
-        DB::table('sanpham')->insert($data);
-        Session::put('message','The product was added successfully.');
-        return Redirect::to('/manage-product');
+
     }
 
 
@@ -85,10 +70,24 @@ class ProductController extends Controller
  
     public function details_product($product_id){
 
-         $details_product = DB::table('sanpham')->join('hinhanh','hinhanh.sp_ma','=','sanpham.sp_ma')->where('sanpham.sp_ma',$product_id)->get(); 
-         $sz_product = DB::table('chitietsanpham')->where('chitietsanpham.sp_ma',$product_id)->get(); 
 
-         return view('pages.product.show_detail')->with('details_product',$details_product)->with('sz_product',$sz_product);
+        $content = Cart::content();
+
+        $details_product = DB::table('sanpham')->join('hinhanh','hinhanh.sp_ma','=','sanpham.sp_ma')->where('sanpham.sp_ma',$product_id)->get(); 
+        $sz_product = DB::table('chitietsanpham')->where('chitietsanpham.sp_ma',$product_id)->get(); 
+
+        $all_product = DB::table('sanpham')->select('sp_ma')->where('sanpham.sp_ma',$product_id)->limit(1)->get(); //Tiên 14/03
+
+   
+        $sizes = DB::Table('chitietsanpham')->select('ctsp_kichCo','ctsp_soLuongTon','ctsp_ma')->where('chitietsanpham.sp_ma',$product_id)->get(); // Tiên 12/03
+        
+        $sold_product=DB::table('chitietdonhang')->join('chitietsanpham','chitietsanpham.ctsp_ma','=','chitietdonhang.ctsp_ma')->where('chitietsanpham.sp_ma',$product_id)->select('soLuongDat')->sum('soLuongDat'); //Tien 18/03
+
+        $comments = Comment::where('sp_ma',$product_id)->get(); // Tiên 14/03
+
+        $total_view=DB::table('binhluan')->join('sanpham','sanpham.sp_ma','=','binhluan.sp_ma')->where('binhluan.sp_ma',$product_id)->select('sp_ma')->count();
+
+         return view('pages.product.show_detail',compact('chitietsanpham'))->with('details_product',$details_product)->with('sz_product',$sz_product)->with('sizes',$sizes)->with('all_product',$all_product)->with('comments',$comments)->with('sold_product',$sold_product)->with('total_view',$total_view);
     }
 
 
@@ -300,6 +299,7 @@ class ProductController extends Controller
         // echo $hinh_anh;
         return view('admin.edit_product')->with('edit_pro', $edit_pro)->with('list_brand', $list_brand)->with('list_cate', $list_cate)->with('hinh_anh', $hinh_anh);
     }
+    
     public function capnhat_sanpham(Request $request, $chinhsua_sp_ma){
         $data= array();
         $data['sp_ten']=$request->pro_name;
@@ -309,32 +309,27 @@ class ProductController extends Controller
         $data['th_ma']=$request->pro_brand;
         $data['dm_ma']=$request->pro_cate;
 
-        if ($request->hasFile('pro_image')){
-            $this->validate($request,
-                                ['product_image'=>'mimes:jpg,jpeg,png,gif|max:2048',
-                                ],
-                                ['product_image.mimes'=>'Only accept jpg, jpeg, png, gif.',
-                                 'product_image.max'=>'Max file size: 2MB.',
-                                ]
-                            );
-
-            $product_image = $request->file('pro_image');
-            if ($product_image){
-                $get_image = $product_image->getClientOriginalName();
-                $destinationPath = public_path('upload/product');
-                $product_image->move($destinationPath, $get_image);
-                $data_img = array();
-               
-                $data_img['sp_ma'] = DB::table('sanpham')->insertGetId($data);              
-                $data_img['ha_ten']=$get_image;
-                DB::table('hinhanh')->where('sp_ma', $chinhsua_sp_ma)->update($data_img);
-            }
-           
-           
-        }
-        DB::table('sanpham')->where('sp_ma', $chinhsua_sp_ma)->update($data);
-        Session::put('message','The product was added successfully.');
+        if($request->hasFile('product_image')) {
+            DB::table('sanpham')->where('sp_ma', $chinhsua_sp_ma)->update($data);
+                // duyệt từng ảnh và thực hiện lưu
+                foreach ($request->product_image as $photo) {
+                    $get_image = $photo->getClientOriginalName();
+                    $destinationPath = public_path('upload/product');
+                    $photo->move($destinationPath, $get_image);
+                    $data_img = array();
+                    $data_img['sp_ma']=$chinhsua_sp_ma;
+                    $data_img['ha_ten']=$get_image;
+                    DB::table('hinhanh')->insert($data_img);
+                }
+                Session::put('message','Cập nhật sản phẩm thành công!');
+                return Redirect::to('/manage-product');
+        }else{
+            DB::table('sanpham')->where('sp_ma', $chinhsua_sp_ma)->update($data);
+        Session::put('message','Cập nhật sản phẩm thành công!');
         return Redirect::to('/manage-product');
+        }
     }
+
+
 
 }

@@ -6,8 +6,8 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="{{URL::to('/')}}">Trang chủ</a></span> <span>Giỏ hàng</span></p>
-            <h1 class="mb-0 bread">Giỏ hàng của tôi</h1>
+          	<p class="breadcrumbs"><span class="mr-2"><a href="{{URL::to('/')}}">{{ __('Trang chủ') }}</a></span> <span>{{ __('Giỏ hàng của tôi') }}</span></p>
+            <h1 class="mb-0 bread">{{ __('Giỏ hàng của tôi') }}</h1>
           </div>
         </div>
       </div>
@@ -29,7 +29,7 @@
 			?>
 
 			@if ($content->isempty())
-				<p class="text-center"><a href="{{URL::to('/')}}" class="btn btn-primary py-3 px-4">MUA HÀNG NGAY!</a></p>
+				<p class="text-center"><a href="{{URL::to('/')}}" class="btn btn-primary py-3 px-4">{{ __('Mua sắm ngay') }}</a></p>
 			@else
 
 			<div class="row">
@@ -40,14 +40,14 @@
 	    				<table class="table">
 						    <thead class="thead-primary">
 							     <tr class="text-center">
-							        <th>STT</th>
-							        <th>Mã sản phẩm</th>
-							        <th>Hình ảnh</th>
-							        <th>Sản phẩm</th>
-							        <th>Kích cỡ</th>
-							        <th>Đơn giá</th>
-							        <th>Số lượng</th>
-							        <th>Thành tiền</th>
+							        <th>{{ __('STT') }}</th>
+							        <th>{{ __('Mã sản phẩm') }}</th>
+							        <th>{{ __('Hình ảnh') }}</th>
+							        <th>{{ __('Tên sản phẩm') }}</th>
+							        <th>{{ __('Kích cỡ') }}</th>
+							        <th>{{ __('Đơn giá') }}</th>
+							        <th>{{ __('Số lượng') }}</th>
+							        <th>{{ __('Thành tiền') }}</th>
 							        <th>&nbsp;</th>
 							    </tr>
 						    </thead>
@@ -107,7 +107,7 @@
 											
 											<?php
 											$subtotal = $v_content->price * $v_content->qty;
-											echo number_format($subtotal).' '.'vnđ';
+											echo number_format($subtotal).' '.'VNĐ';
 											?><!-- Tien -->
 										</p>
 								        </td>
@@ -132,10 +132,10 @@
 	    	<div class="row justify-content-start">
 	    		<div class="col-md-12 ftco-animate">
 	    			<div class="cart-total mb-3">
-	    				<h3 class="billing-heading mb-4" align="right">Thành tiền giỏ hàng: &emsp;{{Cart::subtotal().' '.'vnđ'}}</h3>		
+	    				<h3 class="billing-heading mb-4" align="right">{{ __('Tổng tiền') }}: &emsp;{{Cart::subtotal().' '.'vnđ'}}</h3>		
 	    			</div>
-	    			<p class="text-center"><a href="{{URL::to('/')}}" class="btn btn-primary py-3 px-4">MUA HÀNG</a>
-	    			<a href="{{URL::to('/checkout')}}" class="btn btn-primary py-3 px-4">ĐẶT HÀNG</a></p>
+	    			<p class="text-center"><a href="{{URL::to('/')}}" class="btn btn-primary py-3 px-4">{{ __('Mua sắm ngay') }}</a>
+	    			<a href="{{URL::to('/checkout')}}" class="btn btn-primary py-3 px-4">{{ __('Đặt hàng ngay') }}</a></p>
 	    		</div>
 	    	</div>
 	    	@endif

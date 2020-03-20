@@ -19,6 +19,8 @@ class CreateChitietdonhang extends Migration
             $table->primary(['dh_ma','ctsp_ma']);
             $table->foreign('dh_ma')->references('dh_ma')->on('donhang');
             $table->foreign('ctsp_ma')->references('ctsp_ma')->on('chitietsanpham'); 
+            $table->Integer('donGiaBan');
+            $table->Integer('donGiaNhap');
             $table->Integer('soLuongDat'); 
             $table->Integer('thanhTien');
             $table->timestamps(); //tự động thêm thời gian tạo

@@ -25,147 +25,7 @@ use DB;
 
 class PaymentController extends Controller
 {
-  //   private $_api_context;
-
-  //   public function __construct()
-  //   {
-  //   	/** PayPal api context **/
-  //       $paypal_conf = \Config::get('paypal');
-  //       $this->_api_context = new ApiContext(new OAuthTokenCredential(
-  //           $paypal_conf['client_id'],
-  //           $paypal_conf['secret'])
-  //       );
-  //       $this->_api_context->setConfig($paypal_conf['settings']);
-  //   }
-
-  //   public function payWithPayPal(Request $request)
-  //   {
-
-		// $payer = new Payer();
-  //       $payer->setPaymentMethod('paypal');
-
-  //       $content = Cart::content();
-		// (double)$rate = 0.000043; 
-		// $index = 0;
-		// $items = array();
-		// foreach($content as $v_content){
-		// 	$index++;
-		// 	$items[$index] = new Item();
-		// 	$items[$index]->setName($v_content->name)
-		// 	    ->setCurrency('USD')
-		// 	    ->setQuantity($v_content->qty)
-		// 	    ->setSku($v_content->id) // Similar to `item_number` in Classic API
-		// 	    ->setPrice($v_content->price * $rate);
-		// }
-
-		// $itemList = new ItemList();
-		// $itemList->setItems($items);
-		
-
-		// (int)$phi=Session::get('vc_phi');
-		// $subtt =(double)Cart::subtotal(2,'.','');
-
-		// $details = new Details();
-		// $details->setShipping(round($phi*$rate))
-		//     ->setSubtotal(round($subtt*$rate));
-
-		// $amount = new Amount();
-		// $amount->setCurrency("USD")
-		//     ->setTotal(($subtt + $phi)*$rate)
-		//     ->setDetails($details);
-
-  //       $transaction = new Transaction();
-  //       $transaction->setAmount($amount)
-  //           ->setItemList($item_list)
-  //           ->setDescription('Your transaction description');
-
-  //       $redirect_urls = new RedirectUrls();
-  //       $redirect_urls->setReturnUrl(URL::to('status')) /** Specify return URL **/
-  //           ->setCancelUrl(URL::to('status'));
-
-  //       $payment = new Payment();
-  //       $payment->setIntent('Sale')
-  //           ->setPayer($payer)
-  //           ->setRedirectUrls($redirect_urls)
-  //           ->setTransactions(array($transaction));
-  //       /** dd($payment->create($this->_api_context));exit; **/
-  //       try {
-
-  //           $payment->create($this->_api_context);
-
-  //       } catch (\PayPal\Exception\PPConnectionException $ex) {
-
-  //           if (\Config::get('app.debug')) {
-
-  //               \Session::put('error', 'Connection timeout');
-  //               return Redirect::to('/thankyou');
-
-  //           } else {
-
-  //               \Session::put('error', 'Some error occur, sorry for inconvenient');
-  //               return Redirect::to('/thankyou');
-
-  //           }
-
-  //   	}
-  //   	foreach ($payment->getLinks() as $link) {
-
-  //           if ($link->getRel() == 'approval_url') {
-
-  //               $redirect_url = $link->getHref();
-  //               break;
-
-  //           }
-
-  //       }
-
-  //       /** add payment ID to session **/
-  //       Session::put('paypal_payment_id', $payment->getId());
-
-  //       if (isset($redirect_url)) {
-
-  //           /** redirect to paypal **/
-  //           return Redirect::away($redirect_url);
-
-  //       }
-
-  //       \Session::put('error', 'Unknown error occurred');
-  //       return Redirect::to('/thankyou');
-  //   }
-
-  //   public function getPaymentStatus()
-  //   {
-  //       /** Get the payment ID before session clear **/
-  //       $payment_id = Session::get('paypal_payment_id');
-
-  //       /** clear the session payment ID **/
-  //       Session::forget('paypal_payment_id');
-  //       if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
-
-  //           \Session::put('error', 'Payment failed');
-  //           return Redirect::to('/thankyou');
-
-  //       }
-
-  //       $payment = Payment::get($payment_id, $this->_api_context);
-  //       $execution = new PaymentExecution();
-  //       $execution->setPayerId(Input::get('PayerID'));
-
-  //       /**Execute the payment **/
-  //       $result = $payment->execute($execution, $this->_api_context);
-
-  //       if ($result->getState() == 'approved') {
-
-  //           \Session::put('success', 'Payment success');
-  //           return Redirect::to('/');
-
-  //       }
-
-  //       \Session::put('error', 'Payment failed');
-  //       return Redirect::to('/thankyou');
-
-  //   }
-
+ 
 	public function create(Request $request)
 	{
 		$apiContext = new \PayPal\Rest\ApiContext(
@@ -182,6 +42,7 @@ class PaymentController extends Controller
 		(double)$rate = 0.000043; 
 		$index = 0;
 		$items = array();
+    (double)$tongtien = 0;
 		foreach($content as $v_content){
 			$index++;
 			$items[$index] = new Item();
@@ -190,50 +51,33 @@ class PaymentController extends Controller
 			    ->setQuantity($v_content->qty)
 			    ->setSku($v_content->id) // Similar to `item_number` in Classic API
 			    ->setPrice($v_content->price * $rate);
+          // echo 'sp'.round($v_content->price * $rate,2) * $v_content->qty.'\n';
+      $tongtien = $tongtien + round($v_content->price * $rate,2) * $v_content->qty;
+
 		}
 		$itemList = new ItemList();
 		$itemList->setItems($items);
-		
+		// echo '<pre>';
+  //   print_r($items);
+  //   echo "</pre>";
+  //   echo "tongtien".$tongtien;
 
-		(int)$phi=Session::get('vc_phi');
-		$subtt =(double)Cart::subtotal(2,'.','');
+		(double)$phi=Session::get('vc_phi');
+		// $subtt =(double)Cart::subtotal(2,'.','');
 
 		$details = new Details();
 		$details->setShipping($phi*$rate)
-		    ->setSubtotal($subtt*$rate);
+		    ->setSubtotal($tongtien);
+
+    (double)$tongcuoi = $tongtien +(round($phi*$rate,2));
 
 		$amount = new Amount();
 		$amount->setCurrency("USD")
-		    ->setTotal(($subtt + $phi)*$rate)
+		    ->setTotal($tongcuoi)
 		    ->setDetails($details);
-
-		// $item1 = new Item();
-		// $item1->setName('Ground Coffee 40 oz')
-		// 	    ->setCurrency('USD')
-		// 	    ->setQuantity(1)
-		// 	    ->setSku("123123") // Similar to `item_number` in Classic API
-		// 	    ->setPrice(7.5);
-		// $item2 = new Item();
-		// $item2->setName('Granola bars')
-		// 	    ->setCurrency('USD')
-		// 	    ->setQuantity(5)
-		// 	    ->setSku("321321") // Similar to `item_number` in Classic API
-		// 	    ->setPrice(2);
-
-		// $itemList = new ItemList();
-		// $itemList->setItems(array($item1, $item2));
-
-		// $details = new Details();
-		// $details->setShipping(1.2)
-		// 	    ->setTax(1.3)
-		// 	    ->setSubtotal(17.50);
-
-
-		// $amount = new Amount();
-		// $amount->setCurrency("USD")
-		// 	    ->setTotal(20)
-		// 	    ->setDetails($details);
-
+        
+    // echo 'tong tien cuoi: '.$tongcuoi;
+	
 		$transaction = new Transaction();
 		$transaction->setAmount($amount)
 		    ->setItemList($itemList)
@@ -279,20 +123,25 @@ class PaymentController extends Controller
 	    $amount = new Amount();
 	    $details = new Details();
 
+
 	    //them du lieu
 		$content = Cart::content();
-	    (double)$rate = 0.000043; 
+	  (double)$rate = 0.000043; 
+    (double)$tongtien = 0;
+    foreach($content as $v_content){
+      $tongtien = $tongtien + round($v_content->price * $rate,2) * $v_content->qty;
+    }
 
-		(int)$phi=Session::get('vc_phi');
-		$subtt =(double)Cart::subtotal(2,'.','');
+		(double)$phi=Session::get('vc_phi');
+    (double)$tongcuoi = $tongtien +(round($phi*$rate,2));
 
 		// $details = new Details();
 		$details->setShipping($phi*$rate)
-		    ->setSubtotal($subtt*$rate);
+		    ->setSubtotal($tongtien);
 
 		// $amount = new Amount();
 		$amount->setCurrency("USD")
-		    ->setTotal(($subtt + $phi)*$rate)
+		    ->setTotal($tongcuoi)
 		    ->setDetails($details);
 
 
@@ -361,6 +210,9 @@ class PaymentController extends Controller
                     $order_detail_data = array();
                     $order_detail_data['dh_ma'] = $insert_donhang_id; 
                     $order_detail_data['ctsp_ma'] = $v_content->id;
+                     $product = DB::table('chitietsanpham')->join('sanpham','sanpham.sp_ma','=','chitietsanpham.sp_ma')->where('ctsp_ma',$v_content->id)->select('sanpham.sp_ma', 'sp_donGiaNhap','sp_donGiaBan')->first();
+                    $order_detail_data['donGiaBan'] = $product->sp_donGiaBan;
+                    $order_detail_data['donGiaNhap'] = $product->sp_donGiaNhap;
                     $order_detail_data['soLuongDat'] = $v_content->qty;
                     $order_detail_data['thanhTien'] = $v_content->qty*$v_content->price;            
                     $insert_orderdetail_id = DB::table('chitietdonhang')->insertGetId($order_detail_data);

@@ -10,12 +10,13 @@
                 <img class="one-third order-md-last img-fluid" src="{{URL::to('public/frontend/images/bg_1.png')}}" alt="">
                   <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
                     <div class="text">
-                        <span class="subheading">#New Arrival</span>
+                        <span class="subheading">{{ __('Sản phẩm mới') }}</span>
                         <div class="horizontal">
-                            <h1 class="mb-4 mt-3">Shoes Collection 2019</h1>
-                            <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country.</p>
+                            <h1 class="mb-4 mt-3">{{ __('Bộ sưu tập giày 2019') }}</h1>
+                            <p class="mb-4">{{ __('Loạt sản phẩm giày thể thao hoàn toàn khác biệt và đậm tính thời trang. Sắc màu của tôi - Giấc mơ của bạn.') }}</p>
                             
-                            <p><a href="#" class="btn-custom">Discover Now</a></p>
+                            <p><a href="#" class="btn-custom">{{ __('Khám phá ngay') }}</a></p>
+                            
                           </div>
                     </div>
                   </div>
@@ -30,12 +31,12 @@
                 <img class="one-third order-md-last img-fluid" src="{{URL::to('public/frontend/images/bg_2.png')}}" alt="">
                   <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
                     <div class="text">
-                        <span class="subheading">#New Arrival</span>
+                        <span class="subheading">{{ __('Sản phẩm mới') }}</span>
                         <div class="horizontal">
-                            <h1 class="mb-4 mt-3">New Shoes Winter Collection</h1>
-                            <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country.</p>
+                            <h1 class="mb-4 mt-3">{{ __('Bộ sưu tập giày mùa hè mới') }}</h1>
+                            <p class="mb-4">{{ __('Lắng nghe âm thanh của mùa hạ') }}</p>
                             
-                            <p><a href="#" class="btn-custom">Discover Now</a></p>
+                            <p><a href="#" class="btn-custom">{{ __('Khám phá ngay') }}</a></p>
                           </div>
                     </div>
                   </div>
@@ -54,8 +55,8 @@
                         <span class="flaticon-bag"></span>
                   </div>
                   <div class="media-body">
-                    <h3 class="heading">Free Shipping</h3>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                    <h3 class="heading">{{ __('Khuyến mãi') }}</h3>
+                    <p>{{ __('Nhiều mã giảm giá hấp dẫn') }}</p>
                   </div>
                 </div>      
               </div>
@@ -65,8 +66,8 @@
                         <span class="flaticon-customer-service"></span>
                   </div>
                   <div class="media-body">
-                    <h3 class="heading">Support Customer</h3>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                    <h3 class="heading">{{ __('Hỗ trợ khách hàng') }}</h3>
+                    <p>{{ __('Nhanh chóng, kinh nghiệm và hiệu quả. Chúng tôi luôn luôn sẵn sàng giải đáp tất cả các thằc mắc và giải quyết nhanh chóng vấn đề của bạn!') }}</p>
                   </div>
                 </div>    
               </div>
@@ -76,8 +77,8 @@
                         <span class="flaticon-payment-security"></span>
                   </div>
                   <div class="media-body">
-                    <h3 class="heading">Secure Payments</h3>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                    <h3 class="heading">{{ __('Thanh toán bảo mật') }}</h3>
+                    <p>{{ __('Dịch vụ được đảm bảo an toàn, nhanh chóng và bảo mật với hình thức thanh toán trực tuyến.') }}</p>
                   </div>
                 </div>      
               </div>
@@ -89,8 +90,8 @@
         <div class="container">
                 <div class="row justify-content-center mb-3 pb-3">
           <div class="col-md-12 heading-section text-center ftco-animate">
-            <h2 class="mb-4">New Shoes Arrival</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+            <h2 class="mb-4">{{ __('Sản phẩm mới') }}</h2>
+            <p>{{ __('Nâng niu bàn chân bạn') }}</p>
           </div>
         </div>          
         </div>
@@ -102,12 +103,12 @@
                     <div class="product d-flex flex-column">
                         <a href="#" class="img-prod"><img class="img-fluid" src="public/upload/product/{{$product->ha_ten}}" alt="Colorlib Template">
                             <div class="overlay"></div>
-                            <span class="status">50% Off</span>
+                            <span class="status">{{ __('Giảm 50%') }}</span>
                         </a>
                         <div class="text py-3 pb-4 px-3">
                             <div class="d-flex">
                                 <div class="cat">
-                                    <span>Lifestyle</span>
+                                    <span>{{ __('Phong cách thời thượng') }}</span>
                                     
                                 </div>
                                 <div class="rating">
@@ -126,8 +127,8 @@
                                 <p class="price"><span>{{number_format($product->sp_donGiaBan).' '.'VNĐ'}}</span></p>
                             </div>
                             <p class="bottom-area d-flex px-3">
-                                <a href="#" class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
-                                <a href="#" class="buy-now text-center py-2">Buy now<span><i class="ion-ios-cart ml-1"></i></span></a>
+                                <a href="#" class="add-to-cart text-center py-2 mr-1"><span>{{ __('Thêm giỏ hàng') }}<i class="ion-ios-add ml-1"></i></span></a>
+                                <a href="#" class="buy-now text-center py-2">{{ __('Buy now') }}<span><i class="ion-ios-cart ml-1"></i></span></a>
                             </p>
                         </div>
 
@@ -150,10 +151,10 @@
                         <div class="choose-wrap divider-one img p-5 d-flex align-items-end" style="background-image: url({{asset('public/frontend/images/choose-1.jpg')}});">
 
                         <div class="text text-center text-white px-2">
-                                <span class="subheading">Men's Shoes</span>
-                            <h2>Men's Collection</h2>
-                            <p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-                            <p><a href="#" class="btn btn-black px-3 py-2">Shop now</a></p>
+                                <span class="subheading">{{ __('Giày nam') }}</span>
+                            <h2>{{ __('Bộ sưu tập giày nam') }}</h2>
+                            <p>{{ __('Cũng tương tự như phong cách cổ điển, những người theo phong cách tinh tế luôn muốn đồ chất lượng cao.') }}</p>
+                            <p><a href="#" class="btn btn-black px-3 py-2">{{ __('Mua sắm ngay') }}</a></p>
                         </div>
                     </div>
                     </div>
@@ -163,10 +164,10 @@
                             <div class="choose-wrap full-wrap img align-self-stretch d-flex align-item-center justify-content-end" style="background-image: url({{URL::to('public/frontend/images/choose-2.jpg')}});">
                                 <div class="col-md-7 d-flex align-items-center">
                                     <div class="text text-white px-5">
-                                        <span class="subheading">Women's Shoes</span>
-                                        <h2>Women's Collection</h2>
-                                        <p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-                                        <p><a href="#" class="btn btn-black px-3 py-2">Shop now</a></p>
+                                        <span class="subheading">{{ __('Giày nữ') }}</span>
+                                        <h2>{{ __('Bộ sưu tập giày nữ') }}</h2>
+                                        <p>{{ __('Phong cách nữ sinh rất phổ biến trong giới sinh viên đại học.') }}</p>
+                                        <p><a href="#" class="btn btn-black px-3 py-2">{{ __('Mua sắm ngay') }}</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -176,20 +177,20 @@
                                 <div class="col-md-6">
                                     <div class="choose-wrap wrap img align-self-stretch bg-light d-flex align-items-center">
                                         <div class="text text-center px-5">
-                                            <span class="subheading">Summer Sale</span>
-                                            <h2>Extra 50% Off</h2>
-                                            <p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-                                            <p><a href="#" class="btn btn-black px-3 py-2">Shop now</a></p>
+                                            <span class="subheading">{{ __('Mua sắm mùa hè') }}</span>
+                                            <h2>{{ __('Giảm giá thêm 50%') }}</h2>
+                                            <p>{{ __('Cùng chào đón một mùa hè sôi động.') }}</p>
+                                            <p><a href="#" class="btn btn-black px-3 py-2">{{ __('Mua sắm ngay') }}</a></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="choose-wrap wrap img align-self-stretch d-flex align-items-center" style="background-image: url({{URL::to('public/frontend/images/choose-3.jpg')}});">
                                         <div class="text text-center text-white px-5">
-                                            <span class="subheading">Shoes</span>
-                                            <h2>Best Sellers</h2>
-                                            <p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-                                            <p><a href="#" class="btn btn-black px-3 py-2">Shop now</a></p>
+                                            <span class="subheading">{{ __('Giày dép') }}</span>
+                                            <h2>{{ __('Bán chạy nhất') }}</h2>
+                                            <p>{{ __('5 mẫu giày bán chạy nhất 2020 mà bạn không nên bỏ lỡ.') }}</p>
+                                            <p><a href="#" class="btn btn-black px-3 py-2">{{ __('Mua sắm ngay') }}</a></p>
                                         </div>
                                     </div>
                                 </div>
@@ -209,8 +210,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="heading-section heading-section-white">
-                        <span class="subheading">Deal of the month</span>
-                <h2 class="mb-3">Deal of the month</h2>
+                        <span class="subheading">{{ __('Khuyến mãi đặc biệt hàng tháng') }}</span>
+                <h2 class="mb-3">{{ __('Khuyến mãi đặc biệt hàng tháng') }}</h2>
               </div>
                     <div id="timer" class="d-flex mb-4">
                           <div class="time" id="days"></div>
@@ -242,8 +243,8 @@
                             <span class="flaticon-bag"></span>
                         </div>
                         <div class="text">
-                            <h3>Free Shipping</h3>
-                            <p class="mb-0">Separated they live in. A small river named Duden flows</p>
+                            <h3>{{ __('Giảm giá') }}</h3>
+                            <p class="mb-0">{{ __('Nhiều mã giảm giá hấp dẫn') }}</p>
                         </div>
                     </div>
                     <div class="services-2 p-4 d-flex ftco-animate">
@@ -251,8 +252,8 @@
                             <span class="flaticon-heart-box"></span>
                         </div>
                         <div class="text">
-                            <h3>Valuable Gifts</h3>
-                            <p class="mb-0">Separated they live in. A small river named Duden flows</p>
+                            <h3>{{ __('Quà tặng giá trị') }}</h3>
+                            <p class="mb-0">{{ __('Nhiều quà tặng giá trị') }}</p>
                         </div>
                     </div>
                     <div class="services-2 p-4 d-flex ftco-animate">
@@ -260,25 +261,17 @@
                             <span class="flaticon-payment-security"></span>
                         </div>
                         <div class="text">
-                            <h3>All Day Support</h3>
-                            <p class="mb-0">Separated they live in. A small river named Duden flows</p>
+                            <h3>{{ __('Hỗ trợ xuyên suốt') }}</h3>
+                            <p class="mb-0">{{ __('Chúng tôi luôn luôn bên bạn để lắng nghe và giúp đỡ') }}</p>
                         </div>
                     </div>
-                    <div class="services-2 p-4 d-flex ftco-animate">
-                        <div class="icon">
-                            <span class="flaticon-customer-service"></span>
-                        </div>
-                        <div class="text">
-                            <h3>All Day Support</h3>
-                            <p class="mb-0">Separated they live in. A small river named Duden flows</p>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
           <div class="col-lg-7">
             <div class="heading-section ftco-animate mb-5">
-                <h2 class="mb-4">Our satisfied customer says</h2>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
+                <h2 class="mb-4">{{ __('Sự hài lòng của khách hàng') }}</h2>
+                <p>{{ __('với dịch vụ của chúng tôi') }}</p>
               </div>
             <div class="carousel-testimony owl-carousel">
               <div class="item">
@@ -289,7 +282,7 @@
                     </span>
                   </div>
                   <div class="text">
-                    <p class="mb-4 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                    <p class="mb-4 pl-4 line">{{ __('Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.') }}</p>
                     <p class="name">Garreth Smith</p>
                     <span class="position">Marketing Manager</span>
                   </div>
@@ -361,8 +354,8 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 heading-section text-center mb-4 ftco-animate">
-            <h2 class="mb-4">Follow Us On Instagram</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
+            {{-- <h2 class="mb-4">Follow Us On Instagram</h2>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p> --}}
           </div>
             </div>
         </div>

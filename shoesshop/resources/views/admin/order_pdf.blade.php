@@ -59,6 +59,13 @@
 				margin-bottom: 10px;
 				box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
 			}
+			tr.tongtien td {
+			  border-top: 2px solid black;
+			  background: #E0E0E0;
+			}
+			.table{
+				 border-collapse: collapse;
+			}
     </style>
 </head>
 <body style="font-family:  DejaVu Sans, sans-serif;">
@@ -143,11 +150,16 @@
 												<td>{{$i++}}</td>
                                                 <td><strong>{{$item->sp_ten}}</strong></td>
 												<td class="text-center">{{$item->soLuongDat}}</td>
-												<td class="text-center">{{number_format($item->sp_donGiaBan).' VND'}}</td>
+												<td class="text-center">{{number_format($item->donGiaBan).' VND'}}</td>
 												<td class="text-right">{{number_format($item->thanhTien).' VND'}}</td>
 											</tr>
                                             <?php $congTien = $congTien + $item->thanhTien; ?>
                                          @endforeach
+                                         <tr class="tongtien">
+											<td colspan="3"></td>
+											<td class="text-right "><strong>Cộng tiền</strong></td>
+											<td class="text-right"><strong>{{number_format($congTien).' VND'}}</strong></td>
+										</tr>
 										<tr>
 											<td colspan="3"></td>
 											<td class="text-right"><strong>Khuyến mãi</strong></td>
@@ -158,9 +170,9 @@
 											</td><td class="text-right"><strong>Vận chuyển</strong></td>
 											<td class="text-right"><strong>{{number_format($order->vc_phi).' VND'}}</strong></td>
 										</tr>
-										<tr>
-											<td colspan="3">
-											</td><td class="text-right"><strong>Tổng tiền</strong></td>
+										<tr class="tongtien">
+											<td colspan="2">
+											</td><td  colspan="2" class="text-right"><strong>Tổng tiền thanh toán</strong></td>
 											<td class="text-right"><strong>{{number_format($congTien+$order->vc_phi).' VND'}}</strong></td>
 										</tr>
 									</tbody>

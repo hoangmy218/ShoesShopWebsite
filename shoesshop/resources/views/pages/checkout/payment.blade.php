@@ -13,8 +13,8 @@ display: none;
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="{{URL::to('/')}}">Trang chủ</a></span> <span>Thanh toán</span></p>
-            <h1 class="mb-0 bread">Thanh toán</h1>
+          	<p class="breadcrumbs"><span class="mr-2"><a href="{{URL::to('/')}}">{{ __('Trang chủ') }}</a></span> <span>{{ __('Thanh toán') }}</span></p>
+            <h1 class="mb-0 bread">{{ __('Thanh toán') }}</h1>
           </div>
         </div>
       </div>
@@ -33,14 +33,14 @@ display: none;
                         <table class="table">
                             <thead class="thead-primary">
                                  <tr class="text-center">
-                                    <th>STT</th>
-                                    <th>Mã sản phẩm</th>
-                                    <th>Hình ảnh</th>
-                                    <th>Sản phẩm</th>
-                                    <th>Kích cỡ</th>
-                                    <th>Đơn giá</th>
-                                    <th>Số lượng</th>
-                                    <th>Thành tiền</th>
+                                    <th>{{ __('STT') }}</th>
+                                    <th>{{ __('Mã sản phẩm') }}</th>
+                                    <th>{{ __('Hình ảnh') }}</th>
+                                    <th>{{ __('Tên sản phẩm') }}</th>
+                                    <th>{{ __('Kích cỡ') }}</th>
+                                    <th>{{ __('Đơn giá') }}</th>
+                                    <th>{{ __('Số lượng') }}</th>
+                                    <th>{{ __('Thành tiền') }}</th>
                                     
                                 </tr>
                             </thead>
@@ -92,51 +92,67 @@ display: none;
 	         <div class="row mt-5 pt-3 d-flex">
 	          	<div class="col-md-12 d-flex">
 	          		<div class="cart-detail cart-total bg-light p-3 p-md-4">
-	          			<h3 class="billing-heading mb-4">Thông tin giao hàng</h3>
+	          			<h3 class="billing-heading mb-4">{{ __('Thông tin giao hàng') }}</h3>
 	          				<?php 
-                                echo '<p class="d-flex"><span>Tên người nhận </span>';
+                                echo '<p class="d-flex"><span>'; 
+                                echo __('Họ và tên người nhận').'</span>';
                                 echo '<span>'.Session::get('dh_tenNhan').'</span></p>';
-                               echo '<p class="d-flex"><span>Địa chỉ</span>';
+                                echo '<p class="d-flex"><span>';
+                                echo __('Địa chỉ').'</span>';
 						        echo '<span>'.Session::get('dh_diaChiNhan').'</span></p>';
-						       echo '<p class="d-flex"><span>Điện thoại</span>';
+						        echo '<p class="d-flex"><span>';
+                                echo __('Điện thoại').'</span>';
 						        echo '<span>'.Session::get('dh_dienThoai').'</span></p>';
-						       echo '<p class="d-flex"><span>Email</span>';
+						        echo '<p class="d-flex"><span>';
+                                echo __('Email').'</span>';
 						        echo '<span>'.Session::get('dh_email').'</span></p>';
 						       
-						        echo '<p class="d-flex"><span>Ngày đặt</span>';
+						        echo '<p class="d-flex"><span>';
+                                echo __('Ngày đặt').'</span>';
 						        $date =date_create(Session::get('dh_ngayDat'));
 						        echo '<span>'.date_format($date,"d/m/Y ").'</span></p>';
 						        					       
-						       echo '<p class="d-flex"><span>Hình thức vận chuyển</span>';
+						       echo '<p class="d-flex"><span>';
+                               echo __('Hình thức vận chuyển').'</span>';
 						        echo '<span>'.Session::get('vc_ten').'</span></p>';
-						        echo '<p class="d-flex"><span>Ghi chú</span>';
+						        echo '<p class="d-flex"><span>';
+                                echo __('Ghi chú').'</span>';
 						        echo '<span>'.Session::get('dh_ghiChu').'</span></p>';
 						    ?>
 	          		</div>
                     <div class="cart-detail cart-total bg-light p-3 p-md-4">
-                        <h3 class="billing-heading mb-4">Tổng tiền giỏ hàng</h3>
+                        <h3 class="billing-heading mb-4">{{ __('Tổng tiền thanh toán') }}</h3>
                         <p class="d-flex">
-                            <span>Thành tiền</span>
+                            <span>{{ __('Cộng tiền') }}</span>
                             <span>{{number_format((double)Cart::subtotal(2,'.','')).' VND'}}</span>
                         </p>
                         <p class="d-flex">
-                            <span>Phí giao hàng</span>
-                            <?php (int)$phi=Session::get('vc_phi'); ?>
+                            <span>{{ __('Phí vận chuyển') }}</span>
+                            <?php (int)$phi = Session::get('vc_phi'); ?>
                             <span>{{number_format($phi).' VND'}}</span>
+                        </p>
+                         <p class="d-flex">
+                            <span>{{ __('Khuyến mãi') }}</span>
+                            <?php 
+                               
+                            if (Session::get('tien_giamgia') != null){
+                                (int)$giamgia = Session::get('tien_giamgia');
+                            } ?>
+                            <span>{{number_format($giamgia).' VND'}}</span>
                         </p>
                         
                         <hr>
                         <p class="d-flex total-price">
-                            <span>Tổng tiền</span>
+                            <span>{{ __('Tổng tiền thanh toán') }}</span>
                             <?php $subtt =(double)Cart::subtotal(2,'.',''); ?> {{-- bo dau hang nghin, chuyen sau thap phan thanh , --}}
-                            <span>{{number_format($subtt+$phi).' VND'}}</span>
+                            <span>{{number_format($subtt + $phi - $giamgia).' VND'}}</span>
                             <?php Session::put('dh_tongTien',number_format((double)Cart::subtotal(2,'.','')));?>
                         </p>
                     </div>
 	          		<div class="cart-detail bg-light p-3 p-md-4">
-	          			{{-- <form action="{{URL::to('/order-place')}}" method="POST">
-							{{csrf_field()}} --}}
-		          			<h3 class="billing-heading mb-4">Hình thức thanh toán</h3>
+	          			<form action="{{URL::to('/order-place')}}" method="POST">
+							{{csrf_field()}}
+		          			<h3 class="billing-heading mb-4">{{ __('Phương thức thanh toán') }}</h3>
 		          			<div class="payment-options">
     		          			@foreach($ma_thanhtoan as $key => $matt)
     			          			<div class="form-group">
@@ -149,12 +165,12 @@ display: none;
 
     	                        @endforeach		
                                {{--  btn1: cash; btn2: paypal	 --}}						
-    							<button type="submit" id="cashbtn" class="btn btn-theme btn-primary py-3 px-4">Hoàn tất</button>
+    							<button type="submit" id="cashbtn" class="btn btn-theme btn-primary py-3 px-4">{{ __('Hoàn tất') }}</button>
                                 {{-- @include('pages.checkout.paypal2') --}}
                                 @include('pages.checkout.paypal')
 							</div>
 						
-					  {{--   </form> --}}
+					    </form>
 
                     </div>
                  

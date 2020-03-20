@@ -1,11 +1,16 @@
 @extends('shop_layout')
 @section('content')
+
+<script src="http://www.codermen.com/js/jquery.js"></script>
+{{-- <link href="rateit/src/rateit.css" rel="stylesheet" type="text/css">
+<script src="rateit/src/jquery.rateit.js" type="text/javascript"></script>  --}}
+
     <div class="hero-wrap hero-bread" style="background-image: url({{URL::to('public/frontend/images/bg_6.jpg')}});">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="{{URL::to('/')}}">Home</a></span> <span>Shop</span></p>
-            <h1 class="mb-0 bread">Shop</h1>
+          	<p class="breadcrumbs"><span class="mr-2"><a href="{{URL::to('/')}}">{{ __('Trang chủ') }}</a></span> <span>{{ __('Cửa hàng') }}</span></p>
+            <h1 class="mb-0 bread">{{ __('Cửa hàng') }}</h1>
           </div>
         </div>
       </div>
@@ -40,10 +45,17 @@
 								<a href="#"><span class="ion-ios-star-outline"></span></a>
 							</p>
 							<p class="text-left mr-4">
-								<a href="#" class="mr-2" style="color: #000;">100 <span style="color: #bbb;">Rating</span></a>
+								<a href="#" class="mr-2" style="color: #000;">100 <span style="color: #bbb;">{{ __('Đánh giá') }}</span></a>
 							</p>
 							<p class="text-left">
-								<a href="#" class="mr-2" style="color: #000;">500 <span style="color: #bbb;">Sold</span></a>
+								
+								<a href="#" class="mr-2" style="color: #000;">
+									
+									 {{$sold_product}} <!-- tiên 18/04 -->
+									
+								 	<span style="color: #bbb;">{{ __('Đã bán') }}</span>
+								</a>
+								
 							</p>
 						</div>
     				<p class="price"><span>{{number_format($value->sp_donGiaBan).' '.'VNĐ'}}</span></p>
@@ -55,26 +67,50 @@
 							<div class="col-md-6">
 								<div class="form-group d-flex">
 						            <div class="select-wrap">
-					                  <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-					                  <select name="size" id="" class="form-control">
-					                  	@foreach($sz_product as $key => $size)
-					                  	<option value="{{$size->ctsp_ma}}" name="opsize">{{$size->ctsp_kichCo}}</option>
-					                  	@endforeach
-					                    
-					                  </select>
+					                  <div class="icon">
+					                  	<span class="ion-ios-arrow-down"></span>
+					                  </div>
+
+					            <!--    2
+ -->
+										<select id="size" name="size" class="form-control" style="width:200px" >
+						                	<option value="" selected disabled>{{ __('Chọn kích cỡ') }}</option>
+						                 	@foreach($sz_product as $key => $sz)
+						                  		<option value="{{$sz->ctsp_ma}}"> {{$sz->ctsp_kichCo}}</option>
+						                  	@endforeach
+						                </select>
+
 					                </div>
 						        </div>
 							</div>
 							<div class="w-100"></div>
+
+							<!-- <div class="col-md-6">
+								<div class="form-group d-flex">
+						            <div class="select-wrap">
+					                  <div class="icon">
+					                  	<span class="ion-ios-arrow-down"></span>
+					                  </div>
+					                  <select name="slton" id="slton" class="form-control" style="width:200px">
+               						  </select>
+					                </div>
+						        </div>
+							</div> -->
+															                
 							<div class="input-group col-md-6 d-flex mb-3">
 					             	<span class="input-group-btn mr-2">
 					                	<button type="button" class="quantity-left-minus btn"  data-type="minus" data-field="">
 					                   <i class="ion-ios-remove"></i>
 					                	</button>
 					            	</span>
-					             	<input type="text" id="quantity" name="qty" class="quantity form-control input-number" value="1" min="1" max="5">
+
+					            	
+						                <input type="text" id="quantity" name="qty" class="quantity form-control input-number" value="1" min="1" max="5">
+						           
+					             	
+
 					             	{{-- @foreach($sz_product as $key => $slt)
-					                  	<option value="{{$slt->ctsp_id}}" name="opsize">{{$slt->ctsp_soLuongTon}}</option>
+					                  	<option value="{{$slt->ctsp_ma}}" name="opsize">{{$slt->ctsp_soLuongTon}}</option>
 					                @endforeach --}}
 					             	<span class="input-group-btn ml-2">
 					                	<button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
@@ -83,31 +119,45 @@
 					             	</span>
 					        </div>
 
-					        <input type="hidden" name="productid_hidden" value="{{$value->sp_ma}}">
+					        <input type="hidden" name="productid_hidden" id="spma" value="{{$value->sp_ma}}">
 
 					        <div class="w-100"></div>
-					        <div class="col-md-12">
-					          		<p style="color: #000;">80 piece available</p>
+					         <div class="col-md-12">
+					          		<p style="color: #000;">{{ __('Có sẵn 80 đôi') }}</p>
 					        </div>
 				        	</div>
 
 				        	
-				          	<!-- <p><a href="cart.html" class="btn btn-primary py-3 px-5">Buy now</a></p> -->
+				          	<!-- <p><a href="cart.html" class="btn btn-primary py-3 px-5">{{ __('Mua ngay') }}</a></p> -->
 
 						</div>
 				
 				    			
     			</div>
     			<div class="row">
-    				<div class="col-lg-6 "></div>
+    				<div class="col-lg-6 ">
+    					
+    				</div>
     				<div class="col-lg-6 ">
     					<div class="sign-btn text-center ">
-				        	<button type="submit" class="btn btn-theme btn-primary py-3 px-5">Add to Cart</button>
+				        	<button type="submit" class="btn btn-theme btn-primary py-3 px-5">{{ __('Thêm giỏ hàng') }}</button>
+				        	
 				        </div>
     				</div>
     			</div>
-							
+    					
     		</form>
+
+
+<!-- Tien 13/3 -->
+    		<!-- <form action="{{URL::to('/reviews')}}" method="POST">
+				{{ csrf_field() }}
+					<div class="col-lg-8 ">
+    					<div class="sign-btn text-right ">
+				     <button type="submit" class="btn btn-theme btn-primary py-3 px-5">{{ __('Đánh giá') }}</button>
+				       </div>
+    				</div>
+			</form> -->
 		@endforeach
 
 
@@ -115,11 +165,11 @@
     		<div class="row mt-5">
           <div class="col-md-12 nav-link-wrap">
             <div class="nav nav-pills d-flex text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-              <a class="nav-link ftco-animate active mr-lg-1" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Description</a>
+              <a class="nav-link ftco-animate active mr-lg-1" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">{{ __('Mô tả') }}</a>
 
-              <a class="nav-link ftco-animate mr-lg-1" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Manufacturer</a>
+              <a class="nav-link ftco-animate mr-lg-1" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">{{ __('Nhà sản xuất') }}</a>
 
-              <a class="nav-link ftco-animate" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Reviews</a>
+              <a class="nav-link ftco-animate" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">{{ __('Đánh giá') }}</a>
 
             </div>
           </div>
@@ -136,20 +186,24 @@
 
               <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-day-2-tab">
               	<div class="p-4">
-	              	<h3 class="mb-4">Manufactured By Nike</h3>
+	              	<h3 class="mb-4">{{ __('Manufactured By Nike') }}</h3>
 	              	<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
               	</div>
               </div>
               <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-day-3-tab">
               	<div class="row p-4">
-						   		<div class="col-md-7">
-						   			<h3 class="mb-4">23 Reviews</h3>
+              		
+						   		 <div class="col-md-7 "> <!-- Tiên 14/03 -->
+						   		 	<h3 class="mb-4">{{$total_view}} {{ __('nhận xét:') }}</h3>
+						   		 	@foreach($comments as $key => $comment)
+						   		 	
+						   						   			
 						   			<div class="review">
-								   		<div class="user-img" style="background-image: url({{URL::to('public/frontend/images/person_1.jpg')}})";></div>
+								   		<div class="user-img" style="background-image: url({{URL::to('public/frontend/images/person_1.jpg')}})"></div>
 								   		<div class="desc">
 								   			<h4>
-								   				<span class="text-left">Jacob Webb</span>
-								   				<span class="text-right">14 March 2018</span>
+								   				<span class="text-left">{{$comment->bl_ten}}</span>
+								   				<span class="text-right">{{date('d/m/Y H:i',strtotime($comment->created_at))}}</span>
 								   			</h4>
 								   			<p class="star">
 								   				<span>
@@ -161,53 +215,16 @@
 							   					</span>
 							   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
 								   			</p>
-								   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
+								   			<p>{{$comment->bl_noidung}}</p>
 								   		</div>
 								   	</div>
-								   	<div class="review">
-								   		<div class="user-img" style="background-image: url({{URL::to('public/frontend/images/person_2.jpg')}})";></div>
-								   		<div class="desc">
-								   			<h4>
-								   				<span class="text-left">Jacob Webb</span>
-								   				<span class="text-right">14 March 2018</span>
-								   			</h4>
-								   			<p class="star">
-								   				<span>
-								   					<i class="ion-ios-star-outline"></i>
-								   					<i class="ion-ios-star-outline"></i>
-								   					<i class="ion-ios-star-outline"></i>
-								   					<i class="ion-ios-star-outline"></i>
-								   					<i class="ion-ios-star-outline"></i>
-							   					</span>
-							   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-								   			</p>
-								   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-								   		</div>
-								   	</div>
-								   	<div class="review">
-								   		<div class="user-img" style="background-image: url({{URL::to('public/frontend/images/person_3.jpg')}})";></div>
-								   		<div class="desc">
-								   			<h4>
-								   				<span class="text-left">Jacob Webb</span>
-								   				<span class="text-right">14 March 2018</span>
-								   			</h4>
-								   			<p class="star">
-								   				<span>
-								   					<i class="ion-ios-star-outline"></i>
-								   					<i class="ion-ios-star-outline"></i>
-								   					<i class="ion-ios-star-outline"></i>
-								   					<i class="ion-ios-star-outline"></i>
-								   					<i class="ion-ios-star-outline"></i>
-							   					</span>
-							   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-								   			</p>
-								   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-								   		</div>
-								   	</div>
+								   	@endforeach		
+								   	
 						   		</div>
+					
 						   		<div class="col-md-4">
 						   			<div class="rating-wrap">
-							   			<h3 class="mb-4">Give a Review</h3>
+							   			<h3 class="mb-4">{{ __('Đánh giá') }}</h3>
 							   			<p class="star">
 							   				<span>
 							   					<i class="ion-ios-star-outline"></i>
@@ -264,7 +281,38 @@
 						   					<span>0 Reviews</span>
 							   			</p>
 							   		</div>
-						   		</div>
+								</div>
+								<!-- Tiên 14/03 -->
+								@foreach($all_product as $key => $product)
+								<div class="col-md-6">
+					    				<div class="well">
+					    					<h3>{{ __('Viết nhận xét của bạn') }}</h3>
+					 						
+					    					<form method="post" action="{{URL::to('/comment/'.$product->sp_ma)}}">
+					    						{{ csrf_field() }}
+					    						<div class="form-group">
+					    							<label for="email">{{ __('Email') }}</label>
+					    							<input required type="email" class="form-control" id="email" name="email">
+					    						</div>
+
+					    						<div class="form-group">
+					    							<label for="name">{{ __('Tên') }}</label>
+					    							<input required type="text" class="form-control" id="name" name="name">
+					    						</div>
+					    						<div class="form-group">
+					    							<label for="cm">{{ __('Nhận xét') }}</label>
+					    							<textarea class="form-control" rows="5" id="cm" name="content"></textarea>
+					    						</div>
+					    						<div class="form-group text-left">
+					    							<button type="submit" class="btn btn-primary">{{ __('Gửi') }}</button>
+					    						</div>
+					    						
+
+					    					</form>
+					    					
+					    				</div>
+					    		</div>
+					    		@endforeach
 						   	</div>
               </div>
             </div>
@@ -316,3 +364,37 @@
 	</script>
 
 @endsection
+
+@section('script')
+<script type="text/javascript">
+
+ 	$('#size').change(function(){
+
+    var szID = $(this).val();
+    console.log(szID);    
+    
+    if(szID){
+        $.ajax({
+           type:"GET",
+           url:"{{url('get-slt')}}?ctsp_kichCo="+szID,success:function(res){               
+            if(res){
+                $("#slton").empty();
+                $("#slton").append('<option>{{ __('Chọn')}}</option>');
+                $.each(res,function(key,value){
+                    $("#slton").append('<option value="'+key+'">'+console.log(value)+'</option>');
+                });
+           
+            }else{
+               $("#slton").empty();
+            }
+           }
+        });
+    }else{
+        $("#slton").empty();
+	}
+       });
+    
+</script>
+
+@endsection
+

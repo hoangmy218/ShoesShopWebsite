@@ -48,10 +48,11 @@ class CheckoutController extends Controller
         Session::put('dh_ngayDat', $dh_ngayDat);
         /*Session::put('dh_trangThai', 'Chờ xử lý');*/
         // Session::put('dh_tongTien','100000');
-        Session::put('vc_ma', $request->vc_ma);
-        $vanchuyen=DB::table('vanchuyen')->where('vc_ma',$request->vc_ma)->first();
+        Session::put('vc_ma', $request->vanc_id);
+        $vanchuyen=DB::table('vanchuyen')->where('vc_ma',$request->vanc_id)->first();
         Session::put('vc_ten', $vanchuyen->vc_ten);
         Session::put('vc_phi', $vanchuyen->vc_phi);
+        // echo Session::get('vc_phi');
     	return Redirect::to('payment');
     }
 
@@ -90,6 +91,7 @@ class CheckoutController extends Controller
             $data['vc_ma'] = Session::get('vc_ma');
             $data['tt_ma'] = $request->optradio;
             $data['nd_ma'] = Session::get('nd_ma');
+            $data['km_ma'] = Session::get('ma_khuyenmai');
 
 
            
@@ -113,6 +115,9 @@ class CheckoutController extends Controller
                     $order_detail_data = array();
                     $order_detail_data['dh_ma'] = $insert_donhang_id; 
                     $order_detail_data['ctsp_ma'] = $v_content->id;
+                    $product = DB::table('chitietsanpham')->join('sanpham','sanpham.sp_ma','=','chitietsanpham.sp_ma')->where('ctsp_ma',$v_content->id)->select('sanpham.sp_ma', 'sp_donGiaNhap','sp_donGiaBan')->first();
+                    $order_detail_data['donGiaBan'] = $product->sp_donGiaBan;
+                    $order_detail_data['donGiaNhap'] = $product->sp_donGiaNhap;
                     $order_detail_data['soLuongDat'] = $v_content->qty;
                     $order_detail_data['thanhTien'] = $v_content->qty*$v_content->price;            
                     $insert_orderdetail_id = DB::table('chitietdonhang')->insertGetId($order_detail_data);
@@ -153,4 +158,100 @@ class CheckoutController extends Controller
         return view('pages.checkout.thankyou');
     }
 
+    //Lan show checkout CHI PHI VAN CHUYEN
+    public function get_list_transport(){
+        $vanchuyen = DB::table("vanchuyen")->pluck("vc_ma","vc_phi");
+        return view('shop_layout',compact('vanchuyen'));
+    }
+    public function get_price(Request $request){
+        $vanchuyenphi = DB::table("vanchuyen")->select('vc_phi')
+        ->where('vc_ma', $request->vc_ma)->first();
+        Session::put('tienvc',$vanchuyenphi->vc_phi);
+        return json_encode($vanchuyenphi);
+    }
+
+    //NGAN
+    // ngân (12/3/2020)
+    public function checkCoupon(Request $res){
+        $this->authLogin();
+        $code = $res->code;
+        
+        $check = db::table('khuyenmai')
+            ->where('km_doanMa',$code)
+            ->get();
+        if(count($check)=="1"){
+            $user_id=Session::get('nd_ma');
+            $check_user = db::table('donhang')
+                ->where('nd_ma',$user_id)
+                ->where('km_ma',$check[0]->km_ma)
+                ->count();
+
+
+            if($check_user=="0"){
+                 // $user_add=db::table('donhang')
+                 //    ->insert([
+                 //        'km_ma' => $check[0]->km_ma,
+                 //        'nd_ma' => $user_id
+                 //    ]);
+                    Session::put('ma_khuyenmai',$check[0]->km_ma);
+                // $insert_cart_total= db::table('tonggiohang')
+                //     ->insert([
+                //         'tgh_tong' => (double)Cart::subtotal(2,'.',''),
+                //         'km_giamGia' => $check[0]->km_giamGia,
+                //         'nd_ma' => $user_id,   
+                //         'tgh_gtong' => (double)Cart::subtotal(2,'.','')-((double)Cart::subtotal(2,'.','')*$check[0]->km_giamGia)/100
+                //     ]);
+                    $giamgia=(double)Cart::subtotal(2,'.','')*$check[0]->km_giamGia/100;
+                    Session::put('tien_giamgia', $giamgia);
+ // Khúc div này làm theo trong clip #31
+                ?>
+                <div class="cart-detail cart-total bg-light p-3 p-md-4">
+                       
+                        <div class="form-group">
+                                <input name="coupon_code" id="coupon_id" class="form-control" rows="3" cols="20" placeholder="<?php echo __('Mã khuyến mãi'); ?>" required>            
+                        </div>
+                        <div class="sign-btn text-center">
+                                <input type="button" value="<?php echo __('Áp dụng'); ?>" id="coupon_btn" class="btn btn-theme btn-primary py-3 px-4">
+                        </div>
+                         <br>
+                        
+                        <h3 class="billing-heading mb-4"><?php echo __('Tổng tiền thanh toán'); ?></h3>
+                        <p class="d-flex">
+                            <span><?php echo __('Cộng tiền'); ?></span>
+                            <span><?php echo number_format((double)Cart::subtotal(2,'.','')).' VND'; ?></span>
+                        </p>
+                        
+                        <p class="d-flex">
+                            <span><?php echo __('Phí vận chuyển'); ?></span>
+                            <?php (int)$phi=Session::get('tienvc'); ?> 
+                            <span><?php echo number_format($phi).' VND'; ?></span>
+                        </p>
+                         <p class="d-flex">
+                            <span><?php echo __('Khuyến mãi'); ?></span>
+                            <?php $giam= $giamgia; ?> 
+                            <span><?php echo '-'.number_format($giam).' VND'; ?></span> 
+                        </p>
+                        
+                        <hr>
+                        <p class="d-flex total-price">
+                            <span><b><?php echo __('Tổng tiền thanh toán'); ?></b></span>
+                            <?php $subtt =(int)Cart::subtotal(2,'.',''); ?> 
+                            <span>
+                                <input id="tong" name="tong" value="<?php echo $subtt; ?>" type="hidden" placeholder="<?php echo gettype($subtt); ?>">
+                                <div id="tongtext"><?php echo number_format($subtt+$phi-$giam).' VND'; ?></div>
+                            </span>
+                        </p>
+                    </div>
+                <?php
+                echo __("Đã áp dụng");
+
+            }else{
+                echo __("Bạn đã dùng mã này rồi!");
+            }
+            
+        }else{
+            echo __("Mã sai! Xin nhập lại!");
+        }
+    }
 }
+

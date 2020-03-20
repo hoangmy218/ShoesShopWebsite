@@ -6,10 +6,10 @@
         <div class="row justify-content-center">
           <div class="col-xl-10 ftco-animate">
              <div class="col-md-12">
-            <div class="container"><h3 class="mb-4 billing-heading" style="text-align: center; font-size: 35px;">Đăng ký tài khoản</h3> <!-- Ngân (6/3/2020), sửa tiếng việt và thêm khúc if -> endif -->
+            <div class="container"><h3 class="mb-4 billing-heading" style="text-align: center; font-size: 35px;">{{ __('Đăng ký tài khoản') }}</h3> <!-- Ngân (6/3/2020), sửa tiếng việt và thêm khúc if -> endif -->
                 @if(count($errors)>0)
                     <div class="alert alert-danger">
-                        <strong>Lỗi</strong><br>
+                        <strong>{{ __('Lỗi') }}</strong><br>
                         <ul>
                             @foreach($errors->all() as $error)
                                 <li>{{$error}}</li>
@@ -27,39 +27,39 @@
             <div class="row">
                 <div class="col-md-6">
                      <div class="form-group"> <!-- Ngân (6/3/2020) -> chỗ placeholder sửa thành tiếng việt -->
-                                    <input type="text" name="user_name" class="form-control" placeholder="Họ và tên" required="">
+                                    <input type="text" name="user_name" class="form-control" placeholder="{{ __('Họ và tên') }}" required="">
                                     <i class="ik ik-user"></i>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name='user_birth' class="form-control" placeholder="Ngày sinh " required="">
+                                    <input type="text" name='user_birth' class="form-control" placeholder="{{ __('Ngày sinh') }}"  required="">
                                     <i class="ik ik-user"></i>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <input type="text" name="user_phone" class="form-control" placeholder="Số điện thoại" required="">
+                                    <input type="text" name="user_phone" class="form-control" placeholder="{{ __('SĐT') }}" required="">
                                     <i class="ik ik-user"></i>
                                 </div>
                                 <div class="form-group">
-                                    <input type="radio" name="rdGioitinh" value="Male" checked> Nam&emsp;&emsp;&emsp;
-                                    <input type="radio" name="rdGioitinh" value="Female"> Nữ<br>
+                                    <input type="radio" name="rdGioitinh" value="Male" checked> {{ __('Nam') }}&emsp;&emsp;&emsp;
+                                    <input type="radio" name="rdGioitinh" value="Female"> {{ __('Nữ') }}<br>
                                 </div>
                                  <div class="form-group">
-                                    <textarea name="user_address"  class="form-control" rows="3" cols="20" placeholder="Địa chỉ" required=""></textarea>                
+                                    <textarea name="user_address"  class="form-control" rows="3" cols="20" placeholder="{{ __('Địa chỉ') }}" required=""></textarea>                
                                 </div>
                 </div>
                 <div class="col-md-6">
                      <!-- <div style="background-color: red;">Cột thứ 2 tỉ lệ 2</div> -->
 
                                 <div class="form-group">
-                                    <input type="text" name="user_email" class="form-control" placeholder="Email" required="">
+                                    <input type="text" name="user_email" class="form-control" placeholder="{{ __('Email') }}" required="">
                                     <i class="ik ik-user"></i>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="user_password" class="form-control" placeholder="Mật khẩu" required="">
+                                    <input type="password" name="user_password" class="form-control" placeholder="{{ __('Mật khẩu') }}" required="">
                                     <i class="ik ik-lock"></i>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="user_confirm_pass" class="form-control" placeholder="Nhập lại mật khẩu" required="">
+                                    <input type="password" name="user_confirm_pass" class="form-control" placeholder="{{ __('Nhập lại mật khẩu') }}" required="">
                                     <i class="ik ik-eye-off"></i>
                                 </div>
                                
@@ -73,11 +73,11 @@
                                 </div> --}}
                                  
                                 <div class="sign-btn text-center">
-                                    <button type="submit" class="btn btn-theme btn-primary py-3 px-4">Tạo tài khoản</button> <!-- Ngân(6/3/2020) đổi tiếng việt tên nút-->
+                                    <button type="submit" class="btn btn-theme btn-primary py-3 px-4">{{ __('Tạo tài khoản') }}</button> <!-- Ngân(6/3/2020) đổi tiếng việt tên nút-->
                                 </div>
                             </form> <br> <!-- Ngân(6/3/2020) thêm <br>-->
                             <div class="register">
-                                <p style="text-align: center;">Bạn đã có tài khoản? <a href="{{URL::to('/userLogin')}}">Đăng nhập</a></p> <!-- Ngân(6/3/2020) đổi tiếng việt -->
+                                <p style="text-align: center;">{{ __('Bạn đã có tài khoản?')}}<a href="{{URL::to('/userLogin')}}" style="color: red;"> {{ __('Đăng nhập') }}</a></p> <!-- Ngân(6/3/2020) đổi tiếng việt -->
                             </div>
                         </div>
 

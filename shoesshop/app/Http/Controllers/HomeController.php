@@ -6,19 +6,20 @@ use DB;
 use Session;
 use Cart;
 use App\Http\Requests;
+use App;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 session_start();
 class HomeController extends Controller
 {
+    
+    // Ngân (11/3/2020) paste lại nguyên cái public authLogin
     public function authLogin(){
-        $user_id = Session::get('nd_ma');
         $cv=Session::get('cv_ma');
-        
-        if (($user_id)&&($cv==2)) 
+        if ($cv==2) 
             return Redirect::to('/Home_u'); 
         else 
-            return Redirect::to('/')->send();
+            return Redirect::to('/userLogin')->send();
     }
     public function index()
     {
@@ -28,7 +29,9 @@ class HomeController extends Controller
         return view("pages.home")->with('all_product',$all_product);
     }
 
-     public function userLogin(){
+
+
+    public function userLogin(){
         return view('pages.customer.user_login');
     }
 
@@ -87,10 +90,10 @@ class HomeController extends Controller
     }
 
 
+     
      public function AfterLogin(Request $request){
-         //Ngân (6/3/2020) thay thế từ đây đến return View('ValidationView')->withErrors($validate)
-        
-        $validate = Validator::make($request->all(), [    
+       
+        $validate = Validator::make($request->all(),[
             'user_email'=>'email',
             'user_password'=>'min:3|max:28',
             ],[
@@ -98,7 +101,7 @@ class HomeController extends Controller
             'user_password.min'=>'Mật khẩu không nhỏ hơn 3 ký tự',
             'user_password.max'=>'Mật khẩu không lớn hơn 28 ký tự',]);
         if ($validate->fails()) {
-            return View('pages.customer.user_login')->withErrors($validate);   
+            return View('pages.customer.user_login')->withErrors($validate);
         }
         // if (Auth::attempt(['email'=>$request->admin_email, 'password'=>$request->admin_password]))
         // {
@@ -110,36 +113,26 @@ class HomeController extends Controller
             print_r($result);
             echo '</pre>';*/
             /*return view('admin.dashboard');*/
-            
-            // Ngân (6/3/2020) thay thế if cũ bằng khúc từ khúc start->end
-            //start
-            Session::put('nd_trangThai',$result->nd_trangThai);
-                $status=Session::get('nd_trangThai');
-            if($status==0){
-                if ($result) {
-                    Session::put('cv_ma',$result->cv_ma);
-                    $cv=Session::get('cv_ma');
-                    
-                        
-                        if($cv==2){
-                            Session::put('nd_ma', $result->nd_ma); // result trỏ tới trường csdl
-                            Session::put('nd_ten',$result->nd_ten);
-                            Session::put('nd_email',$result->nd_email);
-                                return Redirect::to('/Home_u');
-                        }else{
-                            Session::put('message1','Bạn không có quyền truy cập.');
-                                return Redirect::to('/userLogin');
-                        }
-                }    
-                else {
-                    
-                    Session::put('message','Email hoặc mật khẩu không đúng. Vui lòng thử lại');
-                    return Redirect::to('/userLogin');
+            if ($result) {
+                Session::put('cv_ma',$result->cv_ma);
+                $cv=Session::get('cv_ma');
+                if($cv==2){
+                    Session::put('nd_ma', $result->nd_ma); // result trỏ tới trường csdl
+                    Session::put('nd_ten',$result->nd_ten);
+                    Session::put('nd_email',$result->nd_email);
+                        return Redirect::to('/Home_u');
+                }else{
+                    Session::put('message1','Bạn không có quyền truy cập.');
+                        return Redirect::to('/userLogin');
                 }
-            }else{
-                Session::put('message2','Tài khoản không thể đăng nhập.');
-                    return Redirect::to('/userLogin');
-            } //end
+            }    
+            else {
+                
+                Session::put('message','Email hoặc mật khẩu không đúng. Vui lòng thử lại');
+                return Redirect::to('/userLogin');
+            }
+            
+        //}
     }
 
 
@@ -173,5 +166,39 @@ class HomeController extends Controller
         $order = DB::table('donhang')->join('nguoidung','nguoidung.nd_ma','donhang.nd_ma')->join('thanhtoan','thanhtoan.tt_ma','donhang.tt_ma')->join('vanchuyen','vanchuyen.vc_ma','donhang.vc_ma')->where('donhang.dh_ma','=',$dh_ma)->first();
         $items = DB::table('chitietdonhang')->join('chitietsanpham','chitietsanpham.ctsp_ma','chitietdonhang.ctsp_ma')->join('sanpham','sanpham.sp_ma','chitietsanpham.sp_ma')->where('dh_ma',$dh_ma)->get();
         return view('pages.customer.view_customerdetails')->with('order',$order)->with('items',$items);
+    }
+
+      public function search(Request $request){// Tiên 15/03
+
+        $keywords = $request->keywords_submit;
+        $search = DB::table('sanpham')->join('hinhanh','hinhanh.sp_ma','=','sanpham.sp_ma')->where('sp_ten','like','%'.$keywords.'%')->get(); 
+
+        return view('pages.product.search')->with('search',$search);
+    }
+
+    public function info_customer(){
+        $nd_ma= Session::get('nd_ma');
+        $nguoi_dung=DB::table('nguoidung')->where('nd_ma',$nd_ma )->get();
+
+        return view('pages.customer.thongtin_nguoidung')->with('nguoi_dung', $nguoi_dung);
+    }
+    public function chinhsua_thongtin(){
+        $nd_ma= Session::get('nd_ma');
+        $nguoi_dung=DB::table('nguoidung')->where('nd_ma',$nd_ma )->get();
+
+        return view('pages.customer.chinhsua_thongtin')->with('nguoi_dung', $nguoi_dung);
+    }
+    public function capnhat_thongtin(Request $request, $capnhat_nd_ma){
+        $data= array();
+        $data['nd_ten']=$request->capnhat_nd_ten;
+        $data['nd_email']=$request->capnhat_nd_email;
+        $data['nd_dienThoai']=$request->capnhat_nd_dienThoai;
+        $data['nd_gioiTinh']=$request->capnhat_nd_gioiTinh;
+        $data['nd_ngaySinh']=$request->capnhat_nd_ngaySinh;
+        $data['nd_diaChi']=$request->capnhat_nd_diaChi;
+       
+        DB::table('nguoidung')->where('nd_ma', $capnhat_nd_ma)->update($data);
+        Session::put('message', 'Cập nhật thông tin thành công!');
+        return Redirect::to('info-customer');
     }
 }
