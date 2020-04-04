@@ -59,9 +59,7 @@
 							</p>
 						</div>
     				<p class="price"><span>{{number_format($value->sp_donGiaBan).' '.'VNĐ'}}</span></p>
-    				<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-    				<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.
-						</p>
+    				
 						<div class="row mt-4">
 
 							<div class="col-md-6">
@@ -105,7 +103,7 @@
 					            	</span>
 
 					            	
-						                <input type="text" id="quantity" name="qty" class="quantity form-control input-number" value="1" min="1" max="5">
+						                <input type="text" id="quantity" name="quantity" class="quantity form-control input-number" value="1" min="1" max="5">
 						           
 					             	
 
@@ -320,15 +318,49 @@
         </div>
     	</div>
     </section>
+    <script src="http://www.codermen.com/js/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+        	var slt = 1;
 
-@endsection
+            $('select[name="size"]').on('change',function(){
+                var ctsp_ma = $(this).val(); // size_id => ctsp_ma
+                console.log(ctsp_ma,'ctsp_ma'); 
+                
+                if(ctsp_ma){
 
-@section('script_qty')
+                    $.ajax({
 
- <script>
-		$(document).ready(function(){
+                        url: "{{url('getSlt')}}",
+                        dataType: 'json',
+                        type: 'GET',
+                        data:{
+                        	ctsp_ma: ctsp_ma
+                        },
+                        success: function(data){
+                            console.log(data);
+                            
+                             $.each(data, function(name,stock){
+                                $('input[name="quantity"]').attr({
+								       "max" : stock,        // substitute your own
+								       "min" : 1          // values (or variables) here
+								    });
+                              console.log(stock, 'stock');
+                              $('input[name="quantity"]').val("1");
+                              slt = stock;
 
-		var quantitiy=0;
+                             
+                             
+                        
+                    		});
+                        }
+                    });
+                }
+            });
+
+
+            var quantitiy=0;
+
 		   $('.quantity-right-plus').click(function(e){
 		        
 		        // Stop acting like a button
@@ -337,7 +369,7 @@
 		        var quantity = parseInt($('#quantity').val());
 		        
 		        // If is not undefined
-		        if (quantity < 5){
+		        if (quantity < slt){
 		            
 		            $('#quantity').val(quantity + 1);
 
@@ -359,42 +391,9 @@
 		            $('#quantity').val(quantity - 1);
 		            }
 		    });
-		    
-		});
-	</script>
-
-@endsection
-
-@section('script')
-<script type="text/javascript">
-
- 	$('#size').change(function(){
-
-    var szID = $(this).val();
-    console.log(szID);    
-    
-    if(szID){
-        $.ajax({
-           type:"GET",
-           url:"{{url('get-slt')}}?ctsp_kichCo="+szID,success:function(res){               
-            if(res){
-                $("#slton").empty();
-                $("#slton").append('<option>{{ __('Chọn')}}</option>');
-                $.each(res,function(key,value){
-                    $("#slton").append('<option value="'+key+'">'+console.log(value)+'</option>');
-                });
-           
-            }else{
-               $("#slton").empty();
-            }
-           }
         });
-    }else{
-        $("#slton").empty();
-	}
-       });
-    
-</script>
+    </script>
 
 @endsection
+
 

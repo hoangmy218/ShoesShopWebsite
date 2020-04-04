@@ -53,7 +53,7 @@
                             <div class="col-md-12">
 								<div class="card">
                                     <div class="card-header d-block">
-                                        <h3>Danh sách đơn hàng</h3>
+                                        <h3>Danh sách phiếu nhập</h3>
                                         
                                     </div>
                                     <div class="card-body p-0 table-breceipt-style">

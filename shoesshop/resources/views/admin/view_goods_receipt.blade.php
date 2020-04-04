@@ -190,13 +190,13 @@
                                                         </div>
                                                     </div>
                                                      <div class="form-group">
-                                                        <label for="exampleInputName1">Giá nhập</label>
+                                                        <label for="exampleInputName1">Đơn giá nhập</label>
                                                         <div class="form-group mb-2 mr-sm-2 mb-sm-0">
                                                             <input type="number" class="form-control" name="giaNhap" min="100000" step="1000" max="5000000">
                                                         </div>
                                                     </div>
                                                      <div class="form-group">
-                                                        <label for="exampleInputName1">Giá bán</label>
+                                                        <label for="exampleInputName1">Đơn giá bán</label>
                                                         <div class="form-group mb-2 mr-sm-2 mb-sm-0">
                                                             <input type="number" class="form-control" name="giaBan" min="100000" step="1000" max="5000000" >
                                                         </div>

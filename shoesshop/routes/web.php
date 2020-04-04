@@ -62,6 +62,7 @@ Route::post('/tim-kiem','HomeController@search');// Tiên 15/03
 Route::get('/index','StockController@index');
 /*Route::get('/getStock/{id}','StockController@getStock');*/
 Route::get('/getStock','StockController@getStock');
+Route::get('/getSlt','StockController@getSlt');
 Route::post('/getAmount','StockController@getAmount');
 
 
@@ -219,3 +220,7 @@ Route::post('/save-advertisement','AdvertisementController@saveadvertisement');
 Route::get('/edit-advertisement/{advertisement_id}','AdvertisementController@editadvertisement');
 Route::get('/delete-advertisement/{advertisement_id}','AdvertisementController@deleteadvertisement');
 Route::post('/update-advertisement/{advertisement_id}','AdvertisementController@updateadvertisement');
+
+// Thống kê (Ngân 22/3/2020)
+Route::get('/statistical_order','StatisticalController@showStatistical_order')->name('chart','showStatistical_order');
+Route::get('/statistical_Revenue','StatisticalController@showStatistical_Revenue')->name('chart','showStatistical_Revenue');

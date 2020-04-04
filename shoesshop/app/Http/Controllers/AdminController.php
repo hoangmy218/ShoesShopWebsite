@@ -26,7 +26,12 @@ class AdminController extends Controller
 
     public function index()
     {
-        return view('admin_login');
+        $cv=Session::get('cv_ma');
+        
+        if ($cv==1) //Kiem tra neu dang dang nhap thi khong vao lai duoc trang admin-login
+            return Redirect::to('/dashboard'); 
+        else 
+            return view('admin_login');
     }
 
     public function show_dashboard(){

@@ -185,7 +185,7 @@ class ProductController extends Controller
             echo "<pre>"; print_r($data_price_pro); echo '</pre><br>';*/
             DB::table('sanpham')->where('sp_ma',$dataSP[$i])->update($data_price_pro);
         }
-        return Redirect::to('/manage-product');
+        return Redirect::to('/manage-goods-receipt');
     }
 
     public function showGoodsReceipt()

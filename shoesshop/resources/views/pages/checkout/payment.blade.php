@@ -29,7 +29,6 @@ display: none;
           	<div class="row">
                 <div class="col-md-12 ftco-animate">
                     <div class="cart-list">
-
                         <table class="table">
                             <thead class="thead-primary">
                                  <tr class="text-center">
@@ -44,9 +43,10 @@ display: none;
                                     
                                 </tr>
                             </thead>
-                             <?php $count=1; ?>
-                            @foreach($content as $v_content)
+                            
                                 <tbody>
+                                     <?php $count=1; ?>
+                            @foreach($content as $v_content)
                                     <tr class="text-center">
                                         <td class="product-price">
                                             <h4>{{$count}}</h4>
@@ -79,12 +79,13 @@ display: none;
                                             $subtotal = $v_content->price * $v_content->qty;
                                             echo number_format($subtotal).' '.'vnđ';
                                             ?><!-- Tien -->
-                                        </p>
+                                            </p>
                                         </td>
                                         </tr><!-- END TR-->
-                                    </tbody>
-                                    {{$count++}}
-                            @endforeach 
+                                        {{$count++}}
+                                     @endforeach 
+                                </tbody>
+                                    
                         </table>
                     </div>
                 </div>
@@ -137,7 +138,8 @@ display: none;
                                
                             if (Session::get('tien_giamgia') != null){
                                 (int)$giamgia = Session::get('tien_giamgia');
-                            } ?>
+                            } else
+                                (int)$giamgia  = 0; ?>
                             <span>{{number_format($giamgia).' VND'}}</span>
                         </p>
                         
@@ -167,11 +169,11 @@ display: none;
                                {{--  btn1: cash; btn2: paypal	 --}}						
     							<button type="submit" id="cashbtn" class="btn btn-theme btn-primary py-3 px-4">{{ __('Hoàn tất') }}</button>
                                 {{-- @include('pages.checkout.paypal2') --}}
-                                @include('pages.checkout.paypal')
+                               
 							</div>
 						
 					    </form>
-
+                         @include('pages.checkout.paypal')
                     </div>
                  
 	            </div>

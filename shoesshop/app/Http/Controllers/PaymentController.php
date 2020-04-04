@@ -126,14 +126,14 @@ class PaymentController extends Controller
 
 	    //them du lieu
 		$content = Cart::content();
-	  (double)$rate = 0.000043; 
-    (double)$tongtien = 0;
-    foreach($content as $v_content){
-      $tongtien = $tongtien + round($v_content->price * $rate,2) * $v_content->qty;
-    }
+	    (double)$rate = 0.000043; 
+	    (double)$tongtien = 0;
+	    foreach($content as $v_content){
+	      $tongtien = $tongtien + round($v_content->price * $rate,2) * $v_content->qty;
+	    }
 
 		(double)$phi=Session::get('vc_phi');
-    (double)$tongcuoi = $tongtien +(round($phi*$rate,2));
+    	(double)$tongcuoi = $tongtien +(round($phi*$rate,2));
 
 		// $details = new Details();
 		$details->setShipping($phi*$rate)

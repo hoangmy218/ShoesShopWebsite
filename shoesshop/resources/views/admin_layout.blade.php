@@ -156,6 +156,16 @@
                                        
                                     </div>
                                 </div>
+                                 <!-- Start Ngân (1/4/2020) -->
+                                <div class="nav-item has-sub">
+                                    <a href="javascript:void(0)"><i class="ik ik-home"></i><span>Thống kê</span> <span class="badge badge-danger"></span></a>
+                                    <div class="submenu-content">
+                                        <a href="{{URL::to('/statistical_order')}}" class="menu-item">Theo sản phẩm</a>
+                                        <a href= "{{URL::to('/statistical_Revenue')}}" class="menu-item">Theo doanh thu</a>
+                                       
+                                    </div>
+                                </div>
+                                <!-- End Ngân (1/4/2020) -->
                                {{--  <div class="nav-item">
                                     <a href="{{asset('public/backend/pages/navbar.html')}}"><i class="ik ik-menu"></i><span>Navigation</span> <span class="badge badge-success">New</span></a>
                                 </div>
