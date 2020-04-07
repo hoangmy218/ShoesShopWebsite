@@ -35,7 +35,7 @@ class CartController extends Controller
      // Tien 
     public function save_cart(Request $request){
     	$id= $request->size; //ctspma
-    	$soluong = $request->qty;
+    	$soluong = $request->quantity;
 
     	$ctsp = DB::table('chitietsanpham')->where('ctsp_ma',$id)->first();
 
