@@ -89,7 +89,7 @@
 										</p>
 								        </td>
 								        <td class="product-remove">
-								         	<a class="ion-ios-close" href="{{URL::to('/delete-to-cart/'.$v_content->rowId)}}"><i class="fa fa-times"></i></a>
+								         	<a class="ion-ios-close" onclick="<?php echo "return confirm('"; ?>{{ __("Bạn chắc chắn muốn xóa sản phẩm này?") }}<?php echo "')";?>" href="{{URL::to('/delete-to-cart/'.$v_content->rowId)}}"><i class="fa fa-times"></i></a>
 								         	
 								         </td>
 								         

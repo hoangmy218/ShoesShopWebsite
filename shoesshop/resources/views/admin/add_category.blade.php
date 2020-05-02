@@ -34,10 +34,7 @@
                                     <div class="card-body">
                                         <form class="forms-sample" action="{{URL::to('/save-category')}}" method="POST">
                                              {{csrf_field()}}
-                                            <div class="form-group">
-                                                <label for="exampleInputName1">Mã danh mục</label>
-                                                <input type="text" class="form-control" id="exampleInputName1" name="cate_id" placeholder="Name">
-                                            </div>
+                                            
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Tên danh mục</label>
                                                 <input type="text" class="form-control" id="exampleInputName1" name="cate_name" placeholder="Name">

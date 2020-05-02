@@ -88,9 +88,15 @@
                         </div>
                     </div>
                 </div>
-
-
             
+<script type="text/javascript">
+    $(document).ready(function(){ 
+        $('#cancel').click(function(e){
+            e.preventDefault();
+            window.history.back();
+        });
+    });
 
+</script>
 
 @endsection

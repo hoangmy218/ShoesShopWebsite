@@ -16,14 +16,21 @@
     <section class="ftco-section ftco-cart">
 
 		<div class="container">
-			<?php
-		            	$message = Session::get('message');
-		            	if ($message){
-		            		echo '<span class="alert alert-danger">'.$message."</span>";
-		            		
-		            		Session::put('message',null);
-		            	}
-		            ?>
+			
+            <?php
+            	$message = Session::get('message');
+            	if ($message){
+            		echo '<span class="alert alert-danger">'.$message."</span>";
+            		
+            		Session::put('message',null);
+            	}
+            	$success_message = Session::get('success_message');
+            	if ($success_message){
+            		echo '<span class="alert alert-success">'.$success_message."</span>";
+            		
+            		Session::put('success_message',null);
+            	}
+            ?>
 			<?php
 				$content = Cart::content();
 			?>
@@ -56,7 +63,7 @@
 							    <tbody>
 								    <tr class="text-center">
 								      	<td class="product-price">
-								        	<h4>{{$count}}</h4>
+								        	<h4>{{$count++}}</h4>
 								        </td>
 								        <td class="product-id">
 								        	<h3>{{$v_content->id}}</h3>
@@ -112,14 +119,14 @@
 										</p>
 								        </td>
 								        <td class="product-remove">
-								         	<a class="ion-ios-close" href="{{URL::to('/delete-to-cart/'.$v_content->rowId)}}"><i class="fa fa-times"></i></a>
+								         	<a class="ion-ios-close" onclick="<?php echo "return confirm('"; ?>{{ __("Bạn chắc chắn muốn xóa sản phẩm này?") }}<?php echo "')";?>" href="{{URL::to('/delete-to-cart/'.$v_content->rowId)}}"><i class="fa fa-times"></i></a>
 								         	
 								         </td>
 								         
 							         
 							      		</tr><!-- END TR-->
 							    	</tbody>
-							    <?php $count++; ?>
+							   
 							@endforeach 
 
 						</table>
@@ -155,6 +162,12 @@
 			
 			
         $(document).ready(function(){
+        	 //dat thi gian tat thong bao
+        setTimeout(function(){
+           $("span.alert").remove();
+        }, 5000 ); // 5 secs
+
+        	
             $('select[name="size"]').on('change',function(){
                 var size_id = $(this).val();
                 console.log(size_id);

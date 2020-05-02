@@ -1,7 +1,37 @@
 @extends('shop_layout')
+@section('script_thumbnail')
+{{-- <link href="{{asset('public/frontend/css/ThumbnailGallery/bootstrap.css')}}" rel="stylesheet" type="text/css" media="all" /> --}}
+
+<!--theme-style-->
+<link href="{{asset('public/frontend/css/ThumbnailGallery/style.css')}}" rel="stylesheet" type="text/css" media="all" />	
+<link rel="stylesheet" href="{{asset('public/frontend/css/ThumbnailGallery/etalage.css')}}" type="text/css" media="all" />
+{{-- <!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--fonts-->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'> --}}
+<!--//fonts-->
+<script src="{{asset('public/frontend/js/ThumbnailGallery/jquery.min.js')}}"></script>
+
+<script src="{{asset('public/frontend/js/ThumbnailGallery/jquery.etalage.min.js')}}"></script>
+<script>
+			jQuery(document).ready(function($){
+
+				$('#etalage').etalage({
+					thumb_image_width: 500,
+					thumb_image_height: 500,
+					source_image_width: 900,
+					source_image_height: 1200,
+					show_hint: true,
+					
+				});
+
+			});
+		</script>
+@endsection
 @section('content')
 
-<script src="http://www.codermen.com/js/jquery.js"></script>
+
 {{-- <link href="rateit/src/rateit.css" rel="stylesheet" type="text/css">
 <script src="rateit/src/jquery.rateit.js" type="text/javascript"></script>  --}}
 
@@ -23,15 +53,29 @@
 				{{ csrf_field() }}
     		<div class="row">
     		
-    			<div class="col-lg-6 mb-5 ftco-animate">
+    			{{-- <div class="col-lg-6 mb-5 ftco-animate">
     				<a href="{{URL::to('/product-detail')}}">
     					<img src="{{URL::to('public/upload/product/'.$value->ha_ten)}}" class="img-fluid" alt="Colorlib Template">
     				</a>
-    			</div>
-
-    			
-
-    			<div class="col-lg-6 product-details pl-md-5 ftco-animate">
+    			</div> --}}
+    			<div class="col-lg-6 mb-5 ftco-animate">
+    			<div class="grid images_3_of_2">
+						<ul id="etalage">
+							@foreach($image_product as $key => $img_pro)
+							<li>
+								<a href="{{URL::to('public/upload/product/'.$img_pro->ha_ten)}}">
+									<img class="etalage_thumb_image" src="{{URL::to('public/upload/product/'.$img_pro->ha_ten)}}" class="img-responsive" />
+									<img class="etalage_source_image" src="{{URL::to('public/upload/product/'.$img_pro->ha_ten)}}" class="img-responsive" title="" />
+								</a>
+							</li>
+							@endforeach
+							
+						</ul>
+							<div class="clearfix"> </div>		
+				  </div>
+				</div>
+				
+				<div class="col-lg-6 product-details pl-md-5 ftco-animate">
     				
     				<h3>{{$value->sp_ten}}</h3>
     				
@@ -68,16 +112,36 @@
 					                  <div class="icon">
 					                  	<span class="ion-ios-arrow-down"></span>
 					                  </div>
+					                  	<?php 
+						                 	$array = array();
+						                 	
+						                 	foreach($sz_product as $key => $sz){
+						                 		
+						                 		$array[$sz->ctsp_ma] = $sz->ctsp_kichCo;
+						                 		
+						                 	}
+						                 	
+						                 	/*echo '<pre>';
+						                 	print_r($array);echo '</pre>';
+						                 	echo '<pre>';
+						                 	print_r(array_unique($array));echo '</pre>';
+						                 	$a = array();
+						                 	$a = array_unique($array);*/
+						                 	
+											 	
 
-					            <!--    2
- -->
+								        ?>
+					           
 										<select id="size" name="size" class="form-control" style="width:200px" >
 						                	<option value="" selected disabled>{{ __('Chọn kích cỡ') }}</option>
-						                 	@foreach($sz_product as $key => $sz)
-						                  		<option value="{{$sz->ctsp_ma}}"> {{$sz->ctsp_kichCo}}</option>
+						                 	@foreach(array_unique($array) as $key => $val)
+						                  		<option value="{{$key}}">{{$val}}</option>
+						                  		
 						                  	@endforeach
+						                  
 						                </select>
-
+						                
+						                  		
 					                </div>
 						        </div>
 							</div>
@@ -318,8 +382,10 @@
         </div>
     	</div>
     </section>
-    <script src="http://www.codermen.com/js/jquery.js"></script>
-    <script type="text/javascript">
+   <script src="http://www.codermen.com/js/jquery.js"></script>
+
+        <script type="text/javascript">
+    	
         $(document).ready(function(){
         	var slt = 1;
 

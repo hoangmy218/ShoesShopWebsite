@@ -3,15 +3,39 @@
 
     <section id="home-section" class="hero">
         <div class="home-slider owl-carousel">
+            <!-- Start Ngân (17/4/2020) -->
+
+                @foreach( $list_ad as $key => $ad)
+                    <div class="slider-item js-fullheight">
+                        <div class="overlay"></div>
+                        <div class="container-fluid p-0">
+                          <div class="row d-md-flex no-gutters slider-text align-items-center justify-content-end" data-scrollax-parent="true">
+                            <img class="one-third order-md-last img-fluid" src="public/upload/advertisement/{{$ad->qc_hinhAnh}}" alt="">
+                              <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+                                <div class="text">
+                                    <span class="subheading">{{$ad->qc_chuDe}}</span>
+                                    <div class="horizontal">
+                                        <h1 class="mb-4 mt-3">{{$ad->qc_quangCao}}</h1>
+                                        
+                                      </div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                @endforeach
+                <!-- End Ngân (17/4/2020) -->
+          
+        {{--   Bản cũ        
           <div class="slider-item js-fullheight">
             <div class="overlay"></div>
-            <div class="container-fluid p-0">
-              <div class="row d-md-flex no-gutters slider-text align-items-center justify-content-end" data-scrollax-parent="true">
-                <img class="one-third order-md-last img-fluid" src="{{URL::to('public/frontend/images/bg_1.png')}}" alt="">
-                  <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-                    <div class="text">
-                        <span class="subheading">{{ __('Sản phẩm mới') }}</span>
-                        <div class="horizontal">
+                <div class="container-fluid p-0">
+                  <div class="row d-md-flex no-gutters slider-text align-items-center justify-content-end" data-scrollax-parent="true">
+                    <img class="one-third order-md-last img-fluid" src="{{URL::to('public/frontend/images/bg_1.png')}}" alt="">
+                    <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+                        <div class="text">
+                          <span class="subheading">{{ __('Sản phẩm mới') }}</span>
+                          <div class="horizontal">
                             <h1 class="mb-4 mt-3">{{ __('Bộ sưu tập giày 2019') }}</h1>
                             <p class="mb-4">{{ __('Loạt sản phẩm giày thể thao hoàn toàn khác biệt và đậm tính thời trang. Sắc màu của tôi - Giấc mơ của bạn.') }}</p>
                             
@@ -42,7 +66,9 @@
                   </div>
                 </div>
             </div>
-          </div>
+          </div> 
+        --}}
+
         </div>
     </section>
 

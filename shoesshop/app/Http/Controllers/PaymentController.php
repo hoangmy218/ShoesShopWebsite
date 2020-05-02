@@ -187,6 +187,7 @@ class PaymentController extends Controller
             $data['vc_ma'] = Session::get('vc_ma');
             $data['tt_ma'] = $matt->tt_ma;
             $data['nd_ma'] = Session::get('nd_ma');
+            $data['km_ma'] = Session::get('ma_khuyenmai');
 
 
            

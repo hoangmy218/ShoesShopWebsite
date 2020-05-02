@@ -20,16 +20,22 @@ class CouponController extends Controller
     }
 
     public function addCoupon(){
-    	$this->authLogin();
-    	return view('admin.add_coupon');
+        $this->authLogin();
+        return view('admin.add_coupon');
     }
 
     public function saveCoupon(Request $request){
-    	$this->authLogin();
-    	$data = array();
+        $this->authLogin();
+        $data = array();
         $data['km_doanMa'] = $request->coupon_code;
         $data['km_chuDe'] = $request->coupon_topic;
+        // start Ngân (7/4/2020)
+        $data['km_ngayBD'] = $request->coupon_dateB;
+        $data['km_ngayKT'] = $request->coupon_dateE;
         $data['km_giamGia'] = $request->coupon_discount;
+        $data['km_soLan'] = $request->coupon_discount_SL;
+        // end Ngân (7/4/2020)
+
         Db::table('khuyenmai')->insert($data);
         Session::put('message','Thêm thành công');
         return Redirect::to('/manage-coupon');
@@ -37,10 +43,10 @@ class CouponController extends Controller
 
     public function showCoupon(){
         $this->authLogin();
-    	$list_coupon = DB::table('khuyenmai')->get();
-    	$manager_coupon = view('admin.manage_coupon')->with('list_coupon', $list_coupon);
-    	return view('admin_layout')->with('admin.manage_coupon', $manager_coupon);
-    	/*return view('admin.manage_category');*/
+        $list_coupon = DB::table('khuyenmai')->get();
+        $manager_coupon = view('admin.manage_coupon')->with('list_coupon', $list_coupon);
+        return view('admin_layout')->with('admin.manage_coupon', $manager_coupon);
+        /*return view('admin.manage_category');*/
     }
     
     public function editCoupon($Coupon_id){
@@ -55,7 +61,12 @@ class CouponController extends Controller
         $data = array();
         $data['km_doanMa'] = $request->coupon_code;
         $data['km_chuDe'] = $request->coupon_topic;
+        // start Ngân (7/4/2020)
         $data['km_giamGia'] = $request->coupon_discount;
+        $data['km_ngayBD'] = $request->coupon_dateB;
+        $data['km_ngayKT'] = $request->coupon_dateE;
+        $data['km_soLan'] = $request->coupon_discount_SL;
+        // end Ngân (7/4/2020)
         DB::table('khuyenmai')->where('km_ma',$Coupon_id)->update($data);
         Session::put('message','Cập nhật thành công');
         return Redirect::to('/manage-coupon');

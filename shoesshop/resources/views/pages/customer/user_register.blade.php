@@ -17,6 +17,15 @@
                         </ul>
                     </div>
                 @endif
+                  <!-- start  Ngân (11/4/2020) -->
+                 <p style="color: red;"><b><?php
+                $message=Session::get('message');
+                 if($message){
+                   echo $message; 
+                  Session::put('message',null);
+               }
+            ?></b></p>
+            <!-- end  Ngân (11/4/2020) -->
                  <form action="{{URL::to('postregister')}}" method="post" name="formRegister">
                                 {{csrf_field()}} <!-- Ngân (6/3/2020) bỏ onsubmit cũ ở trong thẻ form -->
                                 <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">

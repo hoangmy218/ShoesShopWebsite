@@ -22,9 +22,16 @@ display: none;
 
     <section class="ftco-section">
       <div class="container">
-
-			<?php
+            <?php
+                $message = Session::get('message');
+                if ($message){
+                    echo '<span class="alert alert-danger">'.$message."</span>";
+                    
+                    Session::put('message',null);
+                }
+            
                 $content = Cart::content();
+                $count=1;
             ?>
           	<div class="row">
                 <div class="col-md-12 ftco-animate">
@@ -45,11 +52,11 @@ display: none;
                             </thead>
                             
                                 <tbody>
-                                     <?php $count=1; ?>
+                                    
                             @foreach($content as $v_content)
-                                    <tr class="text-center">
+                                    <tr class="product-id">
                                         <td class="product-price">
-                                            <h4>{{$count}}</h4>
+                                            <h4>{{$count++}}</h4>
                                         </td>
                                         <td class="product-id">
                                             <h3>{{$v_content->id}}</h3>
@@ -82,7 +89,7 @@ display: none;
                                             </p>
                                         </td>
                                         </tr><!-- END TR-->
-                                        {{$count++}}
+                                       
                                      @endforeach 
                                 </tbody>
                                     
@@ -184,6 +191,13 @@ display: none;
 
             <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
         <script>
+            $(document).ready(function(){
+
+            //dat thi gian tat thong bao
+            setTimeout(function(){
+               $("span.alert").remove();
+            }, 5000 ); // 5 secs
+
             $('input[id="btn1"]').change(function(){
                 $('#cashbtn').show();
                 // $('#paypal-button').hide();
@@ -195,6 +209,7 @@ display: none;
                 $('#paypalbtn').show();
                 $('#cashbtn').hide();
             });
+        });
 
             // $('#paypalbtn').attr('hidden': hidden);
             

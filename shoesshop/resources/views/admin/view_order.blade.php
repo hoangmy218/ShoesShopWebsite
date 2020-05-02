@@ -116,7 +116,13 @@
                                                 </tr>
                                                 <tr>
                                                     <th>Khuyến mãi:</th>
-                                                    <td>0</td>
+                                                    <td><?php if (($order->km_ma != NULL) || ($order->km_ma != 0))
+                                                            $disc = $congTien*$order->km_giamGia/100;
+                                                        else
+                                                            $disc = 0;                                                        
+                                                        ?>
+                                                        {{number_format($disc).' VND'}}
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <th>Phí vận chuyển:</th>
@@ -124,7 +130,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th>Tổng tiền thanh toán:</th>
-                                                    <td>{{number_format($congTien+$order->vc_phi).' VND'}}</td>
+                                                    <td>{{number_format($congTien + $order->vc_phi - $disc).' VND'}}</td>
                                                 </tr>
                                             </table>
                                         </div>

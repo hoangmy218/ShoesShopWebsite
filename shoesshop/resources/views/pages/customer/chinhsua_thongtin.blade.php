@@ -35,12 +35,12 @@
                         <div class="form-group">
                             <h5><label for="">{{ __('Giới tính') }}</label><h5>
                         <select name="capnhat_nd_gioiTinh" class="form-control m-bot15">
-                             @if($ndma->nd_gioiTinh==1)
-                                <option selected value="0">{{ __('Nữ') }}</option>
-                                <option value="1">{{ __('Nam') }}</option>
+                             @if($ndma->nd_gioiTinh==0)
+                                <option selected value="0">{{ __('Nam') }}</option>
+                                <option value="1">{{ __('Nữ') }}</option>
                                 @else
-                                <option value="0">{{ __('Nữ') }}</option>
-                                <option selected value="1">{{ __('Nam') }}</option>
+                                <option value="0">{{ __('Nam') }}</option>
+                                <option selected value="1">{{ __('Nữ') }}</option>
                                 @endif
                                
                             }

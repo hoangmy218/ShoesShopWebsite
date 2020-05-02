@@ -40,20 +40,34 @@
                                                 <label for="exampleInputName1">Mã khuyến mãi</label>
                                                 <input type="text" class="form-control" id="exampleInputName1" name="coupon_code" value="{{$edit_value->km_doanMa}}">
                                             </div>
+                                            <!-- start Ngân (7/4/2020) -->
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Tên khuyến mãi</label>
-                                                <input type="text" class="form-control" id="exampleInputName1" name="coupon_topic" placeholder="Vd: Black Friday">
+                                                <input type="text" class="form-control" id="exampleInputName1" name="coupon_topic" value="{{$edit_value->km_chuDe}}">
                                             </div> 
+                                          
+                                            
                                             <div class="form-group">
-                                                <label for="exampleInputName1">Giảm giá</label>
-                                                <input type="text" value="{{$edit_value->km_giamGia}}" class="form-control" id="exampleInputName1" name="coupon_discount" >
-                                            </div>   
+                                                <label for="exampleInputName1">Ngày bắt đầu</label>
+                                                <input type="date" name="coupon_dateB" value="{{$edit_value->km_ngayKT}}" /> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                                <label for="exampleInputName1">Ngày kết thúc</label>
+                                                <input type="date" name="coupon_dateE" value="{{$edit_value->km_ngayBD}}" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Số lần giảm giá</label>
+                                                <input name="coupon_discount_SL" type="number" value="{{$edit_value->km_soLan}}">
+                                                &nbsp&nbsp&nbsp
+                                                <label for="exampleInputName1">Giảm giá mỗi lần</label>
+                                                <input name="coupon_discount" type="number" value="{{$edit_value->km_giamGia}}">
+                                            </div> 
+                                            <!-- end Ngân (7/4/2020) -->
                                             
                                             <div class="form-group pull-right">
                                                 <button type="submit" name="update_coupon" class="btn btn-primary mr-2">Cập nhật</button>
                                                 <a href="{{url()->previous()}}" class="btn btn-default">Hủy</a>
                                               
                                             </div>
+
                                             
                                         </form>
                                     </div>

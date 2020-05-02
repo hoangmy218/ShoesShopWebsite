@@ -10,7 +10,6 @@
                                         <i class="ik ik-file-text bg-blue"></i>
                                         <div class="d-inline">
                                             <h5>Danh mục</h5>
-                                           {{--  <span>lorem ipsum dolor sit amet, consectetur adipisicing elit</span> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -30,7 +29,7 @@
                             </div>
                         </div>
                                 <div class="card">
-                                    <div class="card-header"><h3>Thêm danh mục</h3></div>
+                                    <div class="card-header"><h3>Chỉnh sửa danh mục</h3></div> <!-- Ngân (6/4/2020) Chỉnh thành Chỉnh sửa danh mục -->
                                      @foreach($edit_cate as $key => $edit_value)
                                     <div class="card-body">
 
@@ -38,7 +37,7 @@
                                              {{csrf_field()}}
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Mã danh mục</label>
-                                                <input type="text" class="form-control" id="exampleInputName1" name="cate_id" value="{{$edit_value->dm_ma}}">
+                                                <input type="text" class="form-control" id="exampleInputName1" name="cate_id" value="{{$edit_value->dm_ma}}" disabled="disabled"> <!-- Ngân (6/4/2020) thêm disabled="disabled" -->
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Tên danh mục</label>

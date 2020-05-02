@@ -165,6 +165,23 @@
                                        
                                     </div>
                                 </div>
+                                <!-- Start Ngân (13/3/2020) -->
+                                <div class="nav-item has-sub">
+                                    <a href="javascript:void(0)"><i class="ik ik-list"></i><span>Quản lý khuyến mãi</span> <span class="badge badge-danger"></span></a>
+                                    <div class="submenu-content">
+                                        <a href="{{URL::to('/add-coupon')}}" class="menu-item">Thêm khuyến mãi</a>
+                                        <a href="{{URL::to('/manage-coupon')}}" class="menu-item">Danh sách khuyến mãi</a>
+                                        
+                                    </div>
+                                </div>
+                                <div class="nav-item has-sub">
+                                    <a href="javascript:void(0)"><i class="ik ik-list"></i><span>Quản lý quảng cáo</span> <span class="badge badge-danger"></span></a>
+                                    <div class="submenu-content">
+                                        <a href="{{URL::to('/add-advertisement')}}" class="menu-item">Thêm quảng cáo</a>
+                                        <a href="{{URL::to('/manage-advertisement')}}" class="menu-item">Danh sách quảng cáo</a>
+                                        
+                                    </div>
+                                </div>
                                 <!-- End Ngân (1/4/2020) -->
                                {{--  <div class="nav-item">
                                     <a href="{{asset('public/backend/pages/navbar.html')}}"><i class="ik ik-menu"></i><span>Navigation</span> <span class="badge badge-success">New</span></a>

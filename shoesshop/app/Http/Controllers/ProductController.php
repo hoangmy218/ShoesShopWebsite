@@ -72,9 +72,10 @@ class ProductController extends Controller
 
 
         $content = Cart::content();
+        $image_product =  DB::table('hinhanh')->where('hinhanh.sp_ma',$product_id)->get(); 
 
-        $details_product = DB::table('sanpham')->join('hinhanh','hinhanh.sp_ma','=','sanpham.sp_ma')->where('sanpham.sp_ma',$product_id)->get(); 
-        $sz_product = DB::table('chitietsanpham')->where('chitietsanpham.sp_ma',$product_id)->get(); 
+        $details_product = DB::table('sanpham')->join('hinhanh','hinhanh.sp_ma','=','sanpham.sp_ma')->where('sanpham.sp_ma',$product_id)->limit(1)->get(); 
+        $sz_product = DB::table('chitietsanpham')->where([['chitietsanpham.sp_ma','=',$product_id],['ctsp_soLuongTon','>',0]])->get(); 
 
         $all_product = DB::table('sanpham')->select('sp_ma')->where('sanpham.sp_ma',$product_id)->limit(1)->get(); //Tiên 14/03
 
@@ -87,7 +88,7 @@ class ProductController extends Controller
 
         $total_view=DB::table('binhluan')->join('sanpham','sanpham.sp_ma','=','binhluan.sp_ma')->where('binhluan.sp_ma',$product_id)->select('sp_ma')->count();
 
-         return view('pages.product.show_detail',compact('chitietsanpham'))->with('details_product',$details_product)->with('sz_product',$sz_product)->with('sizes',$sizes)->with('all_product',$all_product)->with('comments',$comments)->with('sold_product',$sold_product)->with('total_view',$total_view);
+         return view('pages.product.show_detail',compact('chitietsanpham'))->with('details_product',$details_product)->with('sz_product',$sz_product)->with('sizes',$sizes)->with('all_product',$all_product)->with('comments',$comments)->with('sold_product',$sold_product)->with('total_view',$total_view)->with('image_product',$image_product);
     }
 
 
@@ -131,6 +132,7 @@ class ProductController extends Controller
                 $data_ctsp['ctsp_soLuongNhap'] = $insert_datadetail['soLuongNhap'];
                 $data_ctsp['ctsp_soLuongTon'] =  $insert_datadetail['soLuongNhap'];
                 $data_ctsp['pn_ma'] = $pn_id;
+                $data_ctsp['created_at'] = $datapn['pn_ngayNhap'];
                 DB::table('chitietsanpham')->insertGetId($data_ctsp);
                
 

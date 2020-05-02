@@ -28,6 +28,9 @@
     <link rel="stylesheet" href="{{asset('public/frontend/css/icomoon.css')}}">
 
     <link rel="stylesheet" href="{{asset('public/frontend/css/style.css')}}">
+    @yield('script_thumbnail')
+  
+
 
 {{--       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -98,7 +101,7 @@
             </li>
             @else
               <li class="nav-item"><a href="{{URL::to('userLogin')}}" class="nav-link">{{ __('Đăng nhập') }}</a></li>
-             {{--  <li class="nav-item"><a href="{{URL::to('register')}}" class="nav-link">{{ __('Register') }}</a></li> --}}
+              <li class="nav-item"><a href="{{URL::to('register')}}" class="nav-link">{{ __('Đăng ký') }}</a></li>
             @endif
 
              <li class="nav-item dropdown nav-item cta cta-colored">

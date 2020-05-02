@@ -42,12 +42,23 @@
                                                 <label for="exampleInputName1">Tên khuyến mãi</label>
                                                 <input type="text" class="form-control" id="exampleInputName1" name="coupon_topic" placeholder="Vd: Black Friday">
                                             </div> 
+                                            <!-- start Ngân (7/4/2020) -->
                                             <div class="form-group">
-                                                <label for="exampleInputName1">Giảm giá</label>
-                                                <input type="text" class="form-control" id="exampleInputName1" name="coupon_discount" placeholder="Vd: 4">
+                                                <label for="exampleInputName1">Ngày bắt đầu</label>
+                                                <input type="date" name="coupon_dateB" /> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                                <label for="exampleInputName1">Ngày kết thúc</label>
+                                                <input type="date" name="coupon_dateE" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Số lần giảm giá</label>
+                                                <input name="coupon_discount_SL" type="number" value="1">
+                                                &nbsp&nbsp&nbsp
+                                                <label for="exampleInputName1">Giảm giá mỗi lần</label>
+                                                <input name="coupon_discount" type="number" value="1">
                                             </div> 
                                             <button type="submit" name="add_coupon" class="btn btn-primary mr-2">Thêm</button>
-                                            <button class="btn btn-light">Hủy</button>
+                                            <button onclick="history.go(0)" class="btn btn-light">Hủy</button>
+                                            <!-- end Ngân (7/4/2020) -->
                                         </form>
                                     </div>
                                 </div>

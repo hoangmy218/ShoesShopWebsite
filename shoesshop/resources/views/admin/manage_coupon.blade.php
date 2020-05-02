@@ -55,6 +55,11 @@
                                                         <th>Mã khuyến mãi</th>
                                                         <th>Chủ đề</th>
                                                         <th>Đoạn mã code</th>
+                                                        <!-- start Ngân (7/4/2020) -->
+                                                        <th>Ngày bắt đầu</th>
+                                                        <th>Ngày kết thúc</th>
+                                                        <th>Số lần giảm</th>
+                                                        <!-- end Ngân (7/4/2020) -->
                                                         <th>Giảm giá (%)</th>
                                                         <th>Thao tác</th>
                                                     </tr>
@@ -68,6 +73,11 @@
                                                         <td>{{$cate->km_ma}}</td>
                                                         <td>{{$cate->km_chuDe}}</td>
                                                         <td>{{$cate->km_doanMa}}</td>
+                                                        <!-- start Ngân (7/4/2020) -->
+                                                        <td>{{$cate->km_ngayBD}}</td>
+                                                        <td>{{$cate->km_ngayKT}}</td>
+                                                        <td>{{$cate->km_soLan}}</td>
+                                                        <!-- end Ngân (7/4/2020) -->
                                                         <td>{{$cate->km_giamGia}}</td>
                                                         <td><div class="table-actions">   
                                                             <a href="{{URL::to('/edit-coupon/'.$cate->km_ma)}}"><i class="ik ik-edit-2"></i></a>

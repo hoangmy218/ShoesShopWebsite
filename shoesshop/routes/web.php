@@ -212,14 +212,28 @@ Route::get('/edit-coupon/{Coupon_id}','CouponController@editCoupon');
 Route::get('/delete-coupon/{Coupon_id}','CouponController@deleteCoupon');
 Route::post('/update-coupon/{Coupon_id}','CouponController@updateCoupon');
 
-
 // Quảng cáo (Ngân 14/3/2020)
-Route::get('/manage-advertisement','AdvertisementController@showadvertisement');
-Route::get('/add-advertisement','AdvertisementController@addadvertisement');
-Route::post('/save-advertisement','AdvertisementController@saveadvertisement');
-Route::get('/edit-advertisement/{advertisement_id}','AdvertisementController@editadvertisement');
-Route::get('/delete-advertisement/{advertisement_id}','AdvertisementController@deleteadvertisement');
-Route::post('/update-advertisement/{advertisement_id}','AdvertisementController@updateadvertisement');
+Route::get('/manage-advertisement','AdvertisementController@showAdvertisement');
+Route::get('/add-advertisement','AdvertisementController@addAdvertisement');
+Route::post('/save-advertisement','AdvertisementController@saveAdvertisement');
+Route::get('/edit-advertisement/{advertisement_id}','AdvertisementController@editAdvertisement');
+Route::get('/delete-advertisement/{advertisement_id}','AdvertisementController@deleteAdvertisement');
+Route::post('/update-advertisement/{advertisement_id}','AdvertisementController@updateAdvertisement');
+
+
+// (Ngân 14/4/2020)
+Route::get('/active-advertisement/{advertisement_id}', 'AdvertisementController@activeAdvertisement');
+Route::get('/unactive-advertisement/{advertisement_id}', 'AdvertisementController@unactiveAdvertisement');
+
+// Khuyến mãi (Ngân 14/3/2020)
+Route::get('/checkCoupon','CheckoutController@checkCoupon'); 
+Route::get('/manage-coupon','CouponController@showCoupon');
+Route::get('/add-coupon','CouponController@addCoupon');
+Route::post('/save-coupon','CouponController@saveCoupon');
+Route::get('/edit-coupon/{Coupon_id}','CouponController@editCoupon');
+Route::get('/delete-coupon/{Coupon_id}','CouponController@deleteCoupon');
+Route::post('/update-coupon/{Coupon_id}','CouponController@updateCoupon');
+
 
 // Thống kê (Ngân 22/3/2020)
 Route::get('/statistical_order','StatisticalController@showStatistical_order')->name('chart','showStatistical_order');

@@ -15,6 +15,12 @@
     	<div class="container">
         	
 			<?php
+                $message = Session::get('message');
+                if ($message){
+                    echo '<span class="alert alert-danger">'.$message."</span>";
+                    
+                    Session::put('message',null);
+                }
                 $content = Cart::content();
             ?>
           	<div class="row">
@@ -182,6 +188,12 @@
      <script type="text/javascript" src="https://code.jquery.com/jquery-latest.pack.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){ 
+        
+            //dat thi gian tat thong bao
+            setTimeout(function(){
+               $("span.alert").remove();
+            }, 5000 ); // 5 secs
+
 
             $('select[name="vanc_id"]').on('change',function(){
                     var vc_ma = $(this).val();

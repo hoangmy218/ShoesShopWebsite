@@ -29,6 +29,30 @@ class CartController extends Controller
         if ($content->isempty()){
             Session::put('message','Giỏ hàng trống!');
         }
+        //Kiemtra het hang
+          
+            $hethang = 0; //false - con hang
+            $outstock = array();
+            foreach ($content as $v_content) {
+                 $ctsp_ton =  DB::table('chitietsanpham')->where('ctsp_ma', $v_content->id)->first();
+                if ( $v_content->qty > $ctsp_ton->ctsp_soLuongTon){
+                    $hethang = $hethang+1; //true
+                    $outstock[$hethang] = $ctsp_ton->sp_ma;
+                }
+            } 
+            if ($hethang == 1){
+                $tenhang = '';
+                foreach ($outstock as $key => $value) {
+                    $hang = DB::table('sanpham')->where('sp_ma',$value)->select('sp_ten')->first();
+                    $tenhang .= ' ';
+                    $tenhang .= $hang->sp_ten;
+                    if ($key != count($outstock))
+                    $tenhang .= ',';
+                }
+                /*$sizes = DB::Table('chitietsanpham')->select('ctsp_kichCo','ctsp_ma')->where('sp_ma',4)->get(); */
+           
+                Session::put('message','<b>'.$tenhang.'</b> không đủ hàng');
+            }
     	return view("pages.cart.show_cart");
     }
 
@@ -63,6 +87,7 @@ class CartController extends Controller
     
     public function delete_to_cart($rowId){
         Cart::update($rowId,0);
+        Session::put('success_message','Xóa sản phẩm thành công!');
         return Redirect::to('/show-cart');
     }
     // Tien 

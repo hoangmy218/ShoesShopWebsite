@@ -152,7 +152,7 @@
                                             </div>
                                             <div class="row col-md-12"> 
                                             <button type="submit" name="add_cate" class="btn btn-primary mr-2">Thêm</button>
-                                            <button class="btn btn-light">Hủy</button>
+                                            <button id="cancel" class="btn btn-light">Hủy</button>
                                             </div>
                                         </form>
                                     </div>
@@ -162,6 +162,15 @@
                     </div>
                 </div>
 <script src="http://www.codermen.com/js/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){ 
+        $('#cancel').click(function(e){
+            e.preventDefault();
+            window.history.back();
+        });
+    });
+
+</script>
                 
 @endsection
 

@@ -23,10 +23,20 @@ class HomeController extends Controller
     }
     public function index()
     {
+        // Start Ngân (14/4/2020)
+        $list_ad = DB::table('quangcao')->where('qc_trangThai',0)->get();
+        //$manager_Advertisement = view('pages.home')->with('list_ad',$list_ad);
 
         // Tiên
-        $all_product = DB::table('sanpham')->join('hinhanh','hinhanh.sp_ma','=','sanpham.sp_ma')->orderby('sanpham.sp_ma','desc')->limit(4)->get(); 
-        return view("pages.home")->with('all_product',$all_product);
+         $all_product = DB::table('hinhanh')->join('sanpham','hinhanh.sp_ma','=','sanpham.sp_ma')->orderby('sanpham.sp_ma','desc')->groupby('hinhanh.sp_ma')->limit(4)->get(); 
+        
+       return view("pages.home")->with('list_ad',$list_ad)->with('all_product',$all_product);;
+        // End Ngân (14/4/2020)
+
+        // Tiên bản cũ 
+        /*
+        $all_product = DB::table('hinhanh')->join('sanpham','hinhanh.sp_ma','=','sanpham.sp_ma')->orderby('sanpham.sp_ma','desc')->groupby('hinhanh.sp_ma')->limit(4)->get(); 
+        return view("pages.home")->with('all_product',$all_product);*/
     }
 
 
@@ -37,17 +47,39 @@ class HomeController extends Controller
 
     public function Home_u(){
         $this->authLogin();
+        // Start Ngân (14/4/2020)
+        $list_ad = DB::table('quangcao')->where('qc_trangThai',0)->get();
+        //$manager_Advertisement = view('pages.home')->with('list_ad',$list_ad);
+
+        // Tiên
+         $all_product = DB::table('hinhanh')->join('sanpham','hinhanh.sp_ma','=','sanpham.sp_ma')->orderby('sanpham.sp_ma','desc')->groupby('hinhanh.sp_ma')->limit(4)->get(); 
+        
+       return view("pages.home")->with('list_ad',$list_ad)->with('all_product',$all_product);;
+        // End Ngân (14/4/2020)
+
+        //  // Start Ngân (14/4/2020)
+        // $list_Advertisement = DB::table('quangcao')->where('qc_trangThai',0)->get();
+        // $manager_Advertisement = view('pages.home')->with('list_ad',$list_Advertisement);
+
+        // $all_product = DB::table('sanpham')->join('hinhanh','hinhanh.sp_ma','=','sanpham.sp_ma')->orderby('sanpham.sp_ma','desc')->limit(4)->get();
+        // $manager_product = view('pages.home')->with('all_product',$all_product); 
+        // return view("shop_layout")->with('pages.home',$manager_product)->with('pages.home',$manager_Advertisement);
+        // // End Ngân (14/4/2020)
+
+        //Bản cũ
+        /*$this->authLogin();
         $all_product = DB::table('sanpham')->join('hinhanh','hinhanh.sp_ma','=','sanpham.sp_ma')->orderby('sanpham.sp_ma','desc')->limit(4)->get(); 
-        return view("pages.home")->with('all_product',$all_product);
+        return view("pages.home")->with('all_product',$all_product);*/
     }
 
     public function get_register(){
         return view('pages.customer.user_register');
     }
 
-    public function post_register(Request $req){
-        // 12/3/2020 MY ẨN VALIDATE VÌ LỖI KHÔNG ĐĂNG ký ĐC
-        // Ngân(6/3/2020) thay nguyên khúc bắt lỗi tới return View ('valida....')
+   public function post_register(Request $req){
+
+        // start  Ngân (11/4/2020)
+
         $validate = Validator::make($req->all(), [
             'user_birth'=>'date',
             'user_phone'=>'numeric',
@@ -57,38 +89,48 @@ class HomeController extends Controller
             ],[
             'user_birth.date'=>'Ngày sinh phải theo định dạng năm/tháng/ngày', 
             'user_phone.numeric'=>'Số điện thoại phải là số.',
-            'user_email.email'=>'Emails chưa nhập đúng định dạng abc@gmai.com',
+            'user_email.email'=>'Mail chưa được nhập đúng định dạng abc@gmai.com',
             'user_password.min'=>'Mật khẩu không nhỏ hơn 3 ký tự',
-            'user_password.max'=>'Mật khẩu không lớn hơn 28 ký tự',]);
+            'user_password.max'=>'Mật khẩu không lớn hơn 28 ký tự',
+            'user_confirm_pass.same'=>'Mật khẩu và mật khẩu nhập lại không trùng nhau.']);
         if ($validate->fails()) {
-            return View('ValidationView')->withErrors($validate);
+            return View('pages.customer.user_register')->withErrors($validate);
         }
 
 
-        $data=array();
 
-        $data['nd_ten'] = $req->user_name;
-        $data['nd_ngaySinh'] = $req->user_birth;
-        $data['nd_email'] = $req->user_email;
-        $data['nd_dienThoai'] = $req->user_phone;
-        $data['nd_diaChi'] = $req->user_address;
-        $data['cv_ma'] = "2"; //Chuc vu Khach hang
-        $data['nd_trangThai'] = "0"; //Trạng thái tài khoản (không vô hiệu) Ngân(6/3/2020)
-        if($req->rdGioitinh=="Male"){
-            $data['nd_gioiTinh'] = 0;
+        $mail_used = DB::table("nguoidung")->where('nd_email',$req->user_email)->count();
+        if($mail_used == 0){
+            $data=array();
+
+            $data['nd_ten'] = $req->user_name;
+            $data['nd_ngaySinh'] = $req->user_birth;
+            $data['nd_email'] = $req->user_email;
+            $data['nd_dienThoai'] = $req->user_phone;
+            $data['nd_diaChi'] = $req->user_address;
+            $data['cv_ma'] = "2"; //Chuc vu Khach hang
+            $data['nd_trangThai'] = "0"; //Trạng thái tài khoản (không vô hiệu) Ngân(6/3/2020)
+            if($req->rdGioitinh=="Male"){
+                $data['nd_gioiTinh'] = 0;
+            }
+            else{
+                $data['nd_gioiTinh'] = 1;
+            }
+            $data['nd_matKhau'] = md5($req->user_password);
+
+            $customer_id = DB::table('nguoidung')->insertGetId($data);
+
+            Session::put('nd_ma',$customer_id);
+            Session::put('nd_ten',$req->user_name);
+            return Redirect::to('/Home_u');
+        }else{
+            Session::put('message','Mail đã được đăng ký.');
+            return Redirect::to('/register');
         }
-        else{
-            $data['nd_gioiTinh'] = 1;
-        }
-        $data['nd_matKhau'] = md5($req->user_password);
 
-        $customer_id = DB::table('nguoidung')->insertGetId($data);
-
-        Session::put('nd_ma',$customer_id);
-        Session::put('nd_ten',$req->user_name);
-        return Redirect::to('/Home_u');
+        // end Ngân (11/4/2020
+        
     }
-
 
      
      public function AfterLogin(Request $request){

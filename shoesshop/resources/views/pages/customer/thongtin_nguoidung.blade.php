@@ -43,7 +43,7 @@
     					<p class="d-flex">
     						<span>{{ __('Giới tính') }}</span>
     					
-    						@if($ndma->nd_gioiTinh==0)
+    						@if($ndma->nd_gioiTinh==1)
     							<span>{{ __('Nữ') }}</span>
     						@else
     							<span>{{ __('Nam') }}</span>
