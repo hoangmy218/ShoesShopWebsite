@@ -74,8 +74,8 @@
                                                         <td>{{$cate->km_chuDe}}</td>
                                                         <td>{{$cate->km_doanMa}}</td>
                                                         <!-- start Ngân (7/4/2020) -->
-                                                        <td>{{$cate->km_ngayBD}}</td>
-                                                        <td>{{$cate->km_ngayKT}}</td>
+                                                        <td>{{date('d-m-Y',strtotime($cate->km_ngayBD))}}</td>
+                                                        <td>{{date('d-m-Y',strtotime($cate->km_ngayKT))}}</td>
                                                         <td>{{$cate->km_soLan}}</td>
                                                         <!-- end Ngân (7/4/2020) -->
                                                         <td>{{$cate->km_giamGia}}</td>

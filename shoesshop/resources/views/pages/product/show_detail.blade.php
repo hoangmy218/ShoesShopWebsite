@@ -80,16 +80,16 @@
     				<h3>{{$value->sp_ten}}</h3>
     				
     				<div class="rating d-flex">
-							<p class="text-left mr-4">
+							{{-- <p class="text-left mr-4">
 								<a href="#" class="mr-2">5.0</a>
 								<a href="#"><span class="ion-ios-star-outline"></span></a>
 								<a href="#"><span class="ion-ios-star-outline"></span></a>
 								<a href="#"><span class="ion-ios-star-outline"></span></a>
 								<a href="#"><span class="ion-ios-star-outline"></span></a>
 								<a href="#"><span class="ion-ios-star-outline"></span></a>
-							</p>
+							</p> --}}
 							<p class="text-left mr-4">
-								<a href="#" class="mr-2" style="color: #000;">100 <span style="color: #bbb;">{{ __('Đánh giá') }}</span></a>
+								<a href="#" class="mr-2" style="color: #000;">0 <span style="color: #bbb;">{{ __('Đánh giá') }}</span></a>
 							</p>
 							<p class="text-left">
 								
@@ -185,7 +185,7 @@
 
 					        <div class="w-100"></div>
 					         <div class="col-md-12">
-					          		<p style="color: #000;">{{ __('Có sẵn 80 đôi') }}</p>
+					          		{{-- <p style="color: #000;">{{ __('Có sẵn 80 đôi') }}</p> --}}
 					        </div>
 				        	</div>
 
@@ -238,20 +238,24 @@
           <div class="col-md-12 tab-wrap">
             
             <div class="tab-content bg-light" id="v-pills-tabContent">
-
+            	@foreach($details_product as $key => $value)
               <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="day-1-tab">
               	<div class="p-4">
-	              	<h3 class="mb-4">Nike Free RN 2019 iD</h3>
-	              	<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
+              		
+	              	<h3 class="mb-4">{{$value->sp_ten}}</h3>
+	              	<p>{{$value->sp_ghiChu}}</p>
+
               	</div>
               </div>
 
               <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-day-2-tab">
               	<div class="p-4">
-	              	<h3 class="mb-4">{{ __('Manufactured By Nike') }}</h3>
-	              	<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
+	              	<h3 class="mb-4">{{$value->th_ten}}</h3>
+	              	<p>...</p>
               	</div>
+
               </div>
+              @endforeach
               <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-day-3-tab">
               	<div class="row p-4">
               		
@@ -261,7 +265,7 @@
 						   		 	
 						   						   			
 						   			<div class="review">
-								   		<div class="user-img" style="background-image: url({{URL::to('public/frontend/images/person_1.jpg')}})"></div>
+								   		<div class="user-img" style="background-image: url({{URL::to('public/frontend/images/avatar.jpg')}})"></div>
 								   		<div class="desc">
 								   			<h4>
 								   				<span class="text-left">{{$comment->bl_ten}}</span>
@@ -284,7 +288,7 @@
 								   	
 						   		</div>
 					
-						   		<div class="col-md-4">
+						   		{{-- <div class="col-md-4">
 						   			<div class="rating-wrap">
 							   			<h3 class="mb-4">{{ __('Đánh giá') }}</h3>
 							   			<p class="star">
@@ -343,7 +347,7 @@
 						   					<span>0 Reviews</span>
 							   			</p>
 							   		</div>
-								</div>
+								</div> --}}
 								<!-- Tiên 14/03 -->
 								@foreach($all_product as $key => $product)
 								<div class="col-md-6">
@@ -453,7 +457,7 @@
 		        // If is not undefined
 		      
 		            // Increment
-		            if(quantity>0){
+		            if(quantity>1){
 		            $('#quantity').val(quantity - 1);
 		            }
 		    });

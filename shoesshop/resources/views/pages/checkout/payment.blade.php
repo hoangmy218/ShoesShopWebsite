@@ -155,7 +155,7 @@ display: none;
                             } else
                                 (int)$giamgia  = 0; ?>
                             <span>{{number_format($giamgia).' VND'}}</span>
-                            <span>Tỉ lệ giảm {{Session::get('ti_le_giamgia')}}</span>
+                           {{--  <span>Tỉ lệ giảm {{Session::get('ti_le_giamgia')}}</span> --}}
                         </p>
                         
                         <hr>

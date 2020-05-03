@@ -75,7 +75,7 @@ class ProductController extends Controller
         $content = Cart::content();
         $image_product =  DB::table('hinhanh')->where('hinhanh.sp_ma',$product_id)->get(); 
 
-        $details_product = DB::table('sanpham')->join('hinhanh','hinhanh.sp_ma','=','sanpham.sp_ma')->where('sanpham.sp_ma',$product_id)->limit(1)->get(); 
+        $details_product = DB::table('sanpham')->join('hinhanh','hinhanh.sp_ma','=','sanpham.sp_ma')->join('thuonghieu', 'thuonghieu.th_ma','=','sanpham.th_ma')->where('sanpham.sp_ma',$product_id)->limit(1)->get(); 
         $sz_product = DB::table('chitietsanpham')->where([['chitietsanpham.sp_ma','=',$product_id],['ctsp_soLuongTon','>',0]])->orderby('ctsp_kichCo','asc')->get(); 
 
         $all_product = DB::table('sanpham')->select('sp_ma')->where('sanpham.sp_ma',$product_id)->limit(1)->get(); //Tiên 14/03
@@ -254,7 +254,15 @@ class ProductController extends Controller
     //Edit Goods of Receipt
     public function deleteGoods($ctsp_ma)
     {
-        # code...
+        $this->authLogin();
+        try {
+            DB::table('chitietsanpham')->where('ctsp_ma', $ctsp_ma)->delete();
+           //DB::table('phieunhap')->where('pn_ma', $pn_ma)->delete(); //Neu doi ctsp cascade thi xoa dong nay
+            Session::put('success_message','Xóa sản phẩm thành công!');
+            
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::put('fail_message','Xóa sản phẩm không thành công!');
+        }
     }
 
     public function getDetailGoods(Request $request)

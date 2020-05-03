@@ -58,6 +58,7 @@ class CartController extends Controller
 
      // Tien 
     public function save_cart(Request $request){
+        $this->authLogin();
     	$id= $request->size; //ctspma
     	$soluong = $request->quantity;
 

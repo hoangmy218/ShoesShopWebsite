@@ -1,5 +1,7 @@
-<div class="cart-list">
-	<?php
+{{-- <div class="row">
+	<div class="col-md-12 ftco-animate"> --}}
+		<div class="cart-list">
+		<?php
 		            	$message = Session::get('message');
 		            	if ($message){
 		            		echo '<span class="alert alert-danger">'.$message."</span>";
@@ -12,6 +14,7 @@
 		            		
 		            		Session::put('success_message',null);
 		            	}
+		            	$content = Cart::content();
 		            ?>
 			
 	    				<table class="table">
@@ -100,7 +103,21 @@
 							@endforeach 
 
 						</table>
+						<h3 class="billing-heading mb-4" align="right">{{ __('Tổng tiền') }}: &emsp;{{Cart::subtotal().' '.'vnđ'}}</h3>	
 					</div>
+				{{-- 	</div>
+
+    		</div> --}}
+	    	{{-- <div class="row justify-content-start">
+	    		<div class="col-md-12 ftco-animate">
+	    			<div class="cart-total mb-3">
+	    				<h3 class="billing-heading mb-4" align="right">{{ __('Tổng tiền') }}: &emsp;{{Cart::subtotal().' '.'vnđ'}}</h3>		
+	    			</div>
+	    			<p class="text-center"><a href="{{URL::to('/')}}" class="btn btn-primary py-3 px-4">{{ __('Mua sắm ngay') }}</a>
+	    			<a href="{{URL::to('/checkout')}}" class="btn btn-primary py-3 px-4">{{ __('Đặt hàng ngay') }}</a></p>
+	    		</div>
+	    	</div> --}}
+	  
 	<script src="http://www.codermen.com/js/jquery.js"></script>
     <script type="text/javascript">
     	    function rating(a){

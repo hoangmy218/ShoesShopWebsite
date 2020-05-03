@@ -163,7 +163,16 @@
 										<tr>
 											<td colspan="3"></td>
 											<td class="text-right"><strong>Khuyến mãi</strong></td>
-											<td class="text-right"><strong>0</strong></td>
+											<td class="text-right">
+												<strong> 
+													<?php if (($order->km_ma != NULL) || ($order->km_ma != 0))
+                                                            $disc = $congTien*$order->km_giamGia/100;
+                                                        else
+                                                            $disc = 0;                                                        
+                                                        ?>
+                                                        {{number_format($disc).' VND'}}
+                                                    </strong>
+                                                </td>
 										</tr>
 										<tr>
 											<td colspan="3">
@@ -173,7 +182,7 @@
 										<tr class="tongtien">
 											<td colspan="2">
 											</td><td  colspan="2" class="text-right"><strong>Tổng tiền thanh toán</strong></td>
-											<td class="text-right"><strong>{{number_format($congTien+$order->vc_phi).' VND'}}</strong></td>
+											<td class="text-right"><strong>{{number_format($congTien+$order->vc_phi - $disc).' VND'}}</strong></td>
 										</tr>
 									</tbody>
 								</table>

@@ -38,7 +38,7 @@
 			@if ($content->isempty())
 				<p class="text-center"><a href="{{URL::to('/')}}" class="btn btn-primary py-3 px-4">{{ __('Mua sắm ngay') }}</a></p>
 			@else
-
+{{-- <div id='updateDiv'> --}}
 			<div class="row">
     			<div class="col-md-12 ftco-animate">
     				<div id='updateDiv'>
@@ -139,21 +139,25 @@
 							@endforeach 
 
 						</table>
+						<h3 class="billing-heading mb-4" align="right">{{ __('Tổng tiền') }}: &emsp;{{Cart::subtotal().' '.'vnđ'}}</h3>	
 					</div>
-</div>
+
+				</div>
 
     			</div>
 
     		</div>
 	    	<div class="row justify-content-start">
 	    		<div class="col-md-12 ftco-animate">
-	    			<div class="cart-total mb-3">
+	    			{{-- <div class="cart-total mb-3">
 	    				<h3 class="billing-heading mb-4" align="right">{{ __('Tổng tiền') }}: &emsp;{{Cart::subtotal().' '.'vnđ'}}</h3>		
-	    			</div>
+	    			</div> --}}
+	    			<br>
 	    			<p class="text-center"><a href="{{URL::to('/')}}" class="btn btn-primary py-3 px-4">{{ __('Mua sắm ngay') }}</a>
 	    			<a href="{{URL::to('/checkout')}}" class="btn btn-primary py-3 px-4">{{ __('Đặt hàng ngay') }}</a></p>
 	    		</div>
 	    	</div>
+	  {{--   </div> --}}
 	    	@endif
 	    
 
