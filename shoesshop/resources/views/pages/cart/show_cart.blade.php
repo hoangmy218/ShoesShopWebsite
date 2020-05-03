@@ -81,13 +81,22 @@
 							                    
 							                    <?php 
 								                    $product = DB::Table('chitietsanpham')->select('sp_ma','ctsp_soLuongTon')->where('ctsp_ma',$v_content->id)->first();
-								                    $sizes = DB::Table('chitietsanpham')->select('ctsp_kichCo','ctsp_ma')->where([['sp_ma',$product->sp_ma],['ctsp_soLuongTon','!=',0]])->orderBy('ctsp_kichCo','asc')->get();  
+								                    $sizes = DB::Table('chitietsanpham')->select('ctsp_kichCo','ctsp_ma')->where([['sp_ma',$product->sp_ma],['ctsp_soLuongTon','!=',0]])->orderBy('ctsp_kichCo','asc')->get();
+								                    $array = array();
+						                 	
+								                 	foreach($sizes as $key => $sz){
+								                 		
+								                 		$array[$sz->ctsp_ma] = $sz->ctsp_kichCo;
+								                 		
+								                 	}  
 							                    ?>
-							                    @foreach($sizes as $key => $value)
-							                    	@if ($v_content->options->size == $value->ctsp_kichCo )
-							                        <option value="{{$value->ctsp_kichCo}}" selected>{{$value->ctsp_kichCo}}</option>
+
+							                    {{-- @foreach($sizes as $key => $value) --}}
+							                    @foreach(array_unique($array) as $key => $val)
+							                    	@if ($v_content->options->size == $val )
+							                        <option value="{{$val}}" selected>{{$val}}</option>
 							                        @else
-							                        	<option value="{{$value->ctsp_kichCo}}">{{$value->ctsp_kichCo}}</option>
+							                        	<option value="{{$val}}">{{$val}}</option>
 							                        @endif
 							                    @endforeach
 							                </select>

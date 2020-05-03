@@ -40,7 +40,7 @@
                                     <i class="ik ik-user"></i>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name='user_birth' class="form-control" placeholder="{{ __('Ngày sinh') }}"  required="">
+                                    <input type="date" name='user_birth' class="form-control" placeholder="{{ __('Ngày sinh') }}"  required="">
                                     <i class="ik ik-user"></i>
                                 </div>
                                 

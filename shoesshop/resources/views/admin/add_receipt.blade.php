@@ -164,6 +164,11 @@
 <script src="http://www.codermen.com/js/jquery.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){ 
+
+
+        $('#kho').parent().addClass('active open');
+         $("#nhaphang").addClass("active");
+
         $('#cancel').click(function(e){
             e.preventDefault();
             window.history.back();

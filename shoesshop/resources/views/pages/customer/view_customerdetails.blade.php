@@ -21,7 +21,7 @@
                               <tr class="text-center">
                                 <th><h3 class=" float-left">{{ __('Mã đơn hàng') }}: {{$order->dh_ma}}</h3></th>
                                 <th></th>
-                                <th><h3 class=" float-right">{{ __('Ngày đặt') }}: {{$order->dh_ngayDat}}</h3></th>
+                                <th><h3 class=" float-right">{{ __('Ngày đặt') }}: {{date('d-m-Y',strtotime($order->dh_ngayDat))}}</h3></th>
                                 
                                 <th>&nbsp;</th>
                               </tr>
@@ -49,6 +49,7 @@
                       </div>
                 </div>
             </div>
+            <br>
 
             <div class="row">
                 <div class="col-md-12 ftco-animate">
@@ -97,23 +98,55 @@
                          <b>{{ __('Đã thanh toán') }}</b>
                     @endif
                 </div>
-                <div class="col-6">
-                <div class="table-responsive">
+                <div class="col-6 d-flex">
+                   
+                        <div class="cart-detail cart-total bg-light p-3 p-md-4">
+                            <h3 class="billing-heading mb-4">Cart Total</h3>
+                            <p class="d-flex">
+                                        <span>{{ __('Cộng tiền') }}</span>
+                                        <span>{{number_format($congTien).' VND'}}</span>
+                                    </p>
+                                    <p class="d-flex">
+                                        <span>{{ __('Phí vận chuyển') }}</span>
+                                        <span>{{number_format($order->vc_phi).' VND'}}</span>
+                                    </p>
+                                    <p class="d-flex">
+                                        <span>{{ __('Khuyến mãi') }}</span>
+                                        <span>
+                                            <?php 
+                                                if (($order->km_ma != NULL) || ($order->km_ma != 0))
+                                                    $disc = $congTien*$order->km_giamGia/100;
+                                                else
+                                                    $disc = 0;                                                        
+                                            ?>
+                                            {{number_format($disc).' VND'}}
+                                        </span>
+                                    </p>
+                                    <hr>
+                                    <p class="d-flex total-price">
+                                        <span>{{ __('Tổng tiền thanh toán') }}</span>
+                                        <span>{{number_format($congTien+$order->vc_phi - $disc).' VND'}}</span>
+                                    </p>
+                        </div>
+                    </div>
+                {{-- <div class="table-responsive">
                 <table class="table">
                     <tr align="left">
-                        <th style="width:50%">{{ __('Cộng tiền') }}: {{number_format($congTien).' VND'}}</th>
+                        <th style="width:50%">: </th>
                     </tr>
                     <tr align="left">
-                        <th>{{ __('Khuyến mãi') }}: 0</th>
+                        <th>: 
+                            
+                            
                     <tr align="left" >
-                        <th>{{ __('Phí vận chuyển') }}: {{number_format($order->vc_phi).' VND'}}</th>
+                        <th>: </th>
                     </tr>
                     <tr align="left" >
-                        <th>{{ __('Tổng tiền thanh toán') }}: {{number_format($congTien+$order->vc_phi).' VND'}}</th>
+                        <th>: </th>
                     </tr>
                 </table>
-                </div>
-                </div>
+                </div> --}}
+                
             </div>
             <div>
         </div>

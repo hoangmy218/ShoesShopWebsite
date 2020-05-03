@@ -28,9 +28,11 @@ class HomeController extends Controller
         //$manager_Advertisement = view('pages.home')->with('list_ad',$list_ad);
 
         // Tiên
-         $all_product = DB::table('hinhanh')->join('sanpham','hinhanh.sp_ma','=','sanpham.sp_ma')->orderby('sanpham.sp_ma','desc')->groupby('hinhanh.sp_ma')->limit(4)->get(); 
+         $all_product = DB::table('hinhanh')->join('sanpham','hinhanh.sp_ma','=','sanpham.sp_ma')->orderby('sanpham.sp_ma','desc')->groupby('hinhanh.sp_ma')->limit(6)->join('thuonghieu', 'thuonghieu.th_ma','=','sanpham.th_ma')->get(); 
+         $cate = DB::table('danhmuc')->orderby('dm_ma','desc')->get();
+         $brand = DB::table('thuonghieu')->orderby('th_ma','desc')->get();
         
-       return view("pages.home")->with('list_ad',$list_ad)->with('all_product',$all_product);;
+       return view("pages.home")->with('list_ad',$list_ad)->with('all_product',$all_product)->with('list_cate',$cate)->with('list_brand',$brand);
         // End Ngân (14/4/2020)
 
         // Tiên bản cũ 
@@ -47,14 +49,16 @@ class HomeController extends Controller
 
     public function Home_u(){
         $this->authLogin();
-        // Start Ngân (14/4/2020)
+       // Start Ngân (14/4/2020)
         $list_ad = DB::table('quangcao')->where('qc_trangThai',0)->get();
         //$manager_Advertisement = view('pages.home')->with('list_ad',$list_ad);
 
         // Tiên
-         $all_product = DB::table('hinhanh')->join('sanpham','hinhanh.sp_ma','=','sanpham.sp_ma')->orderby('sanpham.sp_ma','desc')->groupby('hinhanh.sp_ma')->limit(4)->get(); 
+         $all_product = DB::table('hinhanh')->join('sanpham','hinhanh.sp_ma','=','sanpham.sp_ma')->orderby('sanpham.sp_ma','desc')->groupby('hinhanh.sp_ma')->limit(6)->join('thuonghieu', 'thuonghieu.th_ma','=','sanpham.th_ma')->get(); 
+         $cate = DB::table('danhmuc')->orderby('dm_ma','desc')->get();
+         $brand = DB::table('thuonghieu')->orderby('th_ma','desc')->get();
         
-       return view("pages.home")->with('list_ad',$list_ad)->with('all_product',$all_product);;
+       return view("pages.home")->with('list_ad',$list_ad)->with('all_product',$all_product)->with('list_cate',$cate)->with('list_brand',$brand);
         // End Ngân (14/4/2020)
 
         //  // Start Ngân (14/4/2020)
@@ -158,6 +162,10 @@ class HomeController extends Controller
             if ($result) {
                 Session::put('cv_ma',$result->cv_ma);
                 $cv=Session::get('cv_ma');
+                if($result->nd_trangThai==1){
+                    Session::put('message','Tài khoản đã bị vô hiệu hóa!');
+                    return Redirect::to('/userLogin');
+                }
                 if($cv==2){
                     Session::put('nd_ma', $result->nd_ma); // result trỏ tới trường csdl
                     Session::put('nd_ten',$result->nd_ten);
@@ -197,7 +205,7 @@ class HomeController extends Controller
 
     public function status_order(){
         $nd_ma= Session::get('nd_ma');
-        $status=DB::table('donhang')->where('nd_ma',$nd_ma )->get();
+        $status=DB::table('donhang')->where('nd_ma',$nd_ma )->orderby('dh_ma','desc')->get();
         if($status!=NULL){
             return view('pages.customer.status_order')->with('status', $status);
         }
@@ -205,7 +213,12 @@ class HomeController extends Controller
 
     public function view_customerdetails($dh_ma){
         $this->authLogin();
-        $order = DB::table('donhang')->join('nguoidung','nguoidung.nd_ma','donhang.nd_ma')->join('thanhtoan','thanhtoan.tt_ma','donhang.tt_ma')->join('vanchuyen','vanchuyen.vc_ma','donhang.vc_ma')->where('donhang.dh_ma','=',$dh_ma)->first();
+        $disc = DB::table('donhang')->where('donhang.dh_ma','=',$dh_ma)->first();
+        if ($disc->km_ma != NULL){
+        $order = DB::table('donhang')->join('nguoidung','nguoidung.nd_ma','donhang.nd_ma')->join('thanhtoan','thanhtoan.tt_ma','donhang.tt_ma')->join('vanchuyen','vanchuyen.vc_ma','donhang.vc_ma')->join('khuyenmai','khuyenmai.km_ma','donhang.km_ma')->where('donhang.dh_ma','=',$dh_ma)->first();
+        } else{
+             $order = DB::table('donhang')->join('nguoidung','nguoidung.nd_ma','donhang.nd_ma')->join('thanhtoan','thanhtoan.tt_ma','donhang.tt_ma')->join('vanchuyen','vanchuyen.vc_ma','donhang.vc_ma')->where('donhang.dh_ma','=',$dh_ma)->first();
+        }
         $items = DB::table('chitietdonhang')->join('chitietsanpham','chitietsanpham.ctsp_ma','chitietdonhang.ctsp_ma')->join('sanpham','sanpham.sp_ma','chitietsanpham.sp_ma')->where('dh_ma',$dh_ma)->get();
         return view('pages.customer.view_customerdetails')->with('order',$order)->with('items',$items);
     }

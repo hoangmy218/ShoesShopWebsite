@@ -162,7 +162,9 @@
                             {{-- THÊM NÈ --}}
                           <a id="price" name="price">{{number_format($phi).' VND'}}</a>
                         </p>
-                         <?php Session::put('tien_giamgia', 0);
+                         <?php
+                            Session::put('ti_le_giamgia', 0);
+                            Session::put('tien_giamgia', 0);
                             Session::put('ma_khuyenmai',null); ?>
                         
                         <hr>

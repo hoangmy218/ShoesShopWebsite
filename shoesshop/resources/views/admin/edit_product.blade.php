@@ -174,6 +174,11 @@ $(document).ready(function(){
 </script>
 <script type="text/javascript">
 $(document).ready(function(){
+
+
+        $('#sanpham').parent().addClass('active open');
+         $("#danhsachsanpham").addClass("active");
+
     $('#images').change(function(){
         var fileName = document.getElementById('images').files.length;
         console.log(fileName);

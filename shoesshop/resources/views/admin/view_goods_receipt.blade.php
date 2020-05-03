@@ -236,6 +236,11 @@
            $("span.alert").remove();
         }, 5000 ); // 5 secs
 
+
+        $('#kho').parent().addClass('active open');
+         $("#phieunhap").addClass("active");
+
+
         var ctsp_ma;
         var pn_ma = $('input[name="pn_ma"]').val();
 

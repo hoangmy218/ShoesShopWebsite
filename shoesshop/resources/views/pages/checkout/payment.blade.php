@@ -23,12 +23,19 @@ display: none;
     <section class="ftco-section">
       <div class="container">
             <?php
-                $message = Session::get('message');
+                $message = Session::get('success');
+                if ($message){
+                    echo '<span class="alert alert-success">'.$message."</span>";
+                    
+                    Session::forget('success');
+                }
+                $message = Session::get('error');
                 if ($message){
                     echo '<span class="alert alert-danger">'.$message."</span>";
                     
-                    Session::put('message',null);
+                    Session::forget('error');
                 }
+            
             
                 $content = Cart::content();
                 $count=1;
@@ -148,6 +155,7 @@ display: none;
                             } else
                                 (int)$giamgia  = 0; ?>
                             <span>{{number_format($giamgia).' VND'}}</span>
+                            <span>Tỉ lệ giảm {{Session::get('ti_le_giamgia')}}</span>
                         </p>
                         
                         <hr>

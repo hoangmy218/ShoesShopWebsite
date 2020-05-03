@@ -47,11 +47,11 @@
                                     <span class="input-group-addon search-btn"><i class="ik ik-search"></i></span>
                                 </div>
                             </div>
-                            <button type="button" id="navbar-fullscreen" class="nav-link"><i class="ik ik-maximize"></i></button>
+                           
                         </div>
                         <div class="top-menu d-flex align-items-center">
 
-                            <button type="button" class="nav-link ml-10" id="apps_modal_btn" data-toggle="modal" data-target="#appsModal"><i class="ik ik-grid"></i></button>
+                           
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="username">
@@ -64,11 +64,8 @@
                                     {{-- <img class="avatar" src="{{asset('public/backend/img/user.jpg')}}" alt=""> --}}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="profile.html')}}"><i class="ik ik-user dropdown-icon"></i> Profile</a>
-                                    <a class="dropdown-item" href="#"><i class="ik ik-settings dropdown-icon"></i> Settings</a>
-                                    <a class="dropdown-item" href="#"><span class="float-right"><span class="badge badge-primary">6</span></span><i class="ik ik-mail dropdown-icon"></i> Inbox</a>
-                                    <a class="dropdown-item" href="#"><i class="ik ik-navigation dropdown-icon"></i> Message</a>
-                                    <a class="dropdown-item" href="{{URL::to('/logout')}}"><i class="ik ik-power dropdown-icon"></i> Logout</a>
+                                   
+                                    <a class="dropdown-item" href="{{URL::to('/logout')}}"><i class="ik ik-power dropdown-icon"></i>Đăng xuất</a>
                                 </div>
                             </div>
 
@@ -80,105 +77,104 @@
             <div class="page-wrap">
                 <div class="app-sidebar colored">
                     <div class="sidebar-header">
-                        <a class="header-brand" href="index.html')}}">
+                        <a class="header-brand" href="#">
                             {{-- <div class="logo-img">
                                <img src="{{asset('public/backend/src/img/brand-white.svg')}}" class="header-brand-img" alt="lavalite"> 
                             </div> --}}
                             <span class="text">Admin</span>
                         </a>
-                        <button type="button" class="nav-toggle"><i data-toggle="expanded" class="ik ik-toggle-right toggle-icon"></i></button>
-                        <button id="sidebarClose" class="nav-close"><i class="ik ik-x"></i></button>
+                       
+                      
                     </div>
                     
                     <div class="sidebar-content">
                         <div class="nav-container">
                             <nav id="main-menu-navigation" class="navigation-main">
-                                <div class="nav-lavel">Navigation</div>
-                                <div class="nav-item active">
-                                    <a href="{{URL::to('/dashboard')}}"><i class="ik ik-bar-chart-2"></i><span>Dashboard</span></a>
+                               
+                                <div class="nav-item">
+                                    <a id="dashboard" class="" href="{{URL::to('/dashboard')}}"><i class="ik ik-bar-chart-2"></i><span>Dashboard</span></a>
                                 </div>
                                 <div class="nav-item">
-                                    <a href="{{URL::to('/manage-order')}}"><i class="ik ik-file-text"></i><span>Quản lý đơn hàng</span></a>
+                                    <a id="donhang" href="{{URL::to('/manage-order')}}"><i class="ik ik-file-text"></i><span>Quản lý đơn hàng</span></a>
                                 </div>
                                  <div class="nav-item has-sub">
-                                       <a href="javascript:void(0)"><i class="ik ik-home"></i><span>Quản lý người dùng</span> <span class="badge badge-danger"></span></a>
+                                       <a id="nguoidung" href="javascript:void(0)"><i class="ik ik-users"></i><span>Quản lý người dùng</span> <span class="badge badge-danger"></span></a>
                                        <div class="submenu-content">
-                                            <a href="{{URL::to('/manage-customer')}}" class="menu-item">Vô hiệu hóa người dùng</a>
-                                            <a href="{{URL::to('/history-customer')}}" class="menu-item">Lịch sử mua hàng của người dùng</a>
+                                            <a id="vohieuhoa" href="{{URL::to('/manage-customer')}}" class="menu-item">Vô hiệu hóa người dùng</a>
+                                            <a id="lichsumua" href="{{URL::to('/history-customer')}}" class="menu-item">Lịch sử mua hàng của người dùng</a>
                                         </div>
                                 </div>
                                 <div class="nav-item has-sub">
-                                    <a href="javascript:void(0)"><i class="ik ik-package"></i><span>Quản lý sản phẩm</span> <span class="badge badge-danger"></span></a>
+                                    <a id="sanpham" href="javascript:void(0)"><i class="ik ik-package"></i><span>Quản lý sản phẩm</span> <span class="badge badge-danger"></span></a>
                                     <div class="submenu-content">
-                                        <a href="{{URL::to('/add-product')}}" class="menu-item">Thêm sản phẩm</a>
-                                        <a href="{{URL::to('/manage-product')}}" class="menu-item">Danh sách sản phẩm</a>
+                                        <a id="themsanpham" href="{{URL::to('/add-product')}}" class="menu-item">Thêm sản phẩm</a>
+                                        <a id="danhsachsanpham" href="{{URL::to('/manage-product')}}" class="menu-item">Danh sách sản phẩm</a>
                                         
                                     </div>
                                 </div>
                                 <div class="nav-item has-sub">
-                                    <a href="javascript:void(0)"><i class="ik ik-award"></i><span>Quản lý thương hiệu</span> <span class="badge badge-danger"></span></a>
+                                    <a id="thuonghieu" href="javascript:void(0)"><i class="ik ik-award"></i><span>Quản lý thương hiệu</span> <span class="badge badge-danger"></span></a>
                                     <div class="submenu-content">
-                                        <a href="{{URL::to('/add-brand')}}" class="menu-item">Thêm thương hiệu</a>
-                                        <a href="{{URL::to('/manage-brand')}}" class="menu-item">Danh sách thương hiệu</a>
+                                        <a id="themthuonghieu" href="{{URL::to('/add-brand')}}" class="menu-item">Thêm thương hiệu</a>
+                                        <a id="danhsachthuonghieu" href="{{URL::to('/manage-brand')}}" class="menu-item">Danh sách thương hiệu</a>
                                         
                                     </div>
                                 </div>
                                 <div class="nav-item has-sub">
-                                    <a href="javascript:void(0)"><i class="ik ik-list"></i><span>Quản lý danh mục</span> <span class="badge badge-danger"></span></a>
+                                    <a id="danhmuc" href="javascript:void(0)"><i class="ik ik-list"></i><span>Quản lý danh mục</span> <span class="badge badge-danger"></span></a>
                                     <div class="submenu-content">
-                                        <a href="{{URL::to('/add-category')}}" class="menu-item">Thêm danh mục</a>
-                                        <a href="{{URL::to('/manage-category')}}" class="menu-item">Danh sách danh mục</a>
+                                        <a id="themdanhmuc" href="{{URL::to('/add-category')}}" class="menu-item">Thêm danh mục</a>
+                                        <a id="danhsachdanhmuc" href="{{URL::to('/manage-category')}}" class="menu-item">Danh sách danh mục</a>
                                         
                                     </div>
                                 </div>
                                 <div class="nav-item has-sub">
-                                    <a href="javascript:void(0)"><i class="ik ik-home"></i><span>Quản lý kho</span> <span class="badge badge-danger"></span></a>
+                                    <a id="kho" href="javascript:void(0)"><i class="ik ik-home"></i><span>Quản lý kho</span> <span class="badge badge-danger"></span></a>
                                     <div class="submenu-content">
-                                        <a href="{{URL::to('/add-goods-receipt')}}" class="menu-item">Nhập hàng</a>
-                                        <a href="{{URL::to('/manage-goods-receipt')}}" class="menu-item">Quản lý phiếu nhập</a>
-                                        <a href="{{URL::to('/stock')}}" class="menu-item">Tồn kho</a>
-                                        
-                                    </div>
-                                </div>
-                                <div class="nav-item has-sub">
-                                    <a href="javascript:void(0)"><i class="ik ik-home"></i><span>Hình thức vận chuyển</span> <span class="badge badge-danger"></span></a>
-                                    <div class="submenu-content">
-                                        <a href="{{URL::to('/add-transport')}}" class="menu-item">Thêm hình thức vận chuyển</a>
-                                        <a href="{{URL::to('/manage-transport')}}" class="menu-item">Danh sách hình thức <br> vận chuyển</a>
+                                        <a id="nhaphang" href="{{URL::to('/add-goods-receipt')}}" class="menu-item">Nhập hàng</a>
+                                        <a id="phieunhap" href="{{URL::to('/manage-goods-receipt')}}" class="menu-item">Quản lý phiếu nhập</a>
                                        
                                     </div>
                                 </div>
                                 <div class="nav-item has-sub">
-                                    <a href="javascript:void(0)"><i class="ik ik-home"></i><span>Phương thức thanh toán</span> <span class="badge badge-danger"></span></a>
+                                    <a id="vanchuyen" href="javascript:void(0)"><i class="ik ik-truck"></i><span>Hình thức vận chuyển</span> <span class="badge badge-danger"></span></a>
                                     <div class="submenu-content">
-                                        <a href="{{URL::to('/add-pay')}}" class="menu-item">Thêm phương thức thanh toán</a>
-                                        <a href="{{URL::to('/manage-pay')}}" class="menu-item">Danh sách phương thức <br> thanh toán</a>
+                                        <a id="themvanchuyen" href="{{URL::to('/add-transport')}}" class="menu-item">Thêm hình thức vận chuyển</a>
+                                        <a id="danhsachvanchuyen" href="{{URL::to('/manage-transport')}}" class="menu-item">Danh sách hình thức <br> vận chuyển</a>
+                                       
+                                    </div>
+                                </div>
+                                <div class="nav-item has-sub">
+                                    <a id="thanhtoan" href="javascript:void(0)"><i class="ik ik-dollar-sign"></i><span>Phương thức thanh toán</span> <span class="badge badge-danger"></span></a>
+                                    <div class="submenu-content">
+                                        <a id="themthanhtoan" href="{{URL::to('/add-pay')}}" class="menu-item">Thêm phương thức thanh toán</a>
+                                        <a id="danhsachthanhtoan" href="{{URL::to('/manage-pay')}}" class="menu-item">Danh sách phương thức <br> thanh toán</a>
                                        
                                     </div>
                                 </div>
                                  <!-- Start Ngân (1/4/2020) -->
                                 <div class="nav-item has-sub">
-                                    <a href="javascript:void(0)"><i class="ik ik-home"></i><span>Thống kê</span> <span class="badge badge-danger"></span></a>
+                                    <a id="thongke" href="javascript:void(0)"><i class="ik ik-bar-chart-2"></i><span>Thống kê</span> <span class="badge badge-danger"></span></a>
                                     <div class="submenu-content">
-                                        <a href="{{URL::to('/statistical_order')}}" class="menu-item">Theo sản phẩm</a>
-                                        <a href= "{{URL::to('/statistical_Revenue')}}" class="menu-item">Theo doanh thu</a>
+                                        <a id="theosanpham" href="{{URL::to('/statistical_order')}}" class="menu-item">Theo sản phẩm</a>
+                                        <a id="theodoanhthu" href= "{{URL::to('/statistical_Revenue')}}" class="menu-item">Theo doanh thu</a>
                                        
                                     </div>
                                 </div>
                                 <!-- Start Ngân (13/3/2020) -->
                                 <div class="nav-item has-sub">
-                                    <a href="javascript:void(0)"><i class="ik ik-list"></i><span>Quản lý khuyến mãi</span> <span class="badge badge-danger"></span></a>
+                                    <a id="khuyenmai" href="javascript:void(0)"><i class="ik ik-gift"></i><span>Quản lý khuyến mãi</span> <span class="badge badge-danger"></span></a>
                                     <div class="submenu-content">
-                                        <a href="{{URL::to('/add-coupon')}}" class="menu-item">Thêm khuyến mãi</a>
-                                        <a href="{{URL::to('/manage-coupon')}}" class="menu-item">Danh sách khuyến mãi</a>
+                                        <a id="themkhuyenmai" href="{{URL::to('/add-coupon')}}" class="menu-item">Thêm khuyến mãi</a>
+                                        <a id="danhsachkhuyenmai" href="{{URL::to('/manage-coupon')}}" class="menu-item">Danh sách khuyến mãi</a>
                                         
                                     </div>
                                 </div>
                                 <div class="nav-item has-sub">
-                                    <a href="javascript:void(0)"><i class="ik ik-list"></i><span>Quản lý quảng cáo</span> <span class="badge badge-danger"></span></a>
+                                    <a href="javascript:void(0)" id= "quangcao"><i class="ik ik-tv"></i><span>Quản lý quảng cáo</span> <span class="badge badge-danger"></span></a>
                                     <div class="submenu-content">
-                                        <a href="{{URL::to('/add-advertisement')}}" class="menu-item">Thêm quảng cáo</a>
-                                        <a href="{{URL::to('/manage-advertisement')}}" class="menu-item">Danh sách quảng cáo</a>
+                                        <a id="themquangcao" href="{{URL::to('/add-advertisement')}}" class="menu-item">Thêm quảng cáo</a>
+                                        <a id="danhsachquangcao" href="{{URL::to('/manage-advertisement')}}" class="menu-item">Danh sách quảng cáo</a>
                                         
                                     </div>
                                 </div>
@@ -408,6 +404,10 @@
                 </div>
             </div>
         </div>
+        <script>
+        
+            
+        </script>
         
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script>window.jQuery || document.write('<script src="{{asset('public/backend/src/js/vendor/jquery-3.3.1.min.js')}}"><\/script>')</script>

@@ -27,7 +27,9 @@
                         Session::put('success_message',null);
                     }
                 ?>
-				
+				@if ($status->isempty())
+                <p class="text-center">Chưa có đơn hàng nào!<br><br><a href="{{URL::to('/')}}" class="btn btn-primary py-3 px-4">{{ __('Mua sắm ngay') }}</a></p>
+            @else
           		<div class="row">
     			<div class="col-md-12 ftco-animate">
     				<div class="cart-list">
@@ -72,7 +74,7 @@
 					  </div>
     			</div>
     		</div>
-
+            @endif
 
 
 	         

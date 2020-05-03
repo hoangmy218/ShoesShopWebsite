@@ -12,17 +12,26 @@
     </div>
     <section class="ftco-section ftco-cart">
 			<div class="container">
+                <?php
+                $message = Session::get('message');
+                if ($message){
+                    echo '<span class="alert alert-success">'.$message."</span>";
+                    
+                    Session::forget('message');
+                }
+                $message = Session::get('error');
+                if ($message){
+                    echo '<span class="alert alert-danger">'.$message."</span>";
+                    
+                    Session::forget('error');
+                }
+            ?>
+               
     		<div class="row justify-content-start">
     			<div class="col col-lg-12 col-md-12 mt-5 cart-wrap ftco-animate">
     				<div class="cart-total mb-3">
     					<h3 class="billing-heading mb-4">{{ __('Thông tin của tôi') }}</h3>
-    					<?php
-    $message =Session::get('message');
-    if($message){
-      echo '<span class="text-alert">'.$message.'</span>';
-      Session::put('message', null);
-    }
-  ?>
+    					
     					@foreach($nguoi_dung as $key => $ndma)
     					<p class="d-flex">
     						<span>{{ __('Mã khách hàng') }}</span>
@@ -52,7 +61,7 @@
     					</p>
     					<p class="d-flex">
     						<span>{{ __('Ngày sinh') }}</span>
-    						<span>{{$ndma->nd_ngaySinh}}</span>
+    						<span>{{date('d/m/Y',strtotime($ndma->nd_ngaySinh))}}</span>
     					</p>
     					<p class="d-flex">
     						<span>{{ __('Địa chỉ') }}</span>

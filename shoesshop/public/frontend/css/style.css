@@ -10477,7 +10477,7 @@ textarea.form-control {
 
 .panel-heading a:after {
   font-family: "ionicons";
-  content: "\f3d0";
+ 
   position: absolute;
   right: 20px;
   font-size: 11px;
@@ -10487,7 +10487,8 @@ textarea.form-control {
   margin-top: -8px; }
 
 .panel-heading a.collapsed:after {
-  content: "\f102"; }
+  /*content: "\f102";*/
+   }
 
 .panel-heading a.collapsed {
   color: #333333; }

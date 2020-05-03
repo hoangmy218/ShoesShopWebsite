@@ -88,9 +88,14 @@
                         </div>
                     </div>
                 </div>
-            
-<script type="text/javascript">
-    $(document).ready(function(){ 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+
+        $('#kho').parent().addClass('active open');
+         $("#nhaphang").addClass("active");
+
+
         $('#cancel').click(function(e){
             e.preventDefault();
             window.history.back();

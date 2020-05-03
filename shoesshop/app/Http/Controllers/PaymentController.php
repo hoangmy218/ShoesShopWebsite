@@ -37,9 +37,10 @@ class PaymentController extends Controller
 
 		$payer = new Payer();
 		$payer->setPaymentMethod("paypal");
-
+		(double)$ti_le_giamgia = Session::get('ti_le_giamgia');
 		$content = Cart::content();
-		(double)$rate = 0.000043; 
+		(double)$rate = 0.000043; //ti so USD
+		(double) $discount = (100-$ti_le_giamgia)/100;
 		$index = 0;
 		$items = array();
     (double)$tongtien = 0;
@@ -50,33 +51,34 @@ class PaymentController extends Controller
 			    ->setCurrency('USD')
 			    ->setQuantity($v_content->qty)
 			    ->setSku($v_content->id) // Similar to `item_number` in Classic API
-			    ->setPrice($v_content->price * $rate);
-          // echo 'sp'.round($v_content->price * $rate,2) * $v_content->qty.'\n';
-      $tongtien = $tongtien + round($v_content->price * $rate,2) * $v_content->qty;
+			    ->setPrice($v_content->price * $rate * $discount );
+           echo 'sp'.round($v_content->price * $rate * $discount,2) * $v_content->qty.'\n';
+      $tongtien = $tongtien + round($v_content->price * $rate * $discount,2) * $v_content->qty;
 
 		}
 		$itemList = new ItemList();
 		$itemList->setItems($items);
-		// echo '<pre>';
-  //   print_r($items);
-  //   echo "</pre>";
-  //   echo "tongtien".$tongtien;
+		 echo '<pre>';
+     print_r($items);
+     echo "</pre>";
+     echo "tongtien".$tongtien;
 
 		(double)$phi=Session::get('vc_phi');
+
 		// $subtt =(double)Cart::subtotal(2,'.','');
 
 		$details = new Details();
-		$details->setShipping($phi*$rate)
+		$details->setShipping($phi * $rate)
 		    ->setSubtotal($tongtien);
 
-    (double)$tongcuoi = $tongtien +(round($phi*$rate,2));
+    (double)$tongcuoi = $tongtien +(round($phi * $rate,2));
 
 		$amount = new Amount();
 		$amount->setCurrency("USD")
 		    ->setTotal($tongcuoi)
 		    ->setDetails($details);
         
-    // echo 'tong tien cuoi: '.$tongcuoi;
+     echo 'tong tien cuoi: '.$tongcuoi;
 	
 		$transaction = new Transaction();
 		$transaction->setAmount($amount)
@@ -116,6 +118,8 @@ class PaymentController extends Controller
 		$paymentId = request('paymentId');
     	$payment = Payment::get($paymentId, $apiContext); 
 
+		(double)$ti_le_giamgia = Session::get('ti_le_giamgia');
+
     	$execution = new PaymentExecution();
     	$execution->setPayerId(request('PayerID'));
 
@@ -126,17 +130,19 @@ class PaymentController extends Controller
 
 	    //them du lieu
 		$content = Cart::content();
-	    (double)$rate = 0.000043; 
+	
+	    (double)$rate = 0.000043; //ti so USD
+		(double) $discount = (100-$ti_le_giamgia)/100;
 	    (double)$tongtien = 0;
 	    foreach($content as $v_content){
-	      $tongtien = $tongtien + round($v_content->price * $rate,2) * $v_content->qty;
+	      $tongtien = $tongtien + round($v_content->price * $rate * $discount,2) * $v_content->qty;
 	    }
 
 		(double)$phi=Session::get('vc_phi');
-    	(double)$tongcuoi = $tongtien +(round($phi*$rate,2));
+    	(double)$tongcuoi = $tongtien +(round($phi * $rate ,2));
 
 		// $details = new Details();
-		$details->setShipping($phi*$rate)
+		$details->setShipping($phi * $rate)
 		    ->setSubtotal($tongtien);
 
 		// $amount = new Amount();

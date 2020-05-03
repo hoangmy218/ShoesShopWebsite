@@ -60,7 +60,8 @@ class ProductController extends Controller
     public function showProduct(){
         $this->authLogin();
         
-    	$list_products = DB::table('sanpham')->join('thuonghieu','sanpham.th_ma','=','thuonghieu.th_ma')->join('danhmuc','danhmuc.dm_ma','=','sanpham.dm_ma')->join('hinhanh','hinhanh.sp_ma','=','sanpham.sp_ma')->orderby('sanpham.sp_ma','desc')->get();
+    	$list_products = DB::table('sanpham')->join('thuonghieu','sanpham.th_ma','=','thuonghieu.th_ma')->join('danhmuc','danhmuc.dm_ma','=','sanpham.dm_ma')->orderby('sanpham.sp_ma','desc')->get();
+        
         /*echo "<pre>";
         print_r($list_products);
         echo "</pre>";*/
@@ -75,7 +76,7 @@ class ProductController extends Controller
         $image_product =  DB::table('hinhanh')->where('hinhanh.sp_ma',$product_id)->get(); 
 
         $details_product = DB::table('sanpham')->join('hinhanh','hinhanh.sp_ma','=','sanpham.sp_ma')->where('sanpham.sp_ma',$product_id)->limit(1)->get(); 
-        $sz_product = DB::table('chitietsanpham')->where([['chitietsanpham.sp_ma','=',$product_id],['ctsp_soLuongTon','>',0]])->get(); 
+        $sz_product = DB::table('chitietsanpham')->where([['chitietsanpham.sp_ma','=',$product_id],['ctsp_soLuongTon','>',0]])->orderby('ctsp_kichCo','asc')->get(); 
 
         $all_product = DB::table('sanpham')->select('sp_ma')->where('sanpham.sp_ma',$product_id)->limit(1)->get(); //Tiên 14/03
 

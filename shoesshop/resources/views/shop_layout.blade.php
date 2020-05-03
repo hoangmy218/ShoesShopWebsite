@@ -73,7 +73,7 @@
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active"><a href="{{URL::to('/')}}" class="nav-link">{{ __('Trang chủ') }}</a></li>
             <li class="nav-item"><a data-toggle="modal" data-target="#myModal" class="nav-link">{{ __('Tìm kiếm') }}</a></li>
-            <li class="nav-item dropdown">
+            {{-- <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ __('Danh mục') }}</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
                 <a class="dropdown-item" href="shop.html">{{ __('Mua sắm') }}</a>
@@ -81,7 +81,7 @@
                 <a class="dropdown-item" href="{{URL::to('/checkout')}}">{{ __('Đặt hàng') }}</a>
                 <a class="dropdown-item" href="{{URL::to('/payment')}}">{{ __('Thanh toán') }}</a>
               </div>
-            </li>
+            </li> --}}
             <li class="nav-item"><a href="about.html" class="nav-link">{{ __('Giới thiệu') }}</a></li>
          {{--   <li class="nav-item"><a href="blog.html" class="nav-link">{{ __('Blog') }}</a></li> --}}
             <li class="nav-item"><a href="contact.html" class="nav-link">{{ __('Liên hệ') }}</a></li>

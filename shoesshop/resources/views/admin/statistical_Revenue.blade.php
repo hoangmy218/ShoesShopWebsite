@@ -45,6 +45,15 @@
 {!!Charts::scripts()!!}
 {!!$chart->script()!!}
 {!!$line_chart->script()!!}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+
+        $('#thongke').parent().addClass('active open');
+         $("#theodoanhthu").addClass("active");
+     });
+</script>
 @endsection
 
 

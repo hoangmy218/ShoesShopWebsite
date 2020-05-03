@@ -34,10 +34,10 @@
                                     <div class="card-body">
                                         <form class="forms-sample" action="{{URL::to('/save-brand')}}" method="POST">
                                              {{csrf_field()}}
-                                            <div class="form-group">
+                                            {{-- <div class="form-group">
                                                 <label for="exampleInputName1">Mã thương hiệu</label>
                                                 <input type="text" class="form-control" name="brand_id"  placeholder="Mã">
-                                            </div>
+                                            </div> --}}
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Tên thương hiệu</label>
                                                 <input type="text" class="form-control" name="brand_name" placeholder="Tên">
@@ -49,5 +49,12 @@
                                 </div>
                             </div>
                     </div>
-                
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+
+        $( '#thuonghieu').parent().addClass('active open');
+         $("#themthuonghieu").addClass("active");
+     });
+     </script>
 @endsection

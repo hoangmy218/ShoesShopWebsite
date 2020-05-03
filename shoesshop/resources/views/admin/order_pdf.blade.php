@@ -77,7 +77,7 @@
 						<div class="invoice-title">
 							<div class="row">
 								<div class="col-md-12">
-									<img src="http://vergo-kertas.herokuapp.com/assets/img/logo.png" alt="" height="35">
+									<img src="{{asset('public/backend/img/logo.png')}}" alt="" height="35">
 								</div>
 							</div>
 							<br>

@@ -224,6 +224,7 @@
 <script src="http://www.codermen.com/js/jquery.js"></script>
 <script>
     $(document).ready(function(){
+        $( '#donhang').parent().addClass('active');
 
         //dat thi gian tat thong bao
         setTimeout(function(){

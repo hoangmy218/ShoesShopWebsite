@@ -116,6 +116,10 @@ $(document).ready(function(){
 </script>
 <script type="text/javascript">
 $(document).ready(function(){
+
+        $('#quangcao').parent().addClass('active open');
+         $("#danhsachquangcao").addClass("active");
+
     $('#images').change(function(){
         var fileName = document.getElementById('images').files.length;
         console.log(fileName);

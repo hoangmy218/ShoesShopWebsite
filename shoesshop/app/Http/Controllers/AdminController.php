@@ -142,10 +142,11 @@ class AdminController extends Controller
 
 
 
-        $list=DB::table('sanpham')->where('sanpham.sp_ma', $ct_id)->join('hinhanh','hinhanh.sp_ma','=','sanpham.sp_ma')->get();
+        $list=DB::table('sanpham')->where('sanpham.sp_ma', $ct_id)->get();
+        $image = DB::table('hinhanh')->where('hinhanh.sp_ma','=',$ct_id)->get();
         $ton=DB::table('chitietsanpham')->where('sp_ma', $ct_id)->get();
        
-        return view('admin.chitiet_sanpham')->with('list', $list)->with('tongslton', $tongslton)->with('tongslnhap', $tongslnhap)->with('kichco', $kichco)->with('ton', $ton);
+        return view('admin.chitiet_sanpham')->with('list', $list)->with('tongslton', $tongslton)->with('tongslnhap', $tongslnhap)->with('kichco', $kichco)->with('ton', $ton)->with('hinh',$image);
     }
 
     public function delete_image_product($ha_id){

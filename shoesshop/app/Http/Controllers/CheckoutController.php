@@ -334,14 +334,15 @@ class CheckoutController extends Controller
                     //         'tgh_gtong' => (double)Cart::subtotal(2,'.','')-((double)Cart::subtotal(2,'.','')*$check[0]->km_giamGia)/100
                     //     ]);
                         $giamgia=(double)Cart::subtotal(2,'.','')*$check[0]->km_giamGia/100;
+                        Session::put('ti_le_giamgia',$check[0]->km_giamGia);
                         Session::put('tien_giamgia', $giamgia);
                      // Khúc div này làm theo trong clip #31
                     ?>
                     <div class="cart-detail cart-total bg-light p-3 p-md-4">
                        
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                                 <input name="coupon_code" id="coupon_id" class="form-control" rows="3" cols="20" placeholder="<?php echo __('Mã khuyến mãi'); ?>" required>            
-                        </div>
+                        </div> -->
                         <p style="color: green;"><b><?php echo __("Áp dụng thành công."); ?></b></p>
                         <div class="sign-btn text-center">
                                 <input type="button" value="<?php echo __('Áp dụng'); ?>" id="coupon_btn" class="btn btn-theme btn-primary py-3 px-4">
